@@ -26,7 +26,7 @@ const App: React.FC = () => {
 					<Route path="/" element={!userStore.isAuthenticated ? <Navigate replace to='/login' /> : <Home />} />
 					<Route path="/login" element={!userStore.isAuthenticated ? <LoginPage /> : <Home />} />
 					<Route path="/home" element={!userStore.isAuthenticated ? <Navigate replace to='/login' /> : <Home />} />
-					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/register" element={userStore.registerSuccess ?   <LoginPage /> : <RegisterPage />} />
 				</Routes>
 			}}
 		</Observer>
