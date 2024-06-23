@@ -13,7 +13,11 @@ class BookmarksService {
   getBookmarks = () => {
     this.httpService
       .get<TypeBookmarks>("/api/bookmarks")
-      .then((res) => (this.bookmarkStore.bookmarks = res))
+      .then((res) => {
+        if (res != null){
+          this.bookmarkStore.bookmarks = res
+        }
+      })
       .catch((err: any) => console.log(err));
   };
   setBookmarks = (url: string, title: string) =>
