@@ -1,18 +1,17 @@
 import { Box, Button, Card, CardContent, Container, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRootStore } from '../providers/context_provider/ContextProvider';
+import { useRootService } from '../providers/context_provider/ContextProvider';
 
 const RegisterPage: React.FC = () => {
     const { t } = useTranslation();
     const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const { userStore } = useRootStore();
-
+    const { authService } = useRootService();
+    
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        userStore.registerUser(username, password, email)
+        authService.registerUser(username, password)
     };
 
     return (
@@ -46,16 +45,7 @@ const RegisterPage: React.FC = () => {
                                     value={username}
                                     onChange={(e) => setUsername(e.target.value)}
                                     margin="normal"
-                                    required
-                                />
-                                <TextField
-                                    label={t('email')}
-                                    variant="outlined"
-                                    fullWidth
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    margin="normal"
-                                    type="email"
+                                    type="text"
                                     required
                                 />
                                 <TextField

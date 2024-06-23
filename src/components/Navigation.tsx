@@ -13,6 +13,7 @@ const Navigation: React.FC = () => {
     const { t, i18n } = useTranslation();
     const { setTheme, mode } = useCustomTheme()
     const { userStore } = useRootStore()
+    
 
     const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -80,7 +81,10 @@ const Navigation: React.FC = () => {
                             {mode === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
                         </IconButton>
                     </MenuItem>
-                    <MenuItem onClick={() => { userStore.setAuthenticated(false) }}>{t("log_out")}</MenuItem>
+                    <MenuItem onClick={() => { 
+                        userStore.setAuthenticated(false);
+                    }}
+                        >{t("log_out")}</MenuItem>
                 </Menu>
             </Grid>
         </Grid >
