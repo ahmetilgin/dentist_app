@@ -12,7 +12,6 @@ import {
     createTheme,
     Grid,
     TextField,
-    ThemeProvider,
     Toolbar,
     Typography,
     useMediaQuery
@@ -34,7 +33,7 @@ const HomePage: React.FC = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
-        <ThemeProvider theme={theme}>
+        <Grid>
             <AppBar position="static" color="primary">
                 <Toolbar>
                     <Typography variant="h6" sx={{ flexGrow: 1 }}>kariyer.net</Typography>
@@ -122,7 +121,7 @@ const HomePage: React.FC = () => {
                 </Typography>
                 {/* Burada öne çıkan ilanları listeleyebilirsiniz */}
             </Container>
-        </ThemeProvider>
+        </Grid>
     );
 };
 

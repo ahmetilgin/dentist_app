@@ -1,3 +1,7 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/a7c7d4f6-dfa4-43df-9913-f589a3e84671/deploy-status)](https://app.netlify.com/sites/dentistapp/deploys)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
