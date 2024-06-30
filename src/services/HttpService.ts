@@ -23,6 +23,7 @@ class HttpService {
 
   get = <T>(url: string): Promise<T> => {
     return superagent.agent()
+      .use(prefix(this.API_ROOT))
       .get(url)
       .use(this.tokenPlugin)
       .then((response) => response.body);
@@ -30,6 +31,7 @@ class HttpService {
 
   put = <T>(url: string, body: any): Promise<T> => {
     return superagent.agent()
+      .use(prefix(this.API_ROOT))
       .put(url)
       .send(body)
       .use(this.tokenPlugin)

@@ -1,6 +1,7 @@
 import { Observer } from 'mobx-react';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { AllElements } from './components/AllElementsJustToSee';
 import './i18n';
 import './index.css';
 import Home from './pages/Home';
@@ -27,6 +28,7 @@ const App: React.FC = () => {
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/home" element={<Home />} />
 					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/all_elements" element={<AllElements />} />
 				</Routes>
 			}}
 		</Observer>

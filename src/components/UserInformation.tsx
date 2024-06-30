@@ -58,13 +58,6 @@ const UserInformation: React.FC = () => {
                 </div>
               );
             })}
-            <button
-              onClick={() =>
-                bookmarkStore.setCounter(bookmarkStore.getCounter() + 1)
-              }
-            >
-              {bookmarkStore.getCounter()}
-            </button>
             <ScanViewer
               imageURLs={images}
               index={state.activeImageIndex}
