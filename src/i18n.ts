@@ -10,30 +10,22 @@ i18n
 	.use(initReactI18next)
 	.init({
 		resources: {
+			sq: {
+				translation: sq
+			},
 			en: {
 				translation: en
 			},
 			tr: {
 				translation: tr
-			},
-			sq: {
-				translation: sq
 			}
 		},
+		debug: true,
 		fallbackLng: 'en',
+		lng:"sq",
 		interpolation: {
 			escapeValue: false
-		},
-		missingKeyHandler:(
-			lngs: readonly string[],
-			ns: string,
-			key: string,
-			fallbackValue: string,
-			updateMissing: boolean,
-			options: any,
-		) =>{
-				console.log("Missing ",ns,key,fallbackValue,options,updateMissing,lngs)
-		}
+		}		
 	});
 
 export default i18n;

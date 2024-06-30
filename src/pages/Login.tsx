@@ -107,7 +107,7 @@ const LoginPage: React.FC = () => {
                   required
                   fullWidth
                   id="username"
-                  label={t("username")}
+                  label={t("email_or_username")}
                   name="username"
                   autoFocus
                   value={username}

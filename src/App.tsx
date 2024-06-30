@@ -1,6 +1,6 @@
 import { Observer } from 'mobx-react';
 import React from 'react';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './i18n';
 import './index.css';
 import Home from './pages/Home';
@@ -23,10 +23,10 @@ const App: React.FC = () => {
 		<Observer>
 			{() => {
 				return <Routes>
-					<Route path="/" element={!userStore.isAuthenticated ? <Navigate replace to='/login' /> : <Home />} />
-					<Route path="/login" element={!userStore.isAuthenticated ? <LoginPage /> : <Home />} />
-					<Route path="/home" element={!userStore.isAuthenticated ? <Navigate replace to='/login' /> : <Home />} />
-					<Route path="/register" element={userStore.registerSuccess ?   <LoginPage /> : <RegisterPage />} />
+					<Route path="/" element={<Home />} />
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/home" element={<Home />} />
+					<Route path="/register" element={<RegisterPage />} />
 				</Routes>
 			}}
 		</Observer>

@@ -27,10 +27,10 @@ export class UserStore {
         });
 
         let username = localStorage.getItem("userName")
-        let activeTheme = localStorage.getItem("activeTheme")  
+        // let activeTheme = localStorage.getItem("activeTheme")  
         let lang = localStorage.getItem("i18nextLng") 
         this.username = username ?? ""
-        this.activeTheme = activeTheme ?? "light"
+        // this.activeTheme = activeTheme ?? "light"
         this.language = lang as "sq" | "tr" | "en" ?? "en"
         
         let isAuthenticated = sessionStorage.getItem("isAuthenticated")

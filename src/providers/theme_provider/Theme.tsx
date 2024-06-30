@@ -3,13 +3,13 @@ import { alpha, createTheme } from '@mui/material/styles';
 const createCustomTheme = (mode: any) => {
     const isLight = mode === 'light';
 
-    // Ortak renk paleti
     const primaryMain = isLight ? '#007bff' : '#90caf9';
-    const secondaryMain = isLight ? '#28a745' : '#66bb6a';
+    const secondaryMain = isLight ? '#28a745' : '#81c784';
     const errorMain = isLight ? '#dc3545' : '#f44336';
     const warningMain = isLight ? '#ffc107' : '#ffb74d';
     const infoMain = isLight ? '#17a2b8' : '#4fc3f7';
     const successMain = isLight ? '#28a745' : '#66bb6a';
+
 
     return createTheme({
         palette: {
@@ -231,6 +231,16 @@ const createCustomTheme = (mode: any) => {
                         fontWeight: 500,
                         '&.Mui-selected': {
                             color: primaryMain,
+                        },
+                    },
+                },
+            },
+            MuiFormLabel: {
+                styleOverrides: {
+                    root: {
+                        color: isLight ? '#666666' : '#b0b0b0', // Label rengi
+                        '&.Mui-focused': {
+                            color: primaryMain, // Odaklandığında label rengi
                         },
                     },
                 },
