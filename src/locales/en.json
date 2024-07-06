@@ -40,5 +40,15 @@
     "project_manager": "Project Manager",
     "hr_expert": "HR Expert",
     "istanbul": "Istanbul",
-    "ankara": "Ankara"
+    "ankara": "Ankara",
+    "jobList": {
+        "requirements": "Requirements",
+        "salary": "Salary",
+        "postedOn": "Posted on",
+        "applicationDeadline": "Application Deadline"
+    },
+    "employmentTypes": {
+        "Full-time": "Full-time"
+    },
+    "featuredJobs": "Featured Jobs"
 }

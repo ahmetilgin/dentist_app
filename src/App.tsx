@@ -1,5 +1,4 @@
-import { Observer } from 'mobx-react';
-import React from 'react';
+import { observer } from 'mobx-react';
 import { Route, Routes } from 'react-router-dom';
 import { AllElements } from './components/AllElementsJustToSee';
 import './i18n';
@@ -12,7 +11,7 @@ import { useCustomTheme } from './providers/theme_provider/ThemeProvider';
 
 
 
-const App: React.FC = () => {
+const App = observer(() => {
 	const { userStore } = useRootStore();
 	const { setTheme } = useCustomTheme()
 	setTimeout(() => {
@@ -20,20 +19,14 @@ const App: React.FC = () => {
 	}, 1);
 
 
-	return (
-		<Observer>
-			{() => {
-				return <Routes>
-					<Route path="/" element={<Home />} />
-					<Route path="/login" element={<LoginPage />} />
-					<Route path="/home" element={<Home />} />
-					<Route path="/register" element={<RegisterPage />} />
-					<Route path="/all_elements" element={<AllElements />} />
-				</Routes>
-			}}
-		</Observer>
-	)
-};
+	return (<Routes>
+		<Route path="/" element={<Home />} />
+		<Route path="/login" element={<LoginPage />} />
+		<Route path="/home" element={<Home />} />
+		<Route path="/register" element={<RegisterPage />} />
+		<Route path="/all_elements" element={<AllElements />} />
+	</Routes>)
+});
 
 export default App;
 

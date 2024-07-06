@@ -40,5 +40,15 @@
     "project_manager": "Menaxheri i Projektit",
     "hr_expert": "Eksperti i Burimeve Njerëzore",
     "istanbul": "Stambolli",
-    "ankara": "Ankaraja"
+    "ankara": "Ankaraja",
+    "jobList": {
+        "requirements": "Kërkesat",
+        "salary": "Paga",
+        "postedOn": "Publikuar në",
+        "applicationDeadline": "Afati i Aplikimit"
+    },
+    "employmentTypes": {
+        "Full-time": "Kohë e plotë"
+    },
+    "featuredJobs": "Punët e dalluara"
 }

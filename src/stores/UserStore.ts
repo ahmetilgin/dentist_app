@@ -1,4 +1,4 @@
-import { action, makeObservable, observable } from "mobx";
+import { makeAutoObservable } from "mobx";
 
 export class UserStore {
     username: string = "test";
@@ -10,22 +10,6 @@ export class UserStore {
     token : string | null = null
 
     constructor() {
-        // makeObservable ile observable ve action'ları belirleyin
-        makeObservable(this, {
-            errors: observable,
-            username: observable,
-            isAuthenticated: observable,
-            language: observable,
-            activeTheme: observable,
-            registerSuccess: observable,
-            setAuthenticated: action, // Action olarak belirleyin
-            setUsername: action,
-            setLanguage: action,
-            setTheme: action,
-            reset: action,
-            setRegisterSuccess: action
-        });
-
         let username = localStorage.getItem("userName")
         // let activeTheme = localStorage.getItem("activeTheme")  
         let lang = localStorage.getItem("i18nextLng") 
@@ -44,6 +28,9 @@ export class UserStore {
                 this.token = tokenFromStore;
             }
         }
+
+        makeAutoObservable(this);
+
     }
 
     setAuthenticated(authenticated: boolean) {

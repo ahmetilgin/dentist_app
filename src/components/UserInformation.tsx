@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import { Observer } from "mobx-react";
-import React, { useCallback, useEffect, useState } from "react";
+import { observer } from "mobx-react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   useRootService,
@@ -9,7 +9,8 @@ import {
 import After from "../static/after.png";
 import Before from "../static/before.jpg";
 import ScanViewer from "./ScanViewer";
-const UserInformation: React.FC = () => {
+
+const UserInformation = observer(() => {
   const { bookmarkStore } = useRootStore();
   const { bookmarksService } = useRootService();
 
@@ -37,54 +38,48 @@ const UserInformation: React.FC = () => {
 
   const [state, setState] = useState({ visible: false, activeImageIndex: 0 });
   return (
-    <Observer>
-      {() => {
+    <Grid container style={{ padding: 0 }}>
+      {images.map((item, index) => {
         return (
-          <Grid container style={{ padding: 0 }}>
-            {images.map((item, index) => {
-              return (
-                <div key={index.toString()} className="img-item">
-                  <img
-                    src={item.src}
-                    alt={item.alt}
-                    className={"responsive"}
-                    onClick={() => {
-                      setState({
-                        visible: true,
-                        activeImageIndex: index,
-                      });
-                    }}
-                  />
-                </div>
-              );
-            })}
-            <ScanViewer
-              imageURLs={images}
-              index={state.activeImageIndex}
-              visible={state.visible}
-              onClose={() =>
+          <div key={index.toString()} className="img-item">
+            <img
+              src={item.src}
+              alt={item.alt}
+              className={"responsive"}
+              onClick={() => {
                 setState({
-                  visible: false,
-                  activeImageIndex: 0,
-                })
-              }
+                  visible: true,
+                  activeImageIndex: index,
+                });
+              }}
             />
-
-            {bookmarkStore.bookmarks.length > 0 &&
-              bookmarkStore.bookmarks.map((data, idx) => {
-                return (
-                  <div key={idx} style={{ paddingLeft: 20 }}>
-                    <div>
-                      {data.id} / {data.title} / {data.url}
-                    </div>
-                  </div>
-                );
-              })}
-          </Grid>
+          </div>
         );
-      }}
-    </Observer>
+      })}
+      <ScanViewer
+        imageURLs={images}
+        index={state.activeImageIndex}
+        visible={state.visible}
+        onClose={() =>
+          setState({
+            visible: false,
+            activeImageIndex: 0,
+          })
+        }
+      />
+
+      {bookmarkStore.bookmarks.length > 0 &&
+        bookmarkStore.bookmarks.map((data, idx) => {
+          return (
+            <div key={idx} style={{ paddingLeft: 20 }}>
+              <div>
+                {data.id} / {data.title} / {data.url}
+              </div>
+            </div>
+          );
+        })}
+    </Grid>
   );
-};
+});
 
 export default UserInformation;

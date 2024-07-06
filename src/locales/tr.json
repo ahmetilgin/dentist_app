@@ -40,5 +40,15 @@
     "project_manager": "Proje Yöneticisi",
     "hr_expert": "İK Uzmanı",
     "istanbul": "İstanbul",
-    "ankara": "Ankara"
+    "ankara": "Ankara",
+    "jobList": {
+        "requirements": "Gereksinimler",
+        "salary": "Maaş",
+        "postedOn": "Yayımlandı",
+        "applicationDeadline": "Başvuru Son Tarihi"
+    },
+    "employmentTypes": {
+        "Full-time": "Tam Zamanlı"
+    },
+    "featuredJobs": "Öne Çıkan İlanlar"
 }

@@ -13,9 +13,12 @@ import {
     Typography,
     useMediaQuery
 } from '@mui/material';
-import React from 'react';
+import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import JobList from '../components/JobList';
+import SearchComponent from '../components/SearchRegionOrCities';
+import { QueryResult } from '../DataTypes';
+import { useRootService } from '../providers/context_provider/ContextProvider';
 
 const theme = createTheme({
     palette: {
@@ -28,9 +31,10 @@ const theme = createTheme({
     },
 });
 
-const HomePage: React.FC = () => {
+const HomePage = observer(() => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const { t } = useTranslation()
+    const { httpService } = useRootService()
 
     return <Grid>
         <AppBar position="static" color="primary">
@@ -69,13 +73,12 @@ const HomePage: React.FC = () => {
                     />
                 </Grid>
                 <Grid item xs={12} sm={5}>
-                    <TextField
-                        label={t("search_city_or_district")}
-                        variant="outlined"
-                        color={"primary"}
-
-                        fullWidth
-                    />
+                    <SearchComponent
+                        label=''
+                        fetchOptions={(input) => httpService.get<QueryResult>(`/public/region?query=${input}`)}
+                        onSelect={(selectedItem) => {
+                            console.log(selectedItem)
+                        }} />
                 </Grid>
                 <Grid item xs={12} sm={2}>
                     <Button
@@ -106,18 +109,13 @@ const HomePage: React.FC = () => {
                 ].map((item) => (
                     <Chip key={item} label={item} clickable color="secondary" variant="outlined" />
                 ))}
-
-
-
             </Box>
-
-
             <Typography variant="h5" gutterBottom color="primary">
-                {t("ÖNE ÇIKAN İLANLAR")}
+                {t("featuredJobs")}
             </Typography>
             <JobList />
         </Container>
     </Grid>
-};
+});
 
 export default HomePage;
