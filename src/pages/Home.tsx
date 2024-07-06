@@ -8,7 +8,6 @@ import {
     Container,
     createTheme,
     Grid,
-    TextField,
     Toolbar,
     Typography,
     useMediaQuery
@@ -65,16 +64,16 @@ const HomePage = observer(() => {
 
             <Grid container spacing={2} sx={{ mt: 2, mb: 2 }}>
                 <Grid item xs={12} sm={5}>
-                    <TextField
-                        label={t("search_position_or_company")}
-                        variant="outlined"
-                        color={"primary"}
-                        fullWidth
-                    />
+                    <SearchComponent
+                        label='search_position_or_company'
+                        fetchOptions={(input) => httpService.get<QueryResult>(`/public/jobs/search_professions?query=${input}`)}
+                        onSelect={(selectedItem) => {
+                            console.log(selectedItem)
+                        }} />
                 </Grid>
                 <Grid item xs={12} sm={5}>
                     <SearchComponent
-                        label=''
+                        label='search_city_or_district'
                         fetchOptions={(input) => httpService.get<QueryResult>(`/public/region?query=${input}`)}
                         onSelect={(selectedItem) => {
                             console.log(selectedItem)
