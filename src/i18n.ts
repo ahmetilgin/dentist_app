@@ -22,7 +22,7 @@ i18n
 		},
 		debug: true,
 		fallbackLng: 'en',
-		lng:"sq",
+		lng:"tr",
 		interpolation: {
 			escapeValue: false
 		}		

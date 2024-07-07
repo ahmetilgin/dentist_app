@@ -15,15 +15,6 @@ import { useRootStore } from '../providers/context_provider/ContextProvider';
 const JobList = observer(() => {
     const { t } = useTranslation();
     const { jobStore } = useRootStore();
-    // const { jobService } = useRootService();
-
-    // const fetchJobs = useCallback(() => {
-    //     jobService.getJobs();
-    // }, [jobService]);
-
-    // useEffect(() => {
-    //     fetchJobs();
-    // }, [fetchJobs]);
 
     if (jobStore.jobs.length === 0) {
         return <JobListSkeleton />

@@ -27,8 +27,10 @@ const LoginPage: React.FC = () => {
   const { setTheme, mode } = useCustomTheme();
   const { userStore } = useRootStore();
   const { authService } = useRootService();
+
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loginType, setLoginType] = useState<string>("user"); // Add loginType state variable
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
@@ -42,7 +44,15 @@ const LoginPage: React.FC = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    authService.login(username, password);
+    if (loginType === "user") {
+      authService.loginUser(username, password, "user");
+    } else {
+      authService.loginBusiness(username, password, "business");
+    }
+  };
+
+  const handleLoginTypeChange = (type: string) => {
+    setLoginType(type);
   };
 
   return (
@@ -102,33 +112,67 @@ const LoginPage: React.FC = () => {
 
             <CardContent>
               <Box component="form" onSubmit={handleSubmit} noValidate>
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  id="username"
-                  label={t("email_or_username")}
-                  name="username"
-                  autoFocus
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                />
-                <TextField
-                  margin="normal"
-                  required
-                  fullWidth
-                  name="password"
-                  label={t("password")}
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
+                {loginType === "user" && ( // Render user login form if loginType is "user"
+                  <>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="username"
+                      label={t("email_or_username")}
+                      name="username"
+                      autoFocus
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label={t("password")}
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </>
+                )}
+
+                {loginType === "business" && ( // Render business login form if loginType is "business"
+                  <>
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      id="username"
+                      label={t("email_or_username")}
+                      name="username"
+                      autoFocus
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                    />
+                    <TextField
+                      margin="normal"
+                      required
+                      fullWidth
+                      name="password"
+                      label={t("password")}
+                      type="password"
+                      id="password"
+                      autoComplete="current-password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                  </>
+                )}
+
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label={t("remember_me")}
                 />
+
                 <Button
                   type="submit"
                   fullWidth
@@ -136,8 +180,9 @@ const LoginPage: React.FC = () => {
                   variant="outlined"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {t("signin")}
+                  {loginType === "user" ? t("signin_user") : t("signin_business")}
                 </Button>
+
                 <Grid container>
                   <Grid item xs>
                     <Link href="#" variant="body2">
@@ -145,11 +190,26 @@ const LoginPage: React.FC = () => {
                     </Link>
                   </Grid>
                   <Grid item>
-                    <Link href="/register" variant="body2">
+                    <Link href={`/register?type=${loginType}`} variant="body2">
                       {t("signup")}
                     </Link>
                   </Grid>
                 </Grid>
+
+                <Button
+                  fullWidth
+                  variant="outlined"
+                  sx={{ mt: 2 }}
+                  onClick={() =>
+                    handleLoginTypeChange(
+                      loginType === "user" ? "business" : "user"
+                    )
+                  }
+                >
+                  {loginType === "user"
+                    ? t("switch_to_business_login")
+                    : t("switch_to_user_login")}
+                </Button>
               </Box>
             </CardContent>
           </Box>

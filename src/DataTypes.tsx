@@ -1,6 +1,7 @@
 export interface TypeUser {
   username: string;
   password: string;
+  email: string;
 }
 
 export interface TypeJob {
@@ -13,6 +14,11 @@ export interface TypeJob {
   EmploymentType: string;
   DatePosted: string;
   ApplicationDeadline: string;
+}
+
+export interface TypeJobSearch {
+  keyword: string;
+  location: string;
 }
 
 

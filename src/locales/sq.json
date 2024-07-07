@@ -50,5 +50,15 @@
     "employmentTypes": {
         "Full-time": "Kohë e plotë"
     },
-    "featuredJobs": "Punët e dalluara"
+    "featuredJobs": "Punët e dalluara",
+    "publish_job": "Publiko Punën",
+    "switch_to_user_login": "Kalo në Identifikimin e Përdoruesit",
+    "switch_to_business_login": "Kalo në Identifikimin e Biznesit",
+    "signin_user": "Identifikimi i Përdoruesit",
+    "signin_business": "Identifikimi i Biznesit",
+    "register_user": "Regjistrimi i Përdoruesit",
+    "register_business": "Regjistrimi i Biznesit",
+    "username": "Emri i Përdoruesit",
+    "business_name": "Emri i Biznesit",
+    "business_address": "Adresa e Biznesit"
 }

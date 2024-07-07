@@ -12,10 +12,10 @@ class AuthService {
     }
 
     current = () => this.httpService.get('/user')
-    login(username: string, password: string) {
+    loginUser(username : string, password: string, email : string) {
         this.userStore.setUsername(username)
         this.userStore.errors = undefined;
-        return this.httpService.post<{token : string}>('/auth/sign-in', {username, password} as TypeUser)
+        return this.httpService.post<{token : string}>('/auth/sign-in-normal-user', {username, password, email} as TypeUser)
              .then((res) => {
                 this.userStore.setToken(res.token)
                 this.userStore.setAuthenticated(true)
@@ -24,14 +24,42 @@ class AuthService {
                 this.userStore.errors = err.response && err.response.body && err.response.body.errors;
                  console.log(err)
              })
-     }
+    }
 
-    registerUser(username : string, password: string) {
+    loginBusiness(username : string, password: string, email : string) {
+        this.userStore.setUsername(username)
         this.userStore.errors = undefined;
-        return  this.httpService.post('/auth/sign-up', {username, password} as TypeUser)
+        return this.httpService.post<{token : string}>('/auth/sign-in-business-user', {username, password, email} as TypeUser)
+             .then((res) => {
+                this.userStore.setToken(res.token)
+                this.userStore.setAuthenticated(true)
+             }) // TODO
+             .catch((err: ResponseError) => {
+                this.userStore.errors = err.response && err.response.body && err.response.body.errors;
+                 console.log(err)
+             })
+    }
+
+    registerUser(username : string, password: string, email : string) {
+        this.userStore.errors = undefined;
+        return  this.httpService.post('/auth/sign-up-normal-user', {username, password, email} as TypeUser)
              .then(() => {
                 this.userStore.setRegisterSuccess(true)
              } ) 
+             .catch((err: ResponseError) => {
+                this.userStore.setRegisterSuccess(false) 
+                this.userStore.errors = err.response && err.response.body && err.response.body.errors;
+                console.log(err)
+        })
+    }
+
+
+    registerBusiness(businessUser: any) {
+        this.userStore.errors = undefined;
+        return this.httpService.post('/auth/sign-up-business-user', businessUser)
+             .then(() => {
+                this.userStore.setRegisterSuccess(true)
+             }) 
              .catch((err: ResponseError) => {
                 this.userStore.setRegisterSuccess(false) 
                 this.userStore.errors = err.response && err.response.body && err.response.body.errors;

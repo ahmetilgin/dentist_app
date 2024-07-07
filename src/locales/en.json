@@ -50,5 +50,15 @@
     "employmentTypes": {
         "Full-time": "Full-time"
     },
-    "featuredJobs": "Featured Jobs"
+    "featuredJobs": "Featured Jobs",
+    "publish_job": "Publish Job",
+    "switch_to_user_login": "Switch to User Login",
+    "switch_to_business_login": "Switch to Business Login",
+    "signin_user": "User Sign In",
+    "signin_business": "Business Sign In",
+    "register_user": "User Register",
+    "register_business": "Business Register",
+    "username": "Username",
+    "business_name": "Business Name",
+    "business_address": "Business Address"
 }

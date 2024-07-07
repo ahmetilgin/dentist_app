@@ -50,5 +50,15 @@
     "employmentTypes": {
         "Full-time": "Tam Zamanlı"
     },
-    "featuredJobs": "Öne Çıkan İlanlar"
+    "featuredJobs": "Öne Çıkan İlanlar",
+    "publish_job": "İlan Yayınla",
+    "switch_to_user_login": "Kullanıcı Girişine Geç",
+    "switch_to_business_login": "İşletme Girişine Geç",
+    "signin_user": "Kullanıcı Girişi",
+    "signin_business": "İşletme Girişi",
+    "register_user": "Kullanıcı Kaydı",
+    "register_business": "İşletme Kaydı",
+    "username": "Kullanıcı Adı",
+    "business_name": "İşletme Adı",
+    "business_address": "İşletme Adresi"
 }

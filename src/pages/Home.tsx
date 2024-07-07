@@ -13,9 +13,11 @@ import {
     useMediaQuery
 } from '@mui/material';
 import { observer } from 'mobx-react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import JobList from '../components/JobList';
-import SearchComponent from '../components/SearchRegionOrCities';
+import SearchComponent from '../components/SearchComponent';
 import { QueryResult } from '../DataTypes';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 
@@ -33,7 +35,10 @@ const theme = createTheme({
 const HomePage = observer(() => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const { t } = useTranslation()
-    const { httpService } = useRootService()
+    const { httpService, jobService } = useRootService()
+    const [selectedProfession, setSelectedProfession] = useState<string>("");
+    const [selectedRegion, setSelectedRegion] = useState<string>("");
+    const navigate = useNavigate();
 
     return <Grid>
         <AppBar position="static" color="primary">
@@ -45,9 +50,9 @@ const HomePage = observer(() => {
                     </Button>
                 ) : (
                     <>
-                        <Button color="inherit">{t("search_job")}</Button>
-                        <Button color="inherit">{t("career_planning")}</Button>
-                        <Button color="inherit">{t("career_guide")}</Button>
+                        <Button color="inherit" onClick={() => {
+                            navigate("/publish_new_job")
+                        }} >{t("publish_job")}</Button>
                         <Button variant="outlined" color="secondary">{t("login_signup")}</Button>
                     </>
                 )}
@@ -67,17 +72,24 @@ const HomePage = observer(() => {
                     <SearchComponent
                         label='search_position_or_company'
                         fetchOptions={(input) => httpService.get<QueryResult>(`/public/jobs/search_professions?query=${input}`)}
-                        onSelect={(selectedItem) => {   
-                            console.log(selectedItem)
-                        }} />
+                        onSelect={(selectedItem) => {
+                            if (selectedItem != null) {
+                                setSelectedProfession(selectedItem)
+                            }
+                        }}
+                    />
                 </Grid>
                 <Grid item xs={12} sm={5}>
                     <SearchComponent
                         label='search_city_or_district'
                         fetchOptions={(input) => httpService.get<QueryResult>(`/public/region?query=${input}`)}
                         onSelect={(selectedItem) => {
-                            console.log(selectedItem)
-                        }} />
+                            if (selectedItem != null) {
+                                setSelectedRegion(selectedItem)
+                            }
+                        }
+                        }
+                    />
                 </Grid>
                 <Grid item xs={12} sm={2}>
                     <Button
@@ -87,6 +99,13 @@ const HomePage = observer(() => {
                         size="large"
                         startIcon={<SearchIcon />}
                         sx={{ height: '56px' }}
+                        onClick={() => {
+                            jobService.searchJobs(
+                                selectedProfession,
+                                selectedRegion
+                            );
+                            navigate("/search_result")
+                        }}
                     >
                         {t("find_job")}
                     </Button>
