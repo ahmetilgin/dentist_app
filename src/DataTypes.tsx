@@ -18,4 +18,3 @@ export interface TypeJob {
 
 export type TypeJobs = TypeJob[]
 export type QueryResult = { query_result: string[] }
-export type TypeBookmarks = { id: string; url: string; title: string }[];

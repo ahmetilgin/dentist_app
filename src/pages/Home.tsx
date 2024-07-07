@@ -67,7 +67,7 @@ const HomePage = observer(() => {
                     <SearchComponent
                         label='search_position_or_company'
                         fetchOptions={(input) => httpService.get<QueryResult>(`/public/jobs/search_professions?query=${input}`)}
-                        onSelect={(selectedItem) => {
+                        onSelect={(selectedItem) => {   
                             console.log(selectedItem)
                         }} />
                 </Grid>

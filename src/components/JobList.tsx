@@ -8,22 +8,22 @@ import {
     Typography
 } from '@mui/material';
 import { observer } from 'mobx-react';
-import React, { useCallback, useEffect } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRootService, useRootStore } from '../providers/context_provider/ContextProvider';
+import { useRootStore } from '../providers/context_provider/ContextProvider';
 
 const JobList = observer(() => {
     const { t } = useTranslation();
     const { jobStore } = useRootStore();
-    const { jobService } = useRootService();
+    // const { jobService } = useRootService();
 
-    const fetchJobs = useCallback(() => {
-        jobService.getJobs();
-    }, [jobService]);
+    // const fetchJobs = useCallback(() => {
+    //     jobService.getJobs();
+    // }, [jobService]);
 
-    useEffect(() => {
-        fetchJobs();
-    }, [fetchJobs]);
+    // useEffect(() => {
+    //     fetchJobs();
+    // }, [fetchJobs]);
 
     if (jobStore.jobs.length === 0) {
         return <JobListSkeleton />

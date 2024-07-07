@@ -2,18 +2,12 @@ import { Grid } from "@mui/material";
 import { observer } from "mobx-react";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-  useRootService,
-  useRootStore,
-} from "../providers/context_provider/ContextProvider";
+
 import After from "../static/after.png";
 import Before from "../static/before.jpg";
 import ScanViewer from "./ScanViewer";
 
 const UserInformation = observer(() => {
-  const { bookmarkStore } = useRootStore();
-  const { bookmarksService } = useRootService();
-
   const { t } = useTranslation();
   const images = [
     {
@@ -28,13 +22,6 @@ const UserInformation = observer(() => {
     },
   ];
 
-  const fetchBookmarks = useCallback(() => {
-    bookmarksService.getBookmarks();
-  }, [bookmarksService]);
-
-  useEffect(() => {
-    fetchBookmarks();
-  }, [fetchBookmarks]);
 
   const [state, setState] = useState({ visible: false, activeImageIndex: 0 });
   return (
@@ -67,17 +54,6 @@ const UserInformation = observer(() => {
           })
         }
       />
-
-      {bookmarkStore.bookmarks.length > 0 &&
-        bookmarkStore.bookmarks.map((data, idx) => {
-          return (
-            <div key={idx} style={{ paddingLeft: 20 }}>
-              <div>
-                {data.id} / {data.title} / {data.url}
-              </div>
-            </div>
-          );
-        })}
     </Grid>
   );
 });

@@ -24,7 +24,8 @@ function SearchComponent({
             if (inputValue.length > 0) {
                 try {
                     const results = await fetchOptions(inputValue);
-                    setOptions(results.query_result);
+                    if (results.query_result != null)
+                        setOptions(results.query_result);
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
