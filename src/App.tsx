@@ -9,16 +9,11 @@ import JobSearchPage from './pages/JobSearchPage';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/RegisterPage';
 import { useRootStore } from './providers/context_provider/ContextProvider';
-import { useCustomTheme } from './providers/theme_provider/ThemeProvider';
 
 
 
 const App = observer(() => {
 	const { userStore } = useRootStore();
-	const { setTheme } = useCustomTheme()
-	setTimeout(() => {
-		setTheme(userStore.activeTheme)
-	}, 1);
 
 	if (window.location.pathname === "/publish_new_job") {
 		if (!userStore.isAuthenticated) {

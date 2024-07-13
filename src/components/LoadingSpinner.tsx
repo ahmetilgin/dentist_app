@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 
-const style: CSSProperties  = {
+const style: CSSProperties = {
   borderRadius: '50%',
   width: '40px',
   height: '40px',
@@ -17,7 +17,7 @@ const style: CSSProperties  = {
 const LoadingSpinner: React.FC = () => (
   <div className="loading-spinner" style={style}>
     <style>
-    {`
+      {`
     @keyframes loading-spinner {
       0% { transform : rotate(0deg); }
       100% { transform : rotate(360deg); }

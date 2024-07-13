@@ -1,32 +1,74 @@
-import { alpha, createTheme } from '@mui/material/styles';
+import { alpha, createTheme, ThemeOptions } from '@mui/material/styles';
 
-const createCustomTheme = (mode: any) => {
+const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
     const isLight = mode === 'light';
 
-    const primaryMain = isLight ? '#007bff' : '#90caf9';
-    const secondaryMain = isLight ? '#28a745' : '#81c784';
-    const errorMain = isLight ? '#dc3545' : '#f44336';
-    const warningMain = isLight ? '#ffc107' : '#ffb74d';
-    const infoMain = isLight ? '#17a2b8' : '#4fc3f7';
-    const successMain = isLight ? '#28a745' : '#66bb6a';
+    const colors = isLight ? {
+        background: 'hsl(0, 0%, 100%)',
+        foreground: 'hsl(240, 10%, 3.9%)',
+        card: 'hsl(0, 0%, 100%)',
+        cardForeground: 'hsl(240, 10%, 3.9%)',
+        popover: 'hsl(0, 0%, 100%)',
+        popoverForeground: 'hsl(240, 10%, 3.9%)',
+        primary: 'hsl(240, 5.9%, 10%)',
+        primaryForeground: 'hsl(0, 0%, 98%)',
+        secondary: 'hsl(240, 25%, 25.9%)',
+        secondaryForeground: 'hsl(240, 5.9%, 10%)',
+        muted: 'hsl(240, 4.8%, 95.9%)',
+        mutedForeground: 'hsl(240, 3.8%, 46.1%)',
+        accent: 'hsl(240, 4.8%, 95.9%)',
+        accentForeground: 'hsl(240, 5.9%, 10%)',
+        destructive: 'hsl(0, 84.2%, 60.2%)',
+        destructiveForeground: 'hsl(0, 0%, 98%)',
+        border: 'hsl(240, 5.9%, 90%)',
+        input: 'hsl(240, 5.9%, 90%)',
+        warning: 'hsl(48, 100%, 67%)',
+        info: 'hsl(197, 100%, 50%)',
+        success: 'hsl(120, 100%, 35%)',
+        ring: 'hsl(240, 5.9%, 10%)',
+    } : {
+        background: 'hsl(240, 10%, 3.9%)',
+        foreground: 'hsl(0, 0%, 98%)',
+        card: 'hsl(240, 10%, 3.9%)',
+        cardForeground: 'hsl(0, 0%, 98%)',
+        popover: 'hsl(240, 10%, 3.9%)',
+        popoverForeground: 'hsl(0, 0%, 98%)',
+        primary: 'hsl(0, 0%, 98%)',
+        primaryForeground: 'hsl(240, 5.9%, 10%)',
+        secondary: 'hsl(240, 3.7%, 15.9%)',
+        secondaryForeground: 'hsl(0, 0%, 98%)',
+        muted: 'hsl(240, 3.7%, 15.9%)',
+        mutedForeground: 'hsl(240, 5%, 64.9%)',
+        accent: 'hsl(240, 3.7%, 15.9%)',
+        accentForeground: 'hsl(0, 0%, 98%)',
+        destructive: 'hsl(0, 62.8%, 30.6%)',
+        destructiveForeground: 'hsl(0, 0%, 98%)',
+        warning: 'hsl(48, 100%, 67%)',
+        info: 'hsl(197, 100%, 50%)',
+        success: 'hsl(120, 100%, 35%)',
+        border: 'hsl(240, 3.7%, 15.9%)',
+        input: 'hsl(240, 3.7%, 15.9%)',
+        ring: 'hsl(240, 4.9%, 83.9%)',
+    }
 
+    const borderRadius = 4;
 
     return createTheme({
         palette: {
             mode,
-            primary: { main: primaryMain },
-            secondary: { main: secondaryMain },
-            error: { main: errorMain },
-            warning: { main: warningMain },
-            info: { main: infoMain },
-            success: { main: successMain },
+            primary: { main: colors.primary },
+            secondary: { main: colors.secondary },
+            error: { main: colors.destructive },
+            warning: { main: colors.warning },
+            info: { main: colors.info },
+            success: { main: colors.success },
             text: {
-                primary: isLight ? '#333333' : '#ffffff',
-                secondary: isLight ? '#666666' : '#b0b0b0',
+                primary: colors.foreground,
+                secondary: colors.mutedForeground,
             },
             background: {
-                default: isLight ? '#f8f9fa' : '#121212',
-                paper: isLight ? '#ffffff' : '#1e1e1e',
+                default: colors.background,
+                paper: colors.card,
             },
         },
         typography: {
@@ -46,31 +88,35 @@ const createCustomTheme = (mode: any) => {
             overline: { fontSize: '0.75rem', letterSpacing: '0.08333em', textTransform: 'uppercase' },
         },
         shape: {
-            borderRadius: 8,
+            borderRadius: borderRadius,
         },
         components: {
             MuiButton: {
                 styleOverrides: {
                     root: {
-                        borderRadius: 8,
-                        padding: '8px 16px',
-                        transition: 'all 0.2s ease-in-out',
+                        borderRadius: borderRadius,
+                        padding: '4px 8px',
                         '&:hover': {
-                            transform: 'translateY(-2px)',
-                            boxShadow: `0 4px 8px ${alpha(isLight ? '#000000' : '#ffffff', 0.15)}`,
+                            boxShadow: `0 4px 8px ${alpha(colors.foreground, 0.15)}`,
                         },
                     },
                     containedPrimary: {
-                        backgroundColor: '#ffffff',
-                        color: '#000000',
+                        backgroundColor: colors.primary,
                         '&:hover': {
-                            backgroundColor: '#f5f5f5',
+                            backgroundColor: alpha(colors.primary, 0.9),
                         },
                     },
+                    outlinedSecondary: {
+                        borderColor: colors.secondary,
+                        color: colors.secondary,
+                    },
                     outlined: {
-                        borderWidth: 2,
+                        borderColor: 'currentColor',
+                        borderWidth: '2px',
                         '&:hover': {
-                            borderWidth: 2,
+                            backgroundColor: colors.primary,
+                            color: colors.primaryForeground,
+                            borderWidth: '2px',
                         },
                     },
                 },
@@ -79,19 +125,17 @@ const createCustomTheme = (mode: any) => {
                 styleOverrides: {
                     root: {
                         backgroundImage: 'none',
-                        boxShadow: isLight
-                            ? '0px 2px 8px rgba(0, 0, 0, 0.08)'
-                            : '0px 2px 8px rgba(255, 255, 255, 0.08)',
+                        boxShadow: `0px 2px 8px ${alpha(colors.foreground, 0.08)}`,
                     },
                 },
             },
             MuiAppBar: {
                 styleOverrides: {
                     root: {
-                        backgroundColor: isLight ? '#ffffff' : '#1e1e1e',
-                        color: isLight ? '#333333' : '#ffffff',
+                        backgroundColor: colors.background,
+                        color: colors.foreground,
                         boxShadow: 'none',
-                        borderBottom: `1px solid ${isLight ? '#e0e0e0' : '#333333'}`,
+                        borderBottom: `1px solid ${colors.border}`,
                     },
                 },
             },
@@ -100,24 +144,23 @@ const createCustomTheme = (mode: any) => {
                     root: {
                         '& .MuiOutlinedInput-root': {
                             '& fieldset': {
-                                borderColor: isLight ? '#e0e0e0' : '#424242',
-                                transition: 'all 0.2s ease-in-out',
+                                borderColor: colors.border,
                             },
                             '&:hover fieldset': {
-                                borderColor: isLight ? primaryMain : alpha(primaryMain, 0.7),
+                                borderColor: colors.primary,
                             },
                             '&.Mui-focused fieldset': {
-                                borderColor: primaryMain,
+                                borderColor: colors.primary,
                             },
                         },
                         '& .MuiInputLabel-root': {
-                            color: isLight ? '#666666' : '#b0b0b0',
+                            color: colors.mutedForeground,
                             '&.Mui-focused': {
-                                color: primaryMain,
+                                color: colors.primary,
                             },
                         },
                         '& .MuiInputBase-input': {
-                            color: isLight ? '#333333' : '#ffffff',
+                            color: colors.foreground,
                         },
                     },
                 },
@@ -125,9 +168,9 @@ const createCustomTheme = (mode: any) => {
             MuiCheckbox: {
                 styleOverrides: {
                     root: {
-                        color: isLight ? '#9e9e9e' : '#757575',
+                        color: colors.muted,
                         '&.Mui-checked': {
-                            color: primaryMain,
+                            color: colors.primary,
                         },
                     },
                 },
@@ -135,9 +178,9 @@ const createCustomTheme = (mode: any) => {
             MuiRadio: {
                 styleOverrides: {
                     root: {
-                        color: isLight ? '#9e9e9e' : '#757575',
+                        color: colors.muted,
                         '&.Mui-checked': {
-                            color: primaryMain,
+                            color: colors.primary,
                         },
                     },
                 },
@@ -153,9 +196,9 @@ const createCustomTheme = (mode: any) => {
                         padding: 1,
                         '&.Mui-checked': {
                             transform: 'translateX(16px)',
-                            color: '#fff',
+                            color: colors.background,
                             '& + .MuiSwitch-track': {
-                                backgroundColor: primaryMain,
+                                backgroundColor: colors.primary,
                                 opacity: 1,
                                 border: 'none',
                             },
@@ -167,10 +210,9 @@ const createCustomTheme = (mode: any) => {
                     },
                     track: {
                         borderRadius: 13,
-                        border: `1px solid ${isLight ? '#e0e0e0' : '#424242'}`,
-                        backgroundColor: isLight ? '#e0e0e0' : '#424242',
+                        border: `1px solid ${colors.border}`,
+                        backgroundColor: colors.muted,
                         opacity: 1,
-                        transition: 'background-color 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
                     },
                 },
             },
@@ -178,16 +220,14 @@ const createCustomTheme = (mode: any) => {
                 styleOverrides: {
                     paper: {
                         borderRadius: 16,
-                        boxShadow: isLight
-                            ? '0px 8px 24px rgba(0, 0, 0, 0.15)'
-                            : '0px 8px 24px rgba(255, 255, 255, 0.15)',
+                        boxShadow: `0px 8px 24px ${alpha(colors.foreground, 0.15)}`,
                     },
                 },
             },
             MuiDivider: {
                 styleOverrides: {
                     root: {
-                        backgroundColor: isLight ? '#e0e0e0' : '#424242',
+                        backgroundColor: colors.border,
                     },
                 },
             },
@@ -195,9 +235,9 @@ const createCustomTheme = (mode: any) => {
                 styleOverrides: {
                     root: {
                         '&.Mui-selected': {
-                            backgroundColor: isLight ? alpha(primaryMain, 0.12) : alpha(primaryMain, 0.24),
+                            backgroundColor: alpha(colors.primary, 0.12),
                             '&:hover': {
-                                backgroundColor: isLight ? alpha(primaryMain, 0.18) : alpha(primaryMain, 0.32),
+                                backgroundColor: alpha(colors.primary, 0.18),
                             },
                         },
                     },
@@ -207,20 +247,18 @@ const createCustomTheme = (mode: any) => {
                 styleOverrides: {
                     root: {
                         borderRadius: 16,
-                        boxShadow: isLight
-                            ? '0px 4px 12px rgba(0, 0, 0, 0.05)'
-                            : '0px 4px 12px rgba(255, 255, 255, 0.05)',
+                        boxShadow: `0px 4px 12px ${alpha(colors.foreground, 0.05)}`,
                     },
                 },
             },
             MuiTableCell: {
                 styleOverrides: {
                     root: {
-                        borderBottom: `1px solid ${isLight ? '#e0e0e0' : '#424242'}`,
+                        borderBottom: `1px solid ${colors.border}`,
                     },
                     head: {
                         fontWeight: 600,
-                        backgroundColor: isLight ? '#f5f5f5' : '#2c2c2c',
+                        backgroundColor: colors.muted,
                     },
                 },
             },
@@ -230,17 +268,25 @@ const createCustomTheme = (mode: any) => {
                         textTransform: 'none',
                         fontWeight: 500,
                         '&.Mui-selected': {
-                            color: primaryMain,
+                            color: colors.primary,
                         },
+                    },
+                },
+            },
+            MuiTabs: {
+                styleOverrides: {
+                    flexContainer: {
+                        borderBottom: `1px solid ${colors.border}`,
+                        justifyContent: 'space-around',
                     },
                 },
             },
             MuiFormLabel: {
                 styleOverrides: {
                     root: {
-                        color: isLight ? '#666666' : '#b0b0b0', // Label rengi
+                        color: colors.mutedForeground,
                         '&.Mui-focused': {
-                            color: primaryMain, // Odaklandığında label rengi
+                            color: colors.primary,
                         },
                     },
                 },

@@ -1,5 +1,6 @@
-import { Button, Container, Grid, TextField, Typography } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, Container, Grid, TextField } from '@mui/material';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 
 const PublishNewJob = () => {
@@ -24,91 +25,96 @@ const PublishNewJob = () => {
         setJob({ ...job, [name]: timestamp });
     };
 
+    const { t } = useTranslation();
+
 
     const { jobService } = useRootService()
 
     return (
         <Container maxWidth="sm">
-            <Typography variant="h4" component="h1" gutterBottom>
-                Post New Job
-            </Typography>
-            <Grid container spacing={3}>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Job Title"
-                        name="jobTitle"
-                        value={job.jobTitle}
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Description"
-                        name="description"
-                        multiline
-                        rows={4}
-                        value={job.description}
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Requirements"
-                        name="requirements"
-                        multiline
-                        rows={4}
-                        value={job.requirements}
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Location"
-                        name="location"
-                        value={job.location}
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Salary Range"
-                        name="salaryRange"
-                        value={job.salaryRange}
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        fullWidth
-                        label="Employment Type"
-                        name="employmentType"
-                        onChange={handleChange}
-                    />
-                </Grid>
-                <Grid item xs={12}> {/* Date picker for deadline */}
-                    <TextField
-                        fullWidth
-                        label="Application Deadline"
-                        type="date"
-                        name="applicationDeadline"
-                        onChange={(e) => handleDateChange('applicationDeadline', e.target.value)}
-                    />
-                </Grid>
-                <Grid item xs={12}>
-                    <Button variant="contained" color="primary" onClick={
-                        () => {
-                            jobService.publishJob(job)
-                        }
-                    }>
-                        Submit
-                    </Button>
-                </Grid>
-            </Grid>
+            <Card>
+                <CardHeader title={t("post_new_job_header")} />
+                <CardContent>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Job Title"
+                                name="jobTitle"
+                                value={job.jobTitle}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Description"
+                                name="description"
+                                multiline
+                                rows={4}
+                                value={job.description}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Requirements"
+                                name="requirements"
+                                multiline
+                                rows={4}
+                                value={job.requirements}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Location"
+                                name="location"
+                                value={job.location}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Salary Range"
+                                name="salaryRange"
+                                value={job.salaryRange}
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                fullWidth
+                                label="Employment Type"
+                                name="employmentType"
+                                onChange={handleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}> {/* Date picker for deadline */}
+                            <TextField
+                                fullWidth
+                                label="Application Deadline"
+                                type="date"
+                                name="applicationDeadline"
+                                onChange={(e) => handleDateChange('applicationDeadline', e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Button variant="contained" color="primary" onClick={
+                                () => {
+                                    jobService.publishJob(job)
+                                }
+                            }>
+                                Submit
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </CardContent>
+
+            </Card>
         </Container>
     );
 };

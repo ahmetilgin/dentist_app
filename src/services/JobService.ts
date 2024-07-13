@@ -10,20 +10,21 @@ class JobService {
     this.jobStore = jobStore;
   }
 
-  searchJobs = ( keyword: string,location: string ) => {
+  searchJobs = (keyword: string, location: string) => {
     this.httpService
-      .post<{jobs:TypeJobs}>("/public/jobs/search", {keyword, location} as TypeJobSearch)
+      .post<{ jobs: TypeJobs }>("/public/jobs/search", {
+        keyword,
+        location,
+      } as TypeJobSearch)
       .then((res) => {
-        if (res != null){
-          if (res.jobs != null)
-          {
+        if (res != null) {
+          if (res.jobs != null) {
             this.jobStore.jobs = res.jobs;
-          }    
+          }
         }
       })
       .catch((err: any) => console.log(err));
   };
-
 
   publishJob = (job: any) => {
     this.httpService
@@ -32,8 +33,7 @@ class JobService {
         this.searchJobs("", "");
       })
       .catch((err: any) => console.log(err));
-  }
-
+  };
 }
 
 export default JobService;

@@ -1,5 +1,3 @@
-import Brightness4Icon from "@mui/icons-material/Brightness4";
-import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {
   Box,
   Button,
@@ -7,52 +5,75 @@ import {
   CardContent,
   Checkbox,
   Container,
+  Fade,
   FormControlLabel,
   Grid,
-  IconButton,
-  Link,
-  TextField,
-  Tooltip,
+  Tab,
+  Tabs,
+  TextField
 } from "@mui/material";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import LanguageThemeSelector from "../components/LanguageThemeSelector";
 import {
-  useRootService,
-  useRootStore,
+  useRootService
 } from "../providers/context_provider/ContextProvider";
-import { useCustomTheme } from "../providers/theme_provider/ThemeProvider";
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  index: number;
+  value: number;
+}
+
+function TabPanel(props: TabPanelProps) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Fade in={value === index}>
+          <Box sx={{ p: 3 }}>{children}</Box>
+        </Fade>
+      )}
+    </div>
+  );
+}
 
 const LoginPage: React.FC = () => {
-  const { t, i18n } = useTranslation();
-  const { setTheme, mode } = useCustomTheme();
-  const { userStore } = useRootStore();
+  const { t } = useTranslation();
   const { authService } = useRootService();
+  const navigate = useNavigate();
 
-  const [username, setUsername] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [loginType, setLoginType] = useState<string>("user"); // Add loginType state variable
+  const [username, setUsername] = useState<string>("test1");
+  const [password, setPassword] = useState<string>("test1");
+  const [tabValue, setTabValue] = useState<number>(1);
 
-  const changeLanguage = (lng: string) => {
-    i18n.changeLanguage(lng);
-  };
 
-  const handleThemeChange = () => {
-    let theme = mode === "light" ? "dark" : "light";
-    setTheme(theme);
-    userStore.setTheme(theme);
-  };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (loginType === "user") {
-      authService.loginUser(username, password, "user");
+    if (tabValue === 0) {
+      let result = await authService.loginUser(username, password, "user");
+      if (result) {
+        navigate("/home")
+      }
     } else {
-      authService.loginBusiness(username, password, "business");
+      let result = await authService.loginBusiness(username, password, "business");
+      if (result) {
+        navigate("/home")
+      }
     }
   };
 
-  const handleLoginTypeChange = (type: string) => {
-    setLoginType(type);
+  const handleTabChange = (event: React.SyntheticEvent, newValue: number) => {
+    setTabValue(newValue);
   };
 
   return (
@@ -65,109 +86,38 @@ const LoginPage: React.FC = () => {
       style={{ minHeight: "100vh" }}
     >
       <Container component="main" maxWidth="xs">
+        <LanguageThemeSelector />
         <Card>
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <Grid container alignItems="center">
-              <Grid item xs={6}>
-                <IconButton onClick={handleThemeChange}>
-                  {mode === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
-                </IconButton>
-              </Grid>
-              <Grid item xs={6} container justifyContent="flex-end">
-                <Tooltip title={t("english")} arrow>
-                  <IconButton
-                    onClick={() => changeLanguage("en")}
-                    size="small"
-                    sx={{ mx: 0.5 }}
-                  >
-                    🇺🇸
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("turkish")} arrow>
-                  <IconButton
-                    onClick={() => changeLanguage("tr")}
-                    size="small"
-                    sx={{ mx: 0.5 }}
-                  >
-                    🇹🇷
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title={t("albanian")} arrow>
-                  <IconButton
-                    onClick={() => changeLanguage("sq")}
-                    size="small"
-                    sx={{ mx: 0.5 }}
-                  >
-                    🇦🇱
-                  </IconButton>
-                </Tooltip>
-              </Grid>
-            </Grid>
-
-            <CardContent>
-              <Box component="form" onSubmit={handleSubmit} noValidate>
-                {loginType === "user" && ( // Render user login form if loginType is "user"
-                  <>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="username"
-                      label={t("email_or_username")}
-                      name="username"
-                      autoFocus
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label={t("password")}
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </>
-                )}
-
-                {loginType === "business" && ( // Render business login form if loginType is "business"
-                  <>
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      id="username"
-                      label={t("email_or_username")}
-                      name="username"
-                      autoFocus
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                    <TextField
-                      margin="normal"
-                      required
-                      fullWidth
-                      name="password"
-                      label={t("password")}
-                      type="password"
-                      id="password"
-                      autoComplete="current-password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </>
-                )}
-
+          <Tabs value={tabValue} onChange={handleTabChange}>
+            <Tab label={t("switch_to_user_login")} />
+            <Tab label={t("switch_to_business_login")} />
+          </Tabs>
+          <CardContent>
+            <Box component="form" onSubmit={handleSubmit} noValidate>
+              <TabPanel value={tabValue} index={0}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label={t("email_or_username")}
+                  name="username"
+                  autoFocus
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label={t("password")}
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <FormControlLabel
                   control={<Checkbox value="remember" color="primary" />}
                   label={t("remember_me")}
@@ -180,39 +130,63 @@ const LoginPage: React.FC = () => {
                   variant="outlined"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  {loginType === "user" ? t("signin_user") : t("signin_business")}
+                  {t("signin_user")}
                 </Button>
+              </TabPanel>
 
+              <TabPanel value={tabValue} index={1}>
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="username"
+                  label={t("email_or_username")}
+                  name="username"
+                  autoFocus
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label={t("password")}
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
                 <Grid container>
                   <Grid item xs>
-                    <Link href="#" variant="body2">
-                      {t("forgot_password")}
-                    </Link>
+                    <FormControlLabel
+                      control={<Checkbox value="remember" color="primary" />}
+                      label={t("remember_me")}
+                    />
                   </Grid>
-                  <Grid item>
-                    <Link href={`/register?type=${loginType}`} variant="body2">
-                      {t("signup")}
-                    </Link>
+                  <Grid item xs style={{ alignContent: "center" }}>
+                    <Button color="primary" onClick={() => {
+                      navigate("/forgot_password")
+                    }}>
+                      {t("forgot_password")}
+                    </Button>
                   </Grid>
                 </Grid>
 
                 <Button
+                  type="submit"
                   fullWidth
+                  color={"secondary"}
                   variant="outlined"
-                  sx={{ mt: 2 }}
-                  onClick={() =>
-                    handleLoginTypeChange(
-                      loginType === "user" ? "business" : "user"
-                    )
-                  }
+                  sx={{ mt: 3, mb: 2 }}
                 >
-                  {loginType === "user"
-                    ? t("switch_to_business_login")
-                    : t("switch_to_user_login")}
+                  {t("signin_business")}
                 </Button>
-              </Box>
-            </CardContent>
-          </Box>
+              </TabPanel>
+
+            </Box>
+          </CardContent>
         </Card>
       </Container>
     </Grid>
