@@ -24,3 +24,6 @@ export interface TypeJobSearch {
 
 export type TypeJobs = TypeJob[]
 export type QueryResult = { query_result: string[] }
+
+export type Language = 'sq' | 'tr' | 'en';
+export type Theme = 'light' | 'dark';

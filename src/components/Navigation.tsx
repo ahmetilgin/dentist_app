@@ -4,6 +4,7 @@ import { Avatar, Button, Grid, IconButton, Menu, MenuItem, Typography } from '@m
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { Language, Theme } from '../DataTypes';
 import { useRootStore } from '../providers/context_provider/ContextProvider';
 import { useCustomTheme } from '../providers/theme_provider/ThemeProvider';
 
@@ -13,7 +14,7 @@ const Navigation: React.FC = () => {
     const { t, i18n } = useTranslation();
     const { setTheme, mode } = useCustomTheme()
     const { userStore } = useRootStore()
-    
+
 
     const handleAvatarClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -28,14 +29,14 @@ const Navigation: React.FC = () => {
         setAnchorElLanguage(null);
     };
 
-    const changeLanguage = (lng: string) => {
+    const changeLanguage = (lng: Language) => {
         i18n.changeLanguage(lng);
         handleLanguageMenuClose();
         handleMenuClose();
     };
 
     const handleThemeChange = () => {
-        let theme = mode === "light" ? "dark" : "light";
+        let theme: Theme = mode === "light" ? "dark" : "light";
         setTheme(theme);
         userStore.setTheme(theme)
     };
@@ -81,10 +82,10 @@ const Navigation: React.FC = () => {
                             {mode === 'light' ? <Brightness4Icon /> : <Brightness7Icon />}
                         </IconButton>
                     </MenuItem>
-                    <MenuItem onClick={() => { 
+                    <MenuItem onClick={() => {
                         userStore.setAuthenticated(false);
                     }}
-                        >{t("log_out")}</MenuItem>
+                    >{t("log_out")}</MenuItem>
                 </Menu>
             </Grid>
         </Grid >

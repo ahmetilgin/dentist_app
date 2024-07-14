@@ -60,5 +60,6 @@
     "register_business": "İşletme Kaydı",
     "username": "Kullanıcı Adı",
     "business_name": "İşletme Adı",
-    "business_address": "İşletme Adresi"
+    "business_address": "İşletme Adresi",
+    "login_failed_message": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin."
 }

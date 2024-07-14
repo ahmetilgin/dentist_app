@@ -43,15 +43,16 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
         accentForeground: 'hsl(0, 0%, 98%)',
         destructive: 'hsl(0, 62.8%, 30.6%)',
         destructiveForeground: 'hsl(0, 0%, 98%)',
+        border: 'hsl(240, 3.7%, 15.9%)',
+        input: 'hsl(240, 3.7%, 15.9%)',
         warning: 'hsl(48, 100%, 67%)',
         info: 'hsl(197, 100%, 50%)',
         success: 'hsl(120, 100%, 35%)',
-        border: 'hsl(240, 3.7%, 15.9%)',
-        input: 'hsl(240, 3.7%, 15.9%)',
         ring: 'hsl(240, 4.9%, 83.9%)',
     }
 
     const borderRadius = 4;
+    const padding = 4;
 
     return createTheme({
         palette: {
@@ -96,9 +97,7 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
                     root: {
                         borderRadius: borderRadius,
                         padding: '4px 8px',
-                        '&:hover': {
-                            boxShadow: `0 4px 8px ${alpha(colors.foreground, 0.15)}`,
-                        },
+                        transition: 'all 0.3s ease', // Yumuşak geçiş efekti ekliyoruz
                     },
                     containedPrimary: {
                         backgroundColor: colors.primary,
@@ -108,10 +107,15 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
                     },
                     outlinedSecondary: {
                         borderColor: colors.secondary,
-                        color: colors.secondary,
+                        color: colors.accentForeground,
+                        '&:hover': {
+                            backgroundColor: alpha(colors.secondary, 0.1),
+                            borderColor: alpha(colors.secondary, 1),
+                            color: colors.accentForeground,
+                        },
                     },
                     outlined: {
-                        borderColor: 'currentColor',
+                        borderColor: colors.secondary,
                         borderWidth: '2px',
                         '&:hover': {
                             backgroundColor: colors.primary,
@@ -216,6 +220,49 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
                     },
                 },
             },
+            MuiSelect: {
+                styleOverrides: {
+                    root: {
+                        '&.MuiOutlinedInput-root': {
+                            '& fieldset': {
+                                borderColor: colors.border,
+                            },
+                            '&:hover fieldset': {
+                                borderColor: colors.primary,
+                            },
+                            '&.Mui-focused fieldset': {
+                                borderColor: colors.primary,
+                            },
+                        },
+                    },
+                    icon: {
+                        color: colors.mutedForeground,
+                    },
+                    select: {
+                        padding: padding,
+                        color: colors.foreground,
+                        '&:focus': {
+                            backgroundColor: 'transparent',
+                        },
+                    },
+                },
+            },
+            MuiMenuItem: {
+                styleOverrides: {
+                    root: {
+                        padding: padding,
+                        '&.Mui-selected': {
+                            backgroundColor: alpha(colors.primary, 0.12),
+                            '&:hover': {
+                                backgroundColor: alpha(colors.primary, 0.18),
+                            },
+                        },
+                        '&:hover': {
+                            backgroundColor: alpha(colors.primary, 0.06),
+                        },
+                    },
+                },
+            },
             MuiDialog: {
                 styleOverrides: {
                     paper: {
@@ -251,6 +298,42 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
                     },
                 },
             },
+            MuiChip: {
+                styleOverrides: {
+                    root: {
+                        backgroundColor: colors.muted,
+                        color: colors.mutedForeground,
+                        '&.MuiChip-clickable:hover': {
+                            backgroundColor: alpha(colors.muted, 0.8),
+                        },
+                        '&.MuiChip-clickable:focus': {
+                            backgroundColor: alpha(colors.muted, 0.7),
+                        },
+                    },
+                    label: {
+                        padding: '0 12px',
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        lineHeight: 1.5,
+                    },
+                    deleteIcon: {
+                        color: alpha(colors.mutedForeground, 0.7),
+                        '&:hover': {
+                            color: colors.mutedForeground,
+                        },
+                    },
+                    icon: {
+                        color: colors.mutedForeground,
+                    },
+                    outlined: {
+                        backgroundColor: 'transparent',
+                        border: `1px solid ${colors.border}`,
+                        '&.MuiChip-clickable:hover': {
+                            backgroundColor: alpha(colors.muted, 0.1),
+                        },
+                    },
+                },
+            },
             MuiTableCell: {
                 styleOverrides: {
                     root: {
@@ -277,7 +360,7 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
                 styleOverrides: {
                     flexContainer: {
                         borderBottom: `1px solid ${colors.border}`,
-                        justifyContent: 'space-around',
+                        justifyContent: 'space-between',
                     },
                 },
             },
@@ -297,6 +380,6 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
 
 const lightTheme = createCustomTheme('light');
 const darkTheme = createCustomTheme('dark');
-
+// prettier-ignore
 export { darkTheme, lightTheme };
 

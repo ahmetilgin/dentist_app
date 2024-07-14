@@ -53,7 +53,7 @@ const HomePage = observer(() => {
                         }}
                     >
                         <img src={logo} alt="logo" style={{ width: '50px' }} />
-                        <Typography variant="h6">{t('Karriere')}</Typography>
+                        <Typography variant="h6">{t('karriere')}</Typography>
                     </div>
                     <div
                         style={{
@@ -135,12 +135,15 @@ const HomePage = observer(() => {
                             size="large"
                             startIcon={<SearchIcon />}
                             sx={{ height: '56px' }}
-                            onClick={() => {
-                                jobService.searchJobs(
+                            onClick={async () => {
+                                const result = await jobService.searchJobs(
                                     selectedProfession,
                                     selectedRegion
                                 );
-                                navigate('/search_result');
+                                if (result) {
+                                    navigate('/search_result');
+                                }
+
                             }}
                         >
                             {t('find_job')}
@@ -165,7 +168,7 @@ const HomePage = observer(() => {
                     <></>
                 ) : (
                     <Typography variant="subtitle2" gutterBottom sx={{ mt: 2 }}>
-                        {t('job_postings')}
+                        {/* {t('job_postings')} */}
                     </Typography>
                 )}
             </Container>

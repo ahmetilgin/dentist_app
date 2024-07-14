@@ -1,4 +1,5 @@
 import {
+  Alert,
   Box,
   Button,
   Card,
@@ -16,15 +17,14 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import LanguageThemeSelector from "../components/LanguageThemeSelector";
-import {
-  useRootService
-} from "../providers/context_provider/ContextProvider";
+import { useRootService } from "../providers/context_provider/ContextProvider";
 
 interface TabPanelProps {
   children?: React.ReactNode;
   index: number;
   value: number;
 }
+
 
 function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
@@ -53,21 +53,24 @@ const LoginPage: React.FC = () => {
 
   const [username, setUsername] = useState<string>("test1");
   const [password, setPassword] = useState<string>("test1");
-  const [tabValue, setTabValue] = useState<number>(1);
-
-
+  const [tabValue, setTabValue] = useState<number>(0);
+  const [error, setError] = useState<string | null>(null); // State for error message
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (tabValue === 0) {
       let result = await authService.loginUser(username, password, "user");
       if (result) {
-        navigate("/home")
+        navigate("/home");
+      } else {
+        setError(t("login_failed_message")); // Set error message
       }
     } else {
       let result = await authService.loginBusiness(username, password, "business");
       if (result) {
-        navigate("/home")
+        navigate("/home");
+      } else {
+        setError(t("login_failed_message")); // Set error message
       }
     }
   };
@@ -86,11 +89,10 @@ const LoginPage: React.FC = () => {
       style={{ minHeight: "100vh" }}
     >
       <Container component="main" maxWidth="xs">
-        <LanguageThemeSelector />
         <Card>
           <Tabs value={tabValue} onChange={handleTabChange}>
-            <Tab label={t("switch_to_user_login")} />
-            <Tab label={t("switch_to_business_login")} />
+            <Tab style={{ width: "50%" }} label={t("switch_to_user_login")} />
+            <Tab style={{ width: "50%" }} label={t("switch_to_business_login")} />
           </Tabs>
           <CardContent>
             <Box component="form" onSubmit={handleSubmit} noValidate>
@@ -118,11 +120,21 @@ const LoginPage: React.FC = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
-                <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label={t("remember_me")}
-                />
+                <Grid container>
+                  <Grid item xs>
+                    <FormControlLabel
+                      control={<Checkbox value="remember" color="primary" />}
+                      label={t("remember_me")}
+                    />
+                  </Grid>
+                  <Grid item xs style={{ alignContent: "center" }}>
+                    <Button color="primary" onClick={() => navigate("/forgot_password")}>
+                      {t("forgot_password")}
+                    </Button>
+                  </Grid>
+                </Grid>
 
+                {error && <Alert severity="error">{error}</Alert>} {/* Display error message */}
                 <Button
                   type="submit"
                   fullWidth
@@ -166,14 +178,13 @@ const LoginPage: React.FC = () => {
                     />
                   </Grid>
                   <Grid item xs style={{ alignContent: "center" }}>
-                    <Button color="primary" onClick={() => {
-                      navigate("/forgot_password")
-                    }}>
+                    <Button color="primary" onClick={() => navigate("/forgot_password")}>
                       {t("forgot_password")}
                     </Button>
                   </Grid>
                 </Grid>
 
+                {error && <Alert severity="error">{error}</Alert>} {/* Display error message */}
                 <Button
                   type="submit"
                   fullWidth
@@ -184,7 +195,7 @@ const LoginPage: React.FC = () => {
                   {t("signin_business")}
                 </Button>
               </TabPanel>
-
+              <LanguageThemeSelector />
             </Box>
           </CardContent>
         </Card>

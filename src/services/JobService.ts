@@ -11,7 +11,7 @@ class JobService {
     }
 
     searchJobs = (keyword: string, location: string) => {
-        this.httpService
+        return this.httpService
             .post<{ jobs: TypeJobs }>('/public/jobs/search', {
                 keyword,
                 location,
@@ -20,10 +20,15 @@ class JobService {
                 if (res != null) {
                     if (res.jobs != null) {
                         this.jobStore.jobs = res.jobs;
+                        return true;
                     }
                 }
+                return false;
             })
-            .catch((err: any) => console.log(err));
+            .catch((err: any) => {
+                console.log(err);
+                return false;
+            });
     };
 
     publishJob = (job: any) => {
@@ -36,15 +41,13 @@ class JobService {
     };
 
     getPopularJobs() {
-        this.httpService
-            .get<QueryResult>('/public/jobs/get_populer_professions')
-            .then((res) => {
-                if (res != null) {
-                    if (res.query_result != null) {
-                        this.jobStore.popularJobs = res.query_result;
-                    }
+        this.httpService.get<QueryResult>('/public/jobs/get_populer_professions').then((res) => {
+            if (res != null) {
+                if (res.query_result != null) {
+                    this.jobStore.popularJobs = res.query_result;
                 }
-            });
+            }
+        });
     }
 }
 

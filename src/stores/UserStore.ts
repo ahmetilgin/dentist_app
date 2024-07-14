@@ -1,84 +1,77 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable } from 'mobx';
+import { Theme } from '../DataTypes';
 
 export class UserStore {
-    username: string = "test";
-    errors = undefined;
-    registerSuccess = false
-    public isAuthenticated: boolean = false;
-    language: "sq" | "tr" | "en" = "sq";
-    activeTheme: string = "light";
-    token : string | null = null
+    username: string = '';
+    errors: any = undefined;
+    registerSuccess: boolean = false;
+    isAuthenticated: boolean = false;
+    activeTheme: Theme;
+    token: string | null = null;
 
     constructor() {
-        let username = localStorage.getItem("userName")
-        // let activeTheme = localStorage.getItem("activeTheme")  
-        let lang = localStorage.getItem("i18nextLng") 
-        this.username = username ?? ""
-        // this.activeTheme = activeTheme ?? "light"
-        this.language = lang as "sq" | "tr" | "en" ?? "en"
-        
-        let isAuthenticated = sessionStorage.getItem("isAuthenticated")
-        if (isAuthenticated && isAuthenticated != null) {
-            this.isAuthenticated = JSON.parse(isAuthenticated)  
-        }
-
-        if (this.token == null){
-            let tokenFromStore = sessionStorage.getItem("token")
-            if (tokenFromStore && tokenFromStore != null) { 
-                this.token = tokenFromStore;
-            }
-        }
-
         makeAutoObservable(this);
+        this.username = this.getFromStorage('userName', 'localStorage') || '';
+        this.activeTheme = (this.getFromStorage('activeTheme', 'localStorage') as Theme) || 'light';
+        this.isAuthenticated = JSON.parse(this.getFromStorage('isAuthenticated', 'sessionStorage') || 'false');
+        this.token = this.getFromStorage('token', 'sessionStorage');
+    }
 
+    private getFromStorage(key: string, storageType: 'localStorage' | 'sessionStorage'): string | null {
+        return window[storageType].getItem(key);
+    }
+
+    private setToStorage(key: string, value: string, storageType: 'localStorage' | 'sessionStorage') {
+        window[storageType].setItem(key, value);
+    }
+
+    private removeFromStorage(key: string, storageType: 'localStorage' | 'sessionStorage') {
+        window[storageType].removeItem(key);
     }
 
     setAuthenticated(authenticated: boolean) {
         this.isAuthenticated = authenticated;
-        sessionStorage.setItem("isAuthenticated", JSON.stringify(this.isAuthenticated))
-        if (!authenticated)
-        {
-            this.setToken(null) 
+        this.setToStorage('isAuthenticated', JSON.stringify(authenticated), 'sessionStorage');
+        if (!authenticated) {
+            this.setToken(null);
         }
-        
     }
 
     setUsername(username: string) {
         this.username = username;
-        localStorage.setItem("userName", JSON.stringify(this.username))
+        this.setToStorage('userName', username, 'localStorage');
     }
 
-    setLanguage(p_language: "sq" | "tr" | "en") {
-        this.language = p_language;
+    setTheme(theme: Theme) {
+        this.activeTheme = theme;
+        this.setToStorage('activeTheme', theme, 'localStorage');
     }
 
-    setTheme(p_theme: string) {
-        this.activeTheme = p_theme;
-        localStorage.setItem("activeTheme", JSON.stringify(this.activeTheme))
-    }
-
-    setRegisterSuccess(res: boolean){
-        this.registerSuccess = res
-    }
-
-    logout() {
-        this.setToken(null);
-    }
-
-    reset() {
-        this.username = ''
+    setRegisterSuccess(success: boolean) {
+        this.registerSuccess = success;
     }
 
     setToken(token: string | null) {
         this.token = token;
-        if ( token == null){
-            sessionStorage.removeItem("token")
-        }else{
-            sessionStorage.setItem("token", token);
+        if (token === null) {
+            this.removeFromStorage('token', 'sessionStorage');
+        } else {
+            this.setToStorage('token', token, 'sessionStorage');
         }
     }
 
-    getToken() : string | null{     
-        return this.token
+    logout() {
+        this.setToken(null);
+        this.setAuthenticated(false);
+        this.username = '';
+    }
+
+    reset() {
+        this.username = '';
+        this.removeFromStorage('userName', 'localStorage');
+    }
+
+    getToken(): string | null {
+        return this.token;
     }
 }

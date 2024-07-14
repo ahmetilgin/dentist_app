@@ -60,5 +60,6 @@
     "register_business": "Regjistrimi i Biznesit",
     "username": "Emri i Përdoruesit",
     "business_name": "Emri i Biznesit",
-    "business_address": "Adresa e Biznesit"
+    "business_address": "Adresa e Biznesit",
+    "login_failed_message": "Identifikimi dështoi. Ju lutem kontrolloni të dhënat tuaja."
 }

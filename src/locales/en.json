@@ -60,5 +60,6 @@
     "register_business": "Business Register",
     "username": "Username",
     "business_name": "Business Name",
-    "business_address": "Business Address"
+    "business_address": "Business Address",
+    "login_failed_message": "Login failed. Please check your credentials."
 }

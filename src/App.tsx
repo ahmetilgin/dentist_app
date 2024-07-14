@@ -1,4 +1,5 @@
 import { observer } from 'mobx-react';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AllElements } from './components/AllElementsJustToSee';
 import PublishNewJob from './components/PublishNewJob';
@@ -9,17 +10,25 @@ import JobSearchPage from './pages/JobSearchPage';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/RegisterPage';
 import { useRootStore } from './providers/context_provider/ContextProvider';
+import { useCustomTheme } from './providers/theme_provider/ThemeProvider';
 
 
 
 const App = observer(() => {
 	const { userStore } = useRootStore();
+	const { setTheme } = useCustomTheme();
 
-	if (window.location.pathname === "/publish_new_job") {
-		if (!userStore.isAuthenticated) {
-			window.location.href = "/login";
+	useEffect(() => {
+		if (window.location.pathname === "/publish_new_job") {
+			if (!userStore.isAuthenticated) {
+				window.location.href = "/login";
+			}
 		}
-	}
+	}, [userStore.isAuthenticated]);
+
+	useEffect(() => {
+		setTheme(userStore.activeTheme);
+	}, [userStore.activeTheme, setTheme]);
 
 	return (<Routes>
 		<Route path="/" element={<Home />} />
