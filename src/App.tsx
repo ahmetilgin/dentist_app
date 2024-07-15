@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import JobSearchPage from './pages/JobSearchPage';
 import LoginPage from './pages/Login';
 import RegisterPage from './pages/RegisterPage';
+import ResetPassword from './pages/ResetPassword';
 import { useRootStore } from './providers/context_provider/ContextProvider';
 import { useCustomTheme } from './providers/theme_provider/ThemeProvider';
 
@@ -40,6 +41,7 @@ const App = observer(() => {
 		<Route path="/all_elements" element={<AllElements />} />
 		<Route path="/publish_new_job" element={<PublishNewJob />} />
 		<Route path="/forgot_password" element={<ForgotPassword />} />
+		<Route path="/reset-password/:token" element={<ResetPassword />} />
 	</Routes>)
 });
 

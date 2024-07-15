@@ -66,5 +66,9 @@
     "reset_password_result_error": "Rikthimi i fjalëkalimit dështoi.",
     "not_registered_yet": "Ende nuk jeni regjistruar?",
     "register_error": "Regjistrimi dështoi. Ju lutem provoni përsëri.",
-    "reser_password_error": "Rikthimi i fjalëkalimit dështoi."
+    "reser_password_error": "Rikthimi i fjalëkalimit dështoi.",
+    "new_password": "Fjalëkalimi i ri",
+    "reset_password": "Rikthe Fjalëkalimin",
+    "confirm_password": "Konfirmo Fjalëkalimin",
+    "reset_password_error": "Rikthimi i fjalëkalimit dështoi."
 }

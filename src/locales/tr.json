@@ -66,5 +66,9 @@
     "reset_password_result_error": "Şifre sıfırlama işlemi başarısız.",
     "not_registered_yet": "Henüz kayıtlı değil misiniz?",
     "register_error": "Kayıt sırasında bir hata oluştu.",
-    "reser_password_error": "Şifre sıfırlama işlemi başarısız."
+    "reser_password_error": "Şifre sıfırlama işlemi başarısız.",
+    "new_password": "Yeni Şifre",
+    "reset_password": "Şifreyi Sıfırla",
+    "confirm_password": "Şifreyi Onayla",
+    "reset_password_error": "Şifre sıfırlama işlemi başarısız."
 }

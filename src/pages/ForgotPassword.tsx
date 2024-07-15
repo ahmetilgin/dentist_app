@@ -34,14 +34,14 @@ const ForgotPassword: React.FC = () => {
 		/>
 		<Button variant="contained" color="primary" onClick={async () => {
 			if (isBusiness) {
-				const result = await authService.resetPasswordBusinessUser(email)
+				const result = await authService.sendEmailBusinessUser(email)
 				if (result) {
 					setError(null)
 				} else {
 					setError(t("reser_password_error"))
 				}
 			} else {
-				const result = await authService.resetPasswordNormalUser(email)
+				const result = await authService.sendEmailNormalUser(email)
 				if (result) {
 					setError(null)
 				} else {

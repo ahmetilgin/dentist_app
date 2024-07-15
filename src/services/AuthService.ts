@@ -89,10 +89,10 @@ class AuthService {
             });
     }
 
-    resetPasswordNormalUser(email: string) {
+    sendEmailBusinessUser(email: string) {
         this.userStore.errors = undefined;
         return this.httpService
-            .post('/auth/reset-password-normal-user', { email })
+            .post('/auth/send-email-business-user', { email })
             .then(() => {
                 return true;
             })
@@ -103,10 +103,24 @@ class AuthService {
             });
     }
 
-    resetPasswordBusinessUser(email: string) {
+    sendEmailNormalUser(email: string) {
         this.userStore.errors = undefined;
         return this.httpService
-            .post('/auth/reset-password-business-user', { email })
+            .post('/auth/send-email-normal-user', { email })
+            .then(() => {
+                return true;
+            })
+            .catch((err: ResponseError) => {
+                this.userStore.errors = err.response && err.response.body && err.response.body.errors;
+                console.log(err);
+                return false;
+            });
+    }
+
+    resetPassword(token: string, password: string) {
+        this.userStore.errors = undefined;
+        return this.httpService
+            .post('/auth/reset-password', { token, password })
             .then(() => {
                 return true;
             })

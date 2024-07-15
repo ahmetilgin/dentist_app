@@ -66,5 +66,9 @@
     "reset_password_result_error": "Password reset failed.",
     "not_registered_yet": "Not registered yet?",
     "register_error": "Registration failed. Please try again.",
-    "reser_password_error": "Password reset failed."
+    "reser_password_error": "Password reset failed.",
+    "new_password": "New Password",
+    "reset_password": "Reset Password",
+    "confirm_password": "Confirm Password",
+    "reset_password_error": "Password reset failed."
 }

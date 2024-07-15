@@ -57,8 +57,7 @@ const LoginPage: React.FC = () => {
 	const [tabValue, setTabValue] = useState<number>(0);
 	const [error, setError] = useState<string | null>(null); // State for error message
 	const { userStore } = useRootStore();
-	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-		event.preventDefault();
+	const login = async () => {
 		if (tabValue === 0) {
 			let result = await authService.loginUser(username, password, "user");
 			if (result) {
@@ -142,7 +141,7 @@ const LoginPage: React.FC = () => {
 								color={"secondary"}
 								variant="outlined"
 								sx={{ mt: 1, mb: 1 }}
-								onClick={() => handleSubmit}
+								onClick={(_event) => { login() }}
 							>
 								{t("signin_user")}
 							</Button>
@@ -203,7 +202,9 @@ const LoginPage: React.FC = () => {
 								color={"secondary"}
 								variant="outlined"
 								sx={{ mt: 1, mb: 1 }}
-								onClick={() => handleSubmit}
+								onClick={() => {
+									login()
+								}}
 							>
 								{t("signin_business")}
 							</Button>
