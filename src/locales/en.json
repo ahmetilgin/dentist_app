@@ -61,5 +61,10 @@
     "username": "Username",
     "business_name": "Business Name",
     "business_address": "Business Address",
-    "login_failed_message": "Login failed. Please check your credentials."
+    "login_failed_message": "Login failed. Please check your credentials.",
+    "reset_password_result_success": "Password reset successful. Please check your email.",
+    "reset_password_result_error": "Password reset failed.",
+    "not_registered_yet": "Not registered yet?",
+    "register_error": "Registration failed. Please try again.",
+    "reser_password_error": "Password reset failed."
 }

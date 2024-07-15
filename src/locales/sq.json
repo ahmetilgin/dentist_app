@@ -61,5 +61,10 @@
     "username": "Emri i Përdoruesit",
     "business_name": "Emri i Biznesit",
     "business_address": "Adresa e Biznesit",
-    "login_failed_message": "Identifikimi dështoi. Ju lutem kontrolloni të dhënat tuaja."
+    "login_failed_message": "Identifikimi dështoi. Ju lutem kontrolloni të dhënat tuaja.",
+    "reset_password_result_success": "Rikthimi i fjalëkalimit ishte i suksesshëm. Ju lutem kontrolloni adresën tuaj të emailit.",
+    "reset_password_result_error": "Rikthimi i fjalëkalimit dështoi.",
+    "not_registered_yet": "Ende nuk jeni regjistruar?",
+    "register_error": "Regjistrimi dështoi. Ju lutem provoni përsëri.",
+    "reser_password_error": "Rikthimi i fjalëkalimit dështoi."
 }

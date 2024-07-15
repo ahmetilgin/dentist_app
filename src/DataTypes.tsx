@@ -24,6 +24,6 @@ export interface TypeJobSearch {
 
 export type TypeJobs = TypeJob[]
 export type QueryResult = { query_result: string[] }
-
+export type HttpResponse = { status: number, data: any }
 export type Language = 'sq' | 'tr' | 'en';
 export type Theme = 'light' | 'dark';

@@ -5,6 +5,7 @@ import { AllElements } from './components/AllElementsJustToSee';
 import PublishNewJob from './components/PublishNewJob';
 import './i18n';
 import './index.css';
+import ForgotPassword from './pages/ForgotPassword';
 import Home from './pages/Home';
 import JobSearchPage from './pages/JobSearchPage';
 import LoginPage from './pages/Login';
@@ -38,6 +39,7 @@ const App = observer(() => {
 		<Route path="/search_result" element={<JobSearchPage />} />
 		<Route path="/all_elements" element={<AllElements />} />
 		<Route path="/publish_new_job" element={<PublishNewJob />} />
+		<Route path="/forgot_password" element={<ForgotPassword />} />
 	</Routes>)
 });
 

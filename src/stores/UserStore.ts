@@ -8,6 +8,7 @@ export class UserStore {
     isAuthenticated: boolean = false;
     activeTheme: Theme;
     token: string | null = null;
+    rememberMe: boolean = false;
 
     constructor() {
         makeAutoObservable(this);
@@ -15,6 +16,7 @@ export class UserStore {
         this.activeTheme = (this.getFromStorage('activeTheme', 'localStorage') as Theme) || 'light';
         this.isAuthenticated = JSON.parse(this.getFromStorage('isAuthenticated', 'sessionStorage') || 'false');
         this.token = this.getFromStorage('token', 'sessionStorage');
+        this.rememberMe = JSON.parse(this.getFromStorage('rememberMe', 'localStorage') || 'false');
     }
 
     private getFromStorage(key: string, storageType: 'localStorage' | 'sessionStorage'): string | null {
@@ -35,6 +37,11 @@ export class UserStore {
         if (!authenticated) {
             this.setToken(null);
         }
+    }
+
+    setRememberMe(rememberMe: boolean) {
+        this.rememberMe = rememberMe;
+        this.setToStorage('rememberMe', rememberMe.toString(), 'localStorage');
     }
 
     setUsername(username: string) {

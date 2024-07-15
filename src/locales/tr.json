@@ -61,5 +61,10 @@
     "username": "Kullanıcı Adı",
     "business_name": "İşletme Adı",
     "business_address": "İşletme Adresi",
-    "login_failed_message": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin."
+    "login_failed_message": "Giriş başarısız. Lütfen bilgilerinizi kontrol edin.",
+    "reset_password_result_success": "Şifre sıfırlama işlemi başarılı. Lütfen e-posta adresinizi kontrol edin.",
+    "reset_password_result_error": "Şifre sıfırlama işlemi başarısız.",
+    "not_registered_yet": "Henüz kayıtlı değil misiniz?",
+    "register_error": "Kayıt sırasında bir hata oluştu.",
+    "reser_password_error": "Şifre sıfırlama işlemi başarısız."
 }
