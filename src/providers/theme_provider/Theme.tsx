@@ -271,13 +271,6 @@ const createCustomTheme = (mode: 'light' | 'dark'): ThemeOptions => {
                     },
                 },
             },
-            MuiDivider: {
-                styleOverrides: {
-                    root: {
-                        backgroundColor: colors.border,
-                    },
-                },
-            },
             MuiListItem: {
                 styleOverrides: {
                     root: {

@@ -1,3 +1,5 @@
+
+
 import {
 	Alert,
 	Box,
@@ -17,8 +19,8 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import LanguageThemeSelector from "../components/LanguageThemeSelector";
+import SocialMediaLogin from "../components/SocialMediaLogin";
 import { useRootService, useRootStore } from "../providers/context_provider/ContextProvider";
-
 interface TabPanelProps {
 	children?: React.ReactNode;
 	index: number;
@@ -39,7 +41,7 @@ function TabPanel(props: TabPanelProps) {
 		>
 			{value === index && (
 				<Fade in={value === index}>
-					<Box sx={{ p: 3 }}>{children}</Box>
+					<Box sx={{ p: 0 }}>{children}</Box>
 				</Fade>
 			)}
 		</div>
@@ -90,14 +92,19 @@ const LoginPage: React.FC = () => {
 			justifyContent="center"
 			style={{ minHeight: "100vh" }}
 		>
+
+
 			<Container component="main" maxWidth="xs">
+
 				<Card>
 					<Tabs value={tabValue} onChange={handleTabChange}>
 						<Tab style={{ width: "50%" }} label={t("switch_to_user_login")} />
 						<Tab style={{ width: "50%" }} label={t("switch_to_business_login")} />
 					</Tabs>
-					<CardContent>
+					<CardContent sx={{ p: 3 }}>
 						<TabPanel value={tabValue} index={0}>
+							<SocialMediaLogin />
+
 							<TextField
 								margin="normal"
 								required
@@ -154,9 +161,12 @@ const LoginPage: React.FC = () => {
 							>
 								{t("not_registered_yet")}
 							</Button>
+
 						</TabPanel>
 
 						<TabPanel value={tabValue} index={1}>
+							<SocialMediaLogin />
+
 							<TextField
 								margin="normal"
 								required
@@ -210,7 +220,6 @@ const LoginPage: React.FC = () => {
 							</Button>
 							<Button
 								fullWidth
-								color={"secondary"}
 								variant="outlined"
 								sx={{ mt: 1, mb: 1 }}
 								onClick={() => navigate(`/register?type=${tabValue === 0 ? "user" : "bussiness"}`)}
@@ -219,6 +228,7 @@ const LoginPage: React.FC = () => {
 								{t("not_registered_yet")}
 							</Button>
 						</TabPanel>
+
 						<LanguageThemeSelector />
 					</CardContent>
 				</Card>

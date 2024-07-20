@@ -70,5 +70,6 @@
     "new_password": "Fjalëkalimi i ri",
     "reset_password": "Rikthe Fjalëkalimin",
     "confirm_password": "Konfirmo Fjalëkalimin",
-    "reset_password_error": "Rikthimi i fjalëkalimit dështoi."
+    "reset_password_error": "Rikthimi i fjalëkalimit dështoi.",
+    "or": "ose"
 }

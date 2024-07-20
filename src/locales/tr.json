@@ -70,5 +70,6 @@
     "new_password": "Yeni Şifre",
     "reset_password": "Şifreyi Sıfırla",
     "confirm_password": "Şifreyi Onayla",
-    "reset_password_error": "Şifre sıfırlama işlemi başarısız."
+    "reset_password_error": "Şifre sıfırlama işlemi başarısız.",
+    "or": "veya"
 }

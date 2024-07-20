@@ -28,7 +28,7 @@ const HomePage = observer(() => {
     const isMobile = useMediaQuery(theme.breakpoints.down('xs'), {
         noSsr: true,
     });
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { httpService, jobService } = useRootService();
     const [selectedProfession, setSelectedProfession] = useState<string>('');
     const [selectedRegion, setSelectedRegion] = useState<string>('');
@@ -42,14 +42,13 @@ const HomePage = observer(() => {
     return (
         <Grid>
             <AppBar position="static" color="primary">
-                <Toolbar>
+
+                <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div
                         style={{
                             display: 'flex',
+                            gap: '20px',
                             alignItems: 'center',
-                            gap: '10px',
-                            flexGrow: 1,
-                            textAlign: 'center',
                         }}
                     >
                         <img src={logo} alt="logo" style={{ width: '50px' }} />
@@ -58,8 +57,8 @@ const HomePage = observer(() => {
                     <div
                         style={{
                             display: 'flex',
-                            flexDirection: 'row',
                             gap: '20px',
+                            alignItems: 'center',
                         }}
                     >
                         <Button
@@ -117,7 +116,7 @@ const HomePage = observer(() => {
                             label="search_city_or_district"
                             fetchOptions={(input) =>
                                 httpService.get<QueryResult>(
-                                    `/public/region?query=${input}`
+                                    `/public/country?code=${i18n.language}&query=${input}?`
                                 )
                             }
                             onSelect={(selectedItem) => {

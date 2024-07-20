@@ -48,6 +48,17 @@ function SearchComponent({
         return () => clearTimeout(debounceTimer);
     }, [inputValue, fetchOptions]);
 
+    useEffect(() => {
+        // Automatically set the value to the current input
+        if (inputValue) {
+            const newValue = { title: inputValue };
+            setValue(newValue);
+            onSelect(inputValue);
+        } else {
+            setValue(null);
+            onSelect(null);
+        }
+    }, [inputValue, onSelect]);
 
     const handleInputChange = (
         _event: React.SyntheticEvent<Element, Event>,
@@ -61,30 +72,14 @@ function SearchComponent({
         newValue: string | OptionType | null,
     ) => {
         if (typeof newValue === 'string') {
-            setValue({ title: newValue });
-            onSelect(newValue);
+            setInputValue(newValue);
         } else if (newValue && newValue.inputValue) {
-            setValue({ title: newValue.inputValue });
-            onSelect(newValue.inputValue);
+            setInputValue(newValue.inputValue);
+        } else if (newValue) {
+            setInputValue(newValue.title);
         } else {
-            setValue(newValue);
-            onSelect(newValue ? newValue.title : null);
+            setInputValue('');
         }
-    };
-
-    const handleFilterOptions = (options: OptionType[], params: any) => {
-        const filtered = filter(options, params);
-
-        const { inputValue } = params;
-        const isExisting = options.some((option) => inputValue === option.title);
-        if (inputValue !== '' && !isExisting) {
-            filtered.push({
-                inputValue,
-                title: `Add "${inputValue}"`,
-            });
-        }
-
-        return filtered;
     };
 
     const getOptionLabel = (option: OptionType | string) => {
@@ -119,7 +114,7 @@ function SearchComponent({
                 value={value}
                 onChange={handleOptionChange}
                 onInputChange={handleInputChange}
-                filterOptions={handleFilterOptions}
+                filterOptions={filter}
                 selectOnFocus
                 clearOnBlur
                 handleHomeEndKeys

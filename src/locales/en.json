@@ -70,5 +70,6 @@
     "new_password": "New Password",
     "reset_password": "Reset Password",
     "confirm_password": "Confirm Password",
-    "reset_password_error": "Password reset failed."
+    "reset_password_error": "Password reset failed.",
+    "or": "or"
 }
