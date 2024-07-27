@@ -38,11 +38,9 @@ const LanguageThemeSelector: React.FC = () => {
 
 	return (
 		<Grid container style={{ justifyContent: "space-around" }}>
-			<Button onClick={() => { handleThemeChange(); handleClose(); }}>
-				<IconButton>
-					{mode === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
-				</IconButton>
-			</Button>
+			<IconButton onClick={() => { handleThemeChange(); handleClose(); }}>
+				{mode === "light" ? <Brightness4Icon /> : <Brightness7Icon />}
+			</IconButton>
 			<Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
 				<LanguageIcon />  {t('language')}
 			</Button>

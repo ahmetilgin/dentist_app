@@ -2,7 +2,7 @@ import { FacebookLoginClient, LoginResponse } from '@greatsumini/react-facebook-
 import AppleIcon from '@mui/icons-material/Apple';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
-import { Button, Divider, Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Button, Divider, Grid } from "@mui/material";
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -89,6 +89,7 @@ const SocialMediaLogin: React.FC = () => {
     };
 
     const appleLogin = () => {
+        // Apple login işlevselliğini burada uygulayın
         console.log('Apple Login not implemented');
         setError('Apple login not implemented');
     };
@@ -117,11 +118,8 @@ const SocialMediaLogin: React.FC = () => {
         loadFB();
     }, []);
 
-
-    const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     return (
-        <Grid container direction="column" spacing={isMobile ? 0 : 2}>
+        <Grid container direction="column" spacing={2}>
             <Grid item>
                 <Grid container spacing={2}>
                     <Grid item xs={4} sm={4}>

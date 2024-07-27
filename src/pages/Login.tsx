@@ -52,13 +52,14 @@ const LoginPage: React.FC = () => {
 	const { t } = useTranslation();
 	const { authService } = useRootService();
 	const navigate = useNavigate();
+	const { userStore } = useRootStore();
 
 	const [username, setUsername] = useState<string>("test1");
 	const [password, setPassword] = useState<string>("test1");
-	const [rememberMe, setRememberMe] = useState<boolean>(false);
+	const [rememberMe, setRememberMe] = useState<boolean>(userStore.rememberMe);
 	const [tabValue, setTabValue] = useState<number>(0);
 	const [error, setError] = useState<string | null>(null); // State for error message
-	const { userStore } = useRootStore();
+	
 	const login = async () => {
 		if (tabValue === 0) {
 			let result = await authService.loginUser(username, password, "user");

@@ -3,11 +3,13 @@ import { observer } from 'mobx-react';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
+import SocialMediaRegister from '../components/SocialMediaRegister';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 
 interface BusinessUser {
 	username: string;
 	password: string;
+	confirm_password: string;
 	email: string;
 	businessName: string;
 	businessAddress: string;
@@ -17,6 +19,7 @@ const RegisterPage = observer(() => {
 	const { t } = useTranslation();
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
+	const [confirm_password, setConfirmPassword] = useState('');
 	const [isBusiness, setIsBusiness] = useState(false);
 	const [businessName, setBusinessName] = useState('');
 	const [email, setEmail] = useState('');
@@ -28,14 +31,22 @@ const RegisterPage = observer(() => {
 
 	const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		const businessUser: BusinessUser = {
+			username,
+			password,
+			confirm_password,
+			email,
+			businessName,
+			businessAddress
+		};
+
+		if (password !== confirm_password) {
+			setError(t("passwords_not_match"));
+			return;
+		}
+
+
 		if (isBusiness) {
-			const businessUser: BusinessUser = {
-				username,
-				password,
-				email,
-				businessName,
-				businessAddress
-			};
 			const result = await authService.registerBusiness(businessUser);
 			if (result) {
 				navigate('/login');
@@ -80,6 +91,7 @@ const RegisterPage = observer(() => {
 						<Typography variant="h4" align="center" gutterBottom>
 							{t('register')}
 						</Typography>
+						<SocialMediaRegister />
 						<CardContent>
 							<form onSubmit={handleSubmit}>
 								<TextField
@@ -100,6 +112,16 @@ const RegisterPage = observer(() => {
 									onChange={(e) => setPassword(e.target.value)}
 									margin="normal"
 									type="password"
+									required
+								/>
+								<TextField
+									label={t('confirm_password')}
+									variant="outlined"
+									fullWidth
+									margin="normal"
+									type="password"
+									value={confirm_password}
+									onChange={(e) => setConfirmPassword(e.target.value)}
 									required
 								/>
 								<TextField
