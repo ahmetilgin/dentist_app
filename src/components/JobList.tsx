@@ -1,30 +1,16 @@
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {
-    Box,
-    Button,
-    Card,
-    CardActions,
-    CardContent,
-    Chip,
-    Collapse,
-    IconButton,
-    Skeleton,
-    Stack,
-    Typography,
-    useMediaQuery,
-    useTheme
-} from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, Chip, Collapse, IconButton, Skeleton, Stack, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { TypeJob } from '../DataTypes';
 import { useRootStore } from '../providers/context_provider/ContextProvider';
 
-
 type JobCardProps = {
     job: TypeJob;
-    handleApply: (jobId: string) => void;
+    handleApply: (job: TypeJob) => void;
     isMobile: boolean;
     t: (key: string) => string;
 };
@@ -34,10 +20,14 @@ const JobList: React.FC = observer(() => {
     const { jobStore } = useRootStore();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const navigate = useNavigate();
 
-    const handleApply = (jobId: string) => {
+    const handleApply = (job: TypeJob) => {
+        if (job) {
+            navigate('/job_detail', { state: { job: Object.assign({}, job) } });
+        }
         // Burada başvuru işlemi için gerekli fonksiyonu çağırabilirsiniz
-        console.log(`Applying for job with ID: ${jobId}`);
+        console.log(`Applying for job with ID: ${job}`);
     };
 
     if (jobStore.jobs.length === 0) {
@@ -80,11 +70,7 @@ const JobCard: React.FC<JobCardProps> = ({ job, handleApply, isMobile, t }) => {
                     </Typography>
                 )}
                 <Box display="flex" justifyContent="space-between" alignItems="center" flexWrap="wrap">
-                    <Chip
-                        label={t(`employmentTypes.${job.EmploymentType}`)}
-                        color="primary"
-                        size={isMobile ? 'small' : 'medium'}
-                    />
+                    <Chip label={t(`employmentTypes.${job.EmploymentType}`)} color="primary" size={isMobile ? 'small' : 'medium'} />
                     <Typography variant="body2" sx={{ mt: isMobile ? 1 : 0 }}>
                         {t('jobList.salary')}: {job.SalaryRange}
                     </Typography>
@@ -102,13 +88,8 @@ const JobCard: React.FC<JobCardProps> = ({ job, handleApply, isMobile, t }) => {
                 <IconButton onClick={handleExpandClick} aria-expanded={expanded} aria-label="show more">
                     {expanded ? <ExpandLessIcon /> : <ExpandMoreIcon />}
                 </IconButton>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={() => handleApply(job.UserID)}
-                    size={isMobile ? 'small' : 'medium'}
-                >
-                    {t('jobList.apply')}
+                <Button variant="outlined" color="primary" onClick={() => handleApply(job)} size={isMobile ? 'small' : 'medium'}>
+                    {t('apply')}
                 </Button>
             </CardActions>
         </Card>
