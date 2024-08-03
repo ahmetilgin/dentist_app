@@ -1,5 +1,5 @@
 export interface TypeUser {
-  username: string;
+  usernameOrPassword: string;
   password: string;
   email: string;
 }

@@ -71,5 +71,12 @@
     "reset_password": "Şifreyi Sıfırla",
     "confirm_password": "Şifreyi Onayla",
     "reset_password_error": "Şifre sıfırlama işlemi başarısız.",
-    "or": "veya"
+    "or": "veya",
+    "post_new_job_header": "Yeni İş İlanı Yayınla",
+    "job_title": "İş Başlığı",
+    "job_description": "İş Açıklaması",
+    "job_requirements": "İş Gereksinimleri",
+    "job_salary_range": "Maaş Aralığı",
+    "employment_type": "İstihdam Türü",
+    "application_deadline": "Başvuru Son Tarihi"
 }

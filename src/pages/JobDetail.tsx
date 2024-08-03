@@ -11,20 +11,16 @@ import {
     Divider,
     Grid,
     IconButton,
-    IconButtonProps,
     Link,
     styled,
     Typography,
-    useTheme,
+    useTheme
 } from '@mui/material';
 import { observer } from 'mobx-react';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { TypeJob } from '../DataTypes';
 
-interface Props {
-    job: TypeJob;
-}
 
 const JobDetailCard = styled(Card)(({ theme }) => ({
     margin: theme.spacing(2),
@@ -52,18 +48,6 @@ const CompanyDetailCard = styled(Card)(({ theme }) => ({
     padding: '8px',
 }));
 
-interface ExpandMoreProps extends IconButtonProps {
-    expand: boolean;
-}
-
-const ExpandMore = styled((props: ExpandMoreProps) => {
-    const { expand, ...other } = props;
-    return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-    transition: theme.transitions.create('transform', {
-        duration: theme.transitions.duration.shortest,
-    }),
-}));
 
 const JobDetail: React.FC = observer(() => {
     const location = useLocation();

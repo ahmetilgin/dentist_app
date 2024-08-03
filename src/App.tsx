@@ -16,35 +16,35 @@ import { useRootStore } from './providers/context_provider/ContextProvider';
 import { useCustomTheme } from './providers/theme_provider/ThemeProvider';
 
 const App = observer(() => {
-    const { userStore } = useRootStore();
-    const { setTheme } = useCustomTheme();
+	const { userStore } = useRootStore();
+	const { setTheme } = useCustomTheme();
 
-    useEffect(() => {
-        if (window.location.pathname === '/publish_new_job') {
-            if (!userStore.isAuthenticated) {
-                window.location.href = '/login';
-            }
-        }
-    }, [userStore.isAuthenticated]);
+	useEffect(() => {
+		if (window.location.pathname === '/publish_new_job') {
+			if (!userStore.isAuthenticated) {
+				window.location.href = '/login';
+			}
+		}
+	}, [userStore.isAuthenticated]);
 
-    useEffect(() => {
-        setTheme(userStore.activeTheme);
-    }, [userStore.activeTheme, setTheme]);
+	useEffect(() => {
+		setTheme(userStore.activeTheme);
+	}, [userStore.activeTheme, setTheme]);
 
-    return (
-        <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/search_result" element={<JobSearchPage />} />
-            <Route path="/all_elements" element={<AllElements />} />
-            <Route path="/publish_new_job" element={<PublishNewJob />} />
-            <Route path="/forgot_password" element={<ForgotPassword />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/job_detail" element={<JobDetail />} />
-        </Routes>
-    );
+	return (
+		<Routes>
+			<Route path="/" element={<Home />} />
+			<Route path="/login" element={<LoginPage />} />
+			<Route path="/home" element={<Home />} />
+			<Route path="/register/:user_type" element={<RegisterPage />} />
+			<Route path="/search_result/:keyword/:region" element={<JobSearchPage />} />
+			<Route path="/all_elements" element={<AllElements />} />
+			<Route path="/publish_new_job" element={<PublishNewJob />} />
+			<Route path="/forgot_password" element={<ForgotPassword />} />
+			<Route path="/reset-password/:token" element={<ResetPassword />} />
+			<Route path="/job_detail" element={<JobDetail />} />
+		</Routes>
+	);
 });
 
 export default App;

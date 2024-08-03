@@ -12,12 +12,12 @@ class AuthService {
     }
 
     current = () => this.httpService.get('/user');
-    loginUser(username: string, password: string, email: string) {
-        this.userStore.setUsername(username);
+    loginUser(usernameOrPassword: string, password: string, email: string) {
+        this.userStore.setUsername(usernameOrPassword);
         this.userStore.errors = undefined;
         return this.httpService
             .post<{ token: string }>('/auth/sign-in-normal-user', {
-                username,
+                usernameOrPassword,
                 password,
                 email,
             } as TypeUser)
@@ -32,12 +32,12 @@ class AuthService {
             });
     }
 
-    loginBusiness(username: string, password: string, email: string) {
-        this.userStore.setUsername(username);
+    loginBusiness(usernameOrPassword: string, password: string, email: string) {
+        this.userStore.setUsername(usernameOrPassword);
         this.userStore.errors = undefined;
         return this.httpService
             .post<{ token: string }>('/auth/sign-in-business-user', {
-                username,
+                usernameOrPassword,
                 password,
                 email,
             } as TypeUser)
@@ -53,11 +53,11 @@ class AuthService {
             });
     }
 
-    registerUser(username: string, password: string, email: string) {
+    registerUser(usernameOrPassword: string, password: string, email: string) {
         this.userStore.errors = undefined;
         return this.httpService
             .post('/auth/sign-up-normal-user', {
-                username,
+                usernameOrPassword,
                 password,
                 email,
             } as TypeUser)

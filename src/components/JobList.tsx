@@ -6,7 +6,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { TypeJob } from '../DataTypes';
-import { useRootStore } from '../providers/context_provider/ContextProvider';
 
 type JobCardProps = {
     job: TypeJob;
@@ -15,9 +14,8 @@ type JobCardProps = {
     t: (key: string) => string;
 };
 
-const JobList: React.FC = observer(() => {
+const JobList: React.FC<{ jobList: TypeJob[] }> = observer((jobList) => {
     const { t } = useTranslation();
-    const { jobStore } = useRootStore();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const navigate = useNavigate();
@@ -30,13 +28,15 @@ const JobList: React.FC = observer(() => {
         console.log(`Applying for job with ID: ${job}`);
     };
 
-    if (jobStore.jobs.length === 0) {
+    if (jobList.jobList.length === 0) {
         return <JobListSkeleton />;
     }
 
+    console.log("Jobs", jobList.jobList)
+
     return (
         <Stack spacing={2} sx={{ width: '100%', padding: theme.spacing(2) }}>
-            {jobStore.jobs.map((job: TypeJob) => (
+            {jobList.jobList.map((job: TypeJob) => (
                 <JobCard key={job.UserID} job={job} handleApply={handleApply} isMobile={isMobile} t={t} />
             ))}
         </Stack>

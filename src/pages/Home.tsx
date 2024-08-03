@@ -134,14 +134,7 @@ const HomePage = observer(() => {
                             startIcon={<SearchIcon />}
                             sx={{ height: '56px' }}
                             onClick={async () => {
-                                const result = await jobService.searchJobs(
-                                    selectedProfession,
-                                    selectedRegion
-                                );
-                                if (result) {
-                                    navigate('/search_result');
-                                }
-
+                                navigate(`/search_result/${selectedProfession}/${selectedRegion}`);
                             }}
                         >
                             {t('find_job')}
@@ -161,7 +154,7 @@ const HomePage = observer(() => {
                             variant="outlined"
                             onClick={() => {
                                 setSelectedProfession(item);
-                                navigate('/search_result');
+                                navigate(`/search_result/${item}/${i18n.language}`);
                             }}
                         />
                     ))}

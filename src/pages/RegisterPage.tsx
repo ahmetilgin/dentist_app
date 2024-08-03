@@ -2,7 +2,7 @@ import { Alert, Box, Button, Card, CardContent, Container, Grid, TextField, Typo
 import { observer } from 'mobx-react';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SocialMediaRegister from '../components/SocialMediaRegister';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 
@@ -25,7 +25,6 @@ const RegisterPage = observer(() => {
 	const [email, setEmail] = useState('');
 	const [businessAddress, setBusinessAddress] = useState('');
 	const { authService } = useRootService();
-	const location = useLocation();
 	const navigate = useNavigate();
 	const [error, setError] = useState<string | null>(null); // State for error message
 
@@ -64,11 +63,10 @@ const RegisterPage = observer(() => {
 		};
 	}
 
-	const queryParams = new URLSearchParams(location.search);
-	const loginType = queryParams.get('type');
+	const { userType } = useParams();
 	useEffect(() => {
-		setIsBusiness(loginType === 'business');
-	}, [loginType]);
+		setIsBusiness(userType === 'business');
+	}, [userType]);
 
 	return (
 		<Grid

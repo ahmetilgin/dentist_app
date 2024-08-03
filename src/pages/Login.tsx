@@ -59,7 +59,7 @@ const LoginPage: React.FC = () => {
 	const [rememberMe, setRememberMe] = useState<boolean>(userStore.rememberMe);
 	const [tabValue, setTabValue] = useState<number>(0);
 	const [error, setError] = useState<string | null>(null); // State for error message
-	
+
 	const login = async () => {
 		if (tabValue === 0) {
 			let result = await authService.loginUser(username, password, "user");
@@ -93,8 +93,6 @@ const LoginPage: React.FC = () => {
 			justifyContent="center"
 			style={{ minHeight: "100vh" }}
 		>
-
-
 			<Container component="main" maxWidth="xs">
 
 				<Card>
@@ -158,7 +156,9 @@ const LoginPage: React.FC = () => {
 								color={"secondary"}
 								variant="outlined"
 								sx={{ mt: 1, mb: 1 }}
-								onClick={() => navigate(`/register?type=${tabValue === 0 ? "user" : "bussiness"}`)}
+								onClick={
+									() => navigate(`/register/${tabValue === 0 ? "user" : "bussiness"}`)
+								}
 							>
 								{t("not_registered_yet")}
 							</Button>
@@ -223,7 +223,7 @@ const LoginPage: React.FC = () => {
 								fullWidth
 								variant="outlined"
 								sx={{ mt: 1, mb: 1 }}
-								onClick={() => navigate(`/register?type=${tabValue === 0 ? "user" : "bussiness"}`)}
+								onClick={() => navigate(`/register/${tabValue === 0 ? "user" : "bussiness"}`)}
 
 							>
 								{t("not_registered_yet")}
@@ -234,7 +234,7 @@ const LoginPage: React.FC = () => {
 					</CardContent>
 				</Card>
 			</Container>
-		</Grid>
+		</Grid >
 	);
 };
 

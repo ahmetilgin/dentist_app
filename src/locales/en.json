@@ -71,5 +71,12 @@
     "reset_password": "Reset Password",
     "confirm_password": "Confirm Password",
     "reset_password_error": "Password reset failed.",
-    "or": "or"
+    "or": "or",
+    "post_new_job_header": "Post New Job",
+    "job_title": "Job Title",
+    "job_description": "Job Description",
+    "job_requirements": "Job Requirements",
+    "job_salary_range": "Salary Range",
+    "employment_type": "Employment Type",
+    "application_deadline": "Application Deadline"
 }

@@ -1,7 +1,9 @@
 import { Button, Card, CardContent, CardHeader, Container, Grid, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { QueryResult } from '../DataTypes';
 import { useRootService } from '../providers/context_provider/ContextProvider';
+import SearchComponent from './SearchComponent';
 
 const PublishNewJob = () => {
     const [job, setJob] = useState({
@@ -25,10 +27,10 @@ const PublishNewJob = () => {
         setJob({ ...job, [name]: timestamp });
     };
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
 
 
-    const { jobService } = useRootService()
+    const { httpService, jobService } = useRootService()
 
     return (
         <Container maxWidth="sm">
@@ -39,7 +41,7 @@ const PublishNewJob = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Job Title"
+                                label={t("job_title")}
                                 name="jobTitle"
                                 value={job.jobTitle}
                                 onChange={handleChange}
@@ -48,7 +50,7 @@ const PublishNewJob = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Description"
+                                label={t("job_description")}
                                 name="description"
                                 multiline
                                 rows={4}
@@ -59,7 +61,7 @@ const PublishNewJob = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Requirements"
+                                label={t("job_requirements")}
                                 name="requirements"
                                 multiline
                                 rows={4}
@@ -68,18 +70,24 @@ const PublishNewJob = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Location"
-                                name="location"
-                                value={job.location}
-                                onChange={handleChange}
+                            <SearchComponent
+                                label="search_city_or_district"
+                                fetchOptions={(input) =>
+                                    httpService.get<QueryResult>(
+                                        `/public/country/${i18n.language}/${input}?`
+                                    )
+                                }
+                                onSelect={(selectedItem) => {
+                                    if (selectedItem != null) {
+                                        setJob({ ...job, "location": selectedItem });
+                                    }
+                                }}
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Salary Range"
+                                label={t("job_salary_range")}
                                 name="salaryRange"
                                 value={job.salaryRange}
                                 onChange={handleChange}
@@ -88,7 +96,7 @@ const PublishNewJob = () => {
                         <Grid item xs={12}>
                             <TextField
                                 fullWidth
-                                label="Employment Type"
+                                label={t("employment_type")}
                                 name="employmentType"
                                 onChange={handleChange}
                             />
@@ -96,7 +104,7 @@ const PublishNewJob = () => {
                         <Grid item xs={12}> {/* Date picker for deadline */}
                             <TextField
                                 fullWidth
-                                label="Application Deadline"
+                                label={t("application_deadline")}
                                 type="date"
                                 name="applicationDeadline"
                                 onChange={(e) => handleDateChange('applicationDeadline', e.target.value)}

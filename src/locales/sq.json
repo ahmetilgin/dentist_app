@@ -71,5 +71,12 @@
     "reset_password": "Rikthe Fjalëkalimin",
     "confirm_password": "Konfirmo Fjalëkalimin",
     "reset_password_error": "Rikthimi i fjalëkalimit dështoi.",
-    "or": "ose"
+    "or": "ose",
+    "post_new_job_header": "Publiko Punë të Re",
+    "job_title": "Titulli i Punës",
+    "job_description": "Përshkrimi i Punës",
+    "job_requirements": "Kërkesat e Punës",
+    "job_salary_range": "Rangu i Pagës",
+    "employment_type": "Lloji i Punës",
+    "application_deadline": "Afati i Aplikimit"
 }

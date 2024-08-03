@@ -16,15 +16,14 @@ class JobService {
             .then((res) => {
                 if (res != null) {
                     if (res.jobs != null) {
-                        this.jobStore.jobs = res.jobs;
-                        return true;
+                        return res.jobs;
                     }
                 }
-                return false;
+                return [];
             })
             .catch((err: any) => {
                 console.log(err);
-                return false;
+                return [];
             });
     };
 
