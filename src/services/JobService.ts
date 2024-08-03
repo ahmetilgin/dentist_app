@@ -1,4 +1,4 @@
-import { QueryResult, TypeJobs, TypeJobSearch } from '../DataTypes';
+import { QueryResult, TypeJobs } from '../DataTypes';
 import { JobStore } from '../stores/JobStore';
 import HttpService from './HttpService';
 
@@ -12,10 +12,7 @@ class JobService {
 
     searchJobs = (keyword: string, location: string) => {
         return this.httpService
-            .post<{ jobs: TypeJobs }>('/public/jobs/search', {
-                keyword,
-                location,
-            } as TypeJobSearch)
+            .get<{ jobs: TypeJobs }>(`/public/jobs/search/${location}/${keyword}`)
             .then((res) => {
                 if (res != null) {
                     if (res.jobs != null) {
@@ -41,13 +38,18 @@ class JobService {
     };
 
     getPopularJobs() {
-        this.httpService.get<QueryResult>('/public/jobs/get_populer_professions').then((res) => {
-            if (res != null) {
-                if (res.query_result != null) {
-                    this.jobStore.popularJobs = res.query_result;
+        this.httpService
+            .get<QueryResult>('/public/jobs/get_populer_professions')
+            .then((res) => {
+                if (res != null) {
+                    if (res.query_result != null) {
+                        this.jobStore.popularJobs = res.query_result;
+                    }
                 }
-            }
-        });
+            })
+            .catch((err: any) => {
+                console.log(err);
+            });
     }
 }
 

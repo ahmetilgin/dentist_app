@@ -82,7 +82,7 @@ function SearchComponent({
         }
     };
 
-    const getOptionLabel = (option: OptionType | string) => {
+    const getOptionLabel = (option: OptionType | string) => {   
         if (typeof option === 'string') {
             return option;
         }

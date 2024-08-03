@@ -42,7 +42,6 @@ const HomePage = observer(() => {
     return (
         <Grid>
             <AppBar position="static" color="primary">
-
                 <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
                     <div
                         style={{
@@ -87,7 +86,7 @@ const HomePage = observer(() => {
                 </Toolbar>
             </AppBar>
 
-            <Container maxWidth="lg" sx={{ mt: 4 }}>
+            <Container maxWidth="lg" sx={{ mt: 4 }} className='background'>
                 <Typography variant="h4" gutterBottom color="text">
                     {t('discover_career_opportunities')}
                 </Typography>
@@ -101,7 +100,7 @@ const HomePage = observer(() => {
                             label="search_position_or_company"
                             fetchOptions={(input) =>
                                 httpService.get<QueryResult>(
-                                    `/public/jobs/search_professions?query=${input}`
+                                    `/public/jobs/search_professions/${input}`
                                 )
                             }
                             onSelect={(selectedItem) => {
@@ -116,7 +115,7 @@ const HomePage = observer(() => {
                             label="search_city_or_district"
                             fetchOptions={(input) =>
                                 httpService.get<QueryResult>(
-                                    `/public/country?code=${i18n.language}&query=${input}?`
+                                    `/public/country/${i18n.language}/${input}?`
                                 )
                             }
                             onSelect={(selectedItem) => {
@@ -160,6 +159,10 @@ const HomePage = observer(() => {
                             clickable
                             color="secondary"
                             variant="outlined"
+                            onClick={() => {
+                                setSelectedProfession(item);
+                                navigate('/search_result');
+                            }}
                         />
                     ))}
                 </Box>
