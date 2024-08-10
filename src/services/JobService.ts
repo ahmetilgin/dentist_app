@@ -46,7 +46,7 @@ class JobService {
                     }
                 }
             })
-            .catch((err: any) => {
+        .catch((err: any) => {
                 console.log(err);
             });
     }

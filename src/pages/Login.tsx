@@ -135,7 +135,9 @@ const LoginPage: React.FC = () => {
 									/>
 								</Grid>
 								<Grid item xs style={{ alignContent: "center" }}>
-									<Button color="primary" onClick={() => navigate(`/forgot_password?type=${tabValue === 0 ? "user" : "bussiness"}`)}>
+									<Button color="primary" onClick={
+										() => navigate(`/forgot_password/${tabValue === 0 ? "user" : "bussiness"}`)
+									}>
 										{t("forgot_password")}
 									</Button>
 								</Grid>
@@ -154,7 +156,7 @@ const LoginPage: React.FC = () => {
 							<Button
 								fullWidth
 								color={"secondary"}
-								variant="outlined"
+								variant="text"
 								sx={{ mt: 1, mb: 1 }}
 								onClick={
 									() => navigate(`/register/${tabValue === 0 ? "user" : "bussiness"}`)
@@ -201,7 +203,9 @@ const LoginPage: React.FC = () => {
 									/>
 								</Grid>
 								<Grid item xs style={{ alignContent: "center" }}>
-									<Button color="primary" onClick={() => navigate(`/forgot_password?type=${tabValue === 0 ? "user" : "bussiness"}`)}>
+									<Button color="primary" onClick={
+										() => navigate(`/forgot_password/${tabValue === 0 ? "user" : "bussiness"}`)
+									}>
 										{t("forgot_password")}
 									</Button>
 								</Grid>
@@ -221,7 +225,7 @@ const LoginPage: React.FC = () => {
 							</Button>
 							<Button
 								fullWidth
-								variant="outlined"
+								variant="text"
 								sx={{ mt: 1, mb: 1 }}
 								onClick={() => navigate(`/register/${tabValue === 0 ? "user" : "bussiness"}`)}
 
@@ -229,7 +233,6 @@ const LoginPage: React.FC = () => {
 								{t("not_registered_yet")}
 							</Button>
 						</TabPanel>
-
 						<LanguageThemeSelector />
 					</CardContent>
 				</Card>

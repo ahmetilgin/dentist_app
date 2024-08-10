@@ -62,6 +62,5 @@
     "@tanstack/eslint-plugin-query": "^5.51.15",
     "@types/superagent": "^8.1.7",
     "@types/superagent-prefix": "^0.0.6"
-  },
-  "proxy": "http://localhost:3000"
+  }
 }

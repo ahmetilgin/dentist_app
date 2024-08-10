@@ -40,7 +40,7 @@ const App = observer(() => {
 			<Route path="/search_result/:keyword/:region" element={<JobSearchPage />} />
 			<Route path="/all_elements" element={<AllElements />} />
 			<Route path="/publish_new_job" element={<PublishNewJob />} />
-			<Route path="/forgot_password" element={<ForgotPassword />} />
+			<Route path="/forgot_password/:user_type" element={<ForgotPassword />} />
 			<Route path="/reset-password/:token" element={<ResetPassword />} />
 			<Route path="/job_detail" element={<JobDetail />} />
 		</Routes>

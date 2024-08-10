@@ -1,4 +1,4 @@
-import { Alert, Button, TextField } from '@mui/material';
+import { Alert, Button, Container, Grid, TextField } from '@mui/material';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from "react-router-dom";
@@ -20,9 +20,7 @@ const ResetPassword: React.FC = () => {
         setConfirmPassword(event.target.value);
     };
 
-    const handleSubmit = async (event: React.FormEvent) => {
-        event.preventDefault();
-        // Add your password reset logic here
+    const sendResetPassword = async () => {
         console.log('Password:', password);
         console.log('Confirm Password:', confirmPassword);
         if (password !== confirmPassword) {
@@ -40,8 +38,14 @@ const ResetPassword: React.FC = () => {
     };
 
     return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-            <form onSubmit={handleSubmit}>
+        <Grid
+            container
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            style={{ margin: 'auto' }}
+        >
+            <Container component="main" maxWidth="xs">
                 <TextField
                     type="password"
                     label={t("new_password")}
@@ -60,13 +64,16 @@ const ResetPassword: React.FC = () => {
                     margin="normal"
                     required
                 />
-                <Button type="submit" variant="contained" color="primary">
+                <Button onClick={() => {
+                    sendResetPassword()
+                }} variant="contained" color="primary">
                     {t("reset_password")}
                 </Button>
                 {error == null && error !== undefined && <Alert severity="info">{error}</Alert>}
                 {error != null && error !== undefined && <Alert severity="error">{error}</Alert>}
-            </form>
-        </div>
+            </Container>
+
+        </Grid>
     );
 }
 
