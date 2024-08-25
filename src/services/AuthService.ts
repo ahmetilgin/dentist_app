@@ -1,5 +1,5 @@
 import { ResponseError } from 'superagent';
-import { TypeUser } from '../DataTypes';
+import { BusinessUserLoginInformation, RegisterBusinessUser, TypeUser } from '../DataTypes';
 import { UserStore } from '../stores/UserStore';
 import HttpService from './HttpService';
 
@@ -12,15 +12,10 @@ class AuthService {
     }
 
     current = () => this.httpService.get('/user');
-    loginUser(usernameOrPassword: string, password: string, email: string) {
-        this.userStore.setUsername(usernameOrPassword);
+    loginUser(userInfo: TypeUser) {
         this.userStore.errors = undefined;
         return this.httpService
-            .post<{ token: string }>('/auth/sign-in-normal-user', {
-                usernameOrPassword,
-                password,
-                email,
-            } as TypeUser)
+            .post<{ token: string }>('/auth/sign-in-normal-user', userInfo)
             .then((res) => {
                 this.userStore.setToken(res.token);
                 this.userStore.setAuthenticated(true);
@@ -32,15 +27,10 @@ class AuthService {
             });
     }
 
-    loginBusiness(usernameOrPassword: string, password: string, email: string) {
-        this.userStore.setUsername(usernameOrPassword);
+    loginBusiness(userInfo: TypeUser) {
         this.userStore.errors = undefined;
         return this.httpService
-            .post<{ token: string }>('/auth/sign-in-business-user', {
-                usernameOrPassword,
-                password,
-                email,
-            } as TypeUser)
+            .post<BusinessUserLoginInformation>('/auth/sign-in-business-user', userInfo)
             .then((res) => {
                 this.userStore.setToken(res.token);
                 this.userStore.setAuthenticated(true);
@@ -53,14 +43,10 @@ class AuthService {
             });
     }
 
-    registerUser(usernameOrPassword: string, password: string, email: string) {
+    registerUser(userInfo: TypeUser) {
         this.userStore.errors = undefined;
         return this.httpService
-            .post('/auth/sign-up-normal-user', {
-                usernameOrPassword,
-                password,
-                email,
-            } as TypeUser)
+            .post('/auth/sign-up-normal-user', userInfo)
             .then(() => {
                 this.userStore.setRegisterSuccess(true);
                 return true;
@@ -73,7 +59,7 @@ class AuthService {
             });
     }
 
-    registerBusiness(businessUser: any) {
+    registerBusiness(businessUser: RegisterBusinessUser) {
         this.userStore.errors = undefined;
         return this.httpService
             .post('/auth/sign-up-business-user', businessUser)

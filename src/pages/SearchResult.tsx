@@ -4,7 +4,7 @@ import {
 } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Filters from '../components/Filters';
 import JobList from '../components/JobList';
 import { useRootService } from '../providers/context_provider/ContextProvider';
@@ -12,21 +12,23 @@ import { useRootService } from '../providers/context_provider/ContextProvider';
 const JobSearchPage: React.FC = () => {
     let { keyword, region } = useParams();
     const { jobService } = useRootService();
+    const navigate = useNavigate();
 
     const { isPending, error, data } = useQuery({
         queryKey: ['repoData'],
         queryFn: () => {
-            return jobService.searchJobs(keyword || '', region || '')
+            return jobService.searchJobs(keyword || '-', region || '-')
         }
     })
 
     if (isPending) {
-        return <div>Loading...</div>
+        return <div className={"loader"}></div>
     }
 
     if (error) {
-        return <div>Error: {error.message}</div>
+        navigate('/error');
     }
+
 
     return (<Container maxWidth="lg">
         <Box sx={{ display: 'flex' }}>

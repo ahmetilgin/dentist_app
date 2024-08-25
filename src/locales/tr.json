@@ -78,5 +78,15 @@
     "job_requirements": "İş Gereksinimleri",
     "job_salary_range": "Maaş Aralığı",
     "employment_type": "İstihdam Türü",
-    "application_deadline": "Başvuru Son Tarihi"
+    "application_deadline": "Başvuru Son Tarihi",
+    "on_site": "Yerinde",
+    "full_time": "Tam Zamanlı",
+    "part_time": "Yarı Zamanlı",
+    "remote": "Uzaktan",
+    "hybrid": "Hibrit",
+    "business_description": "İşletme Açıklaması",
+    "business_location:": "İşletme Konumu",
+    "business_website": "İşletme Web Sitesi",
+    "upload_logo": "Isletme Logosu Yükle",
+    "undefined": "Tanımsız"
 }

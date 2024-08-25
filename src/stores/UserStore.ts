@@ -2,7 +2,6 @@ import { makeAutoObservable } from 'mobx';
 import { Theme } from '../DataTypes';
 
 export class UserStore {
-    username: string = '';
     errors: any = undefined;
     registerSuccess: boolean = false;
     isAuthenticated: boolean = false;
@@ -12,7 +11,6 @@ export class UserStore {
 
     constructor() {
         makeAutoObservable(this);
-        this.username = this.getFromStorage('userName', 'localStorage') || '';
         this.activeTheme = (this.getFromStorage('activeTheme', 'localStorage') as Theme) || 'light';
         this.isAuthenticated = JSON.parse(this.getFromStorage('isAuthenticated', 'sessionStorage') || 'false');
         this.token = this.getFromStorage('token', 'sessionStorage');
@@ -44,11 +42,6 @@ export class UserStore {
         this.setToStorage('rememberMe', rememberMe.toString(), 'localStorage');
     }
 
-    setUsername(username: string) {
-        this.username = username;
-        this.setToStorage('userName', username, 'localStorage');
-    }
-
     setTheme(theme: Theme) {
         this.activeTheme = theme;
         this.setToStorage('activeTheme', theme, 'localStorage');
@@ -70,12 +63,6 @@ export class UserStore {
     logout() {
         this.setToken(null);
         this.setAuthenticated(false);
-        this.username = '';
-    }
-
-    reset() {
-        this.username = '';
-        this.removeFromStorage('userName', 'localStorage');
     }
 
     getToken(): string | null {

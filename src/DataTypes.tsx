@@ -1,7 +1,31 @@
-export interface TypeUser {
-  usernameOrPassword: string;
-  password: string;
+
+export interface BusinessUserLoginInformation {
+  token: string;
   email: string;
+  businessName: string;
+  businessAddress: string;
+  businessDescription: string;
+  businessLocation: string;
+  businessWebsite: string;
+  businessLogo: string;
+}
+export interface RegisterBusinessUser {
+  password: string;
+  confirm_password: string;
+  email: string;
+  businessName: string;
+  businessAddress: string;
+  businessDescription: string;
+  businessLocation: string;
+  businessWebsite: string;
+  businessLogo: string;
+}
+
+
+
+export interface TypeUser {
+  email: string;
+  password: string;
 }
 
 export interface TypeJob {

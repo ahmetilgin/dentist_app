@@ -14,7 +14,7 @@ type JobCardProps = {
     t: (key: string) => string;
 };
 
-const JobList: React.FC<{ jobList: TypeJob[] }> = observer((jobList) => {
+const JobList: React.FC<{ jobList: TypeJob[] | undefined }> = observer((jobList) => {
     const { t } = useTranslation();
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -28,15 +28,14 @@ const JobList: React.FC<{ jobList: TypeJob[] }> = observer((jobList) => {
         console.log(`Applying for job with ID: ${job}`);
     };
 
-    if (jobList.jobList.length === 0) {
+    if (jobList.jobList && jobList.jobList.length === 0) {
         return <JobListSkeleton />;
     }
 
-    console.log("Jobs", jobList.jobList)
 
     return (
         <Stack spacing={2} sx={{ width: '100%', padding: theme.spacing(2) }}>
-            {jobList.jobList.map((job: TypeJob) => (
+            {jobList.jobList && jobList.jobList.map((job: TypeJob) => (
                 <JobCard key={job.UserID} job={job} handleApply={handleApply} isMobile={isMobile} t={t} />
             ))}
         </Stack>

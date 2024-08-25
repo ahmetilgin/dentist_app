@@ -1,6 +1,6 @@
-import { Grid, TextField } from '@mui/material';
+import { Grid, List, ListItemButton, Popover, TextField } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { QueryResult } from '../DataTypes';
 
@@ -10,54 +10,73 @@ interface SearchComponentProps {
     onSelect: (selectedItem: string | null) => void;
 }
 
-interface OptionType {
-    inputValue?: string;
-    title: string;
-}
-
-
 function SearchComponent({
     label,
     fetchOptions,
     onSelect,
 }: SearchComponentProps) {
     const { t } = useTranslation();
-    const [inputValue, setInputValue] = useState<string>('-');
+    const [inputValue, setInputValue] = useState<string>('');
+    const anchorElRef = useRef<HTMLDivElement | null>(null);
+    const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
 
-    const { isPending, error, data } = useQuery({
+    const { data } = useQuery({
         queryKey: [label, inputValue],
-        queryFn: () => {
-            return fetchOptions(inputValue)
-        }
-    })
-
-    if (error) {
-        return <div>Error: {error.message}</div>
-    }
-
+        queryFn: () => fetchOptions(inputValue),
+        enabled: !!inputValue,
+    });
 
     const handleInputChange = (
         event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
-
         setInputValue(event.target.value);
     };
 
+    const handleOptionSelect = (option: string) => {
+        onSelect(option);
+        setInputValue(option);
+        setPopoverOpen(false);
+    };
 
     return (
         <Grid item xs={12} sm={12}>
             <TextField
-                id="free-solo-2-demo"
                 label={t(label)}
                 fullWidth
                 value={inputValue}
                 onChange={handleInputChange}
+                inputRef={anchorElRef}
+                onFocus={() => setPopoverOpen(true)}
+                onBlur={() => setTimeout(() => setPopoverOpen(false), 200)}
             />
-            {data && data.query_result && data.query_result.map((option: String) => {
-                return <li>{option}</li>
-            })
-            }
-        </Grid>
+            <Popover
+                open={popoverOpen && Boolean(data && data.query_result && data.query_result.length > 0)}
+                anchorEl={anchorElRef.current}
+                onClose={() => setPopoverOpen(false)}
+                disableAutoFocus
+                disableEnforceFocus
+                disableRestoreFocus
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'left',
+                }}
+                sx={{
+                    width: anchorElRef.current ? anchorElRef.current.clientWidth : undefined,
+                }}
+            >
+                <List sx={{ width: anchorElRef.current ? anchorElRef.current.clientWidth : undefined, }}>
+                    {data?.query_result?.map((option: string, index: number) => (
+                        <ListItemButton key={index} onClick={() => handleOptionSelect(option)} sx={{ width: anchorElRef.current ? anchorElRef.current.clientWidth : undefined, }}>
+                            {option}
+                        </ListItemButton>
+                    ))}
+                </List>
+            </Popover>
+        </Grid >
     );
 }
 
