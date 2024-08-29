@@ -78,5 +78,15 @@
     "job_requirements": "Job Requirements",
     "job_salary_range": "Salary Range",
     "employment_type": "Employment Type",
-    "application_deadline": "Application Deadline"
+    "application_deadline": "Application Deadline",
+    "on_site": "On Site",
+    "full_time": "Full Time",
+    "part_time": "Part Time",
+    "remote": "Remote",
+    "hybrid": "Hybrid",
+    "business_description": "Business Description",
+    "business_location:": "Business Location",
+    "business_website": "Business Website",
+    "upload_logo": "Upload Business Logo",
+    "undefined": "Undefined"
 }

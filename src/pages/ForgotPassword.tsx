@@ -6,22 +6,22 @@ import {
 } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 
 const ForgotPassword: React.FC = () => {
-	const location = useLocation();
 	const [error, setError] = useState<string | null | undefined>(undefined); // State for error message
 	const { t } = useTranslation();
 	const [isBusiness, setIsBusiness] = useState(false);
 	const [email, setEmail] = useState('');
-	const queryParams = new URLSearchParams(location.search);
-	const loginType = queryParams.get('type');
 	const { authService } = useRootService();
 
+
+	const { user_type } = useParams();
+
 	useEffect(() => {
-		setIsBusiness(loginType === 'business');
-	}, [loginType]);
+		setIsBusiness(user_type === 'business');
+	}, [user_type]);
 
 	return (<Container maxWidth="lg">
 		<h1>{t("Forgot Password")}</h1>

@@ -134,7 +134,7 @@ const HomePage = observer(() => {
                             startIcon={<SearchIcon />}
                             sx={{ height: '56px' }}
                             onClick={async () => {
-                                navigate(`/search_result/${selectedProfession}/${selectedRegion}`);
+                                navigate(`/search_result/${selectedProfession || "-"}/${selectedRegion || "-"}`);
                             }}
                         >
                             {t('find_job')}

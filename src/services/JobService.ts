@@ -1,4 +1,4 @@
-import { QueryResult, TypeJobs } from '../DataTypes';
+import { QueryResult, TypeJob, TypeJobs } from '../DataTypes';
 import { JobStore } from '../stores/JobStore';
 import HttpService from './HttpService';
 
@@ -10,7 +10,7 @@ class JobService {
         this.jobStore = jobStore;
     }
 
-    searchJobs = (keyword: string, location: string) => {
+    searchJobs = (keyword: string, location: string): Promise<TypeJob[]> => {
         return this.httpService
             .get<{ jobs: TypeJobs }>(`/public/jobs/search/${location}/${keyword}`)
             .then((res) => {

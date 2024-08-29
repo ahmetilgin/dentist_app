@@ -1,10 +1,7 @@
-import { FacebookLoginClient, LoginResponse } from '@greatsumini/react-facebook-login';
-import AppleIcon from '@mui/icons-material/Apple';
-import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import { Button, Divider, Grid, useMediaQuery, useTheme } from "@mui/material";
 import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Request } from 'superagent';
 import { useRootService } from '../providers/context_provider/ContextProvider';
@@ -51,6 +48,7 @@ const SocialMediaLogin: React.FC = () => {
                 const userInfo = await fetchGoogleUserInfo(tokenResponse.access_token);
                 setUser(userInfo);
                 setError(null);
+                console.log('User Info:', user);
             } catch (error) {
                 console.error('Error fetching user info:', error);
                 setError('Failed to fetch user information');
@@ -62,121 +60,26 @@ const SocialMediaLogin: React.FC = () => {
         }
     });
 
-    const facebookLogin = () => {
-        FacebookLoginClient.login((response: LoginResponse) => {
-            if (response.status === 'connected') {
-                console.log('Facebook Login Success:', response);
-                if (response && response.authResponse !== undefined) {
-                    setUser({ id: response.authResponse.userID, name: '', email: '' });
-                    setError(null);
-                    FacebookLoginClient.getProfile((profile: any) => {
-                        setUser({
-                            id: response.authResponse?.userID || '',
-                            name: profile.name,
-                            email: profile.email,
-                            picture: profile.picture?.data.url,
-                        });
-                    }, { fields: 'name,email,picture' });
-                }
-
-            } else {
-                console.log('Facebook Login Failed:', response);
-                setError('Facebook login failed');
-            }
-        }, {
-            scope: 'public_profile,email',
-        });
-    };
-
-    const appleLogin = () => {
-        console.log('Apple Login not implemented');
-        setError('Apple login not implemented');
-    };
-
-    const handleSocialLogin = (provider: 'facebook' | 'google' | 'apple') => {
-        switch (provider) {
-            case 'facebook':
-                facebookLogin();
-                break;
-            case 'google':
-                googleLogin();
-                break;
-            case 'apple':
-                appleLogin();
-                break;
-        }
-    };
-
-    const loadFB = async () => {
-        FacebookLoginClient.clear();
-        await FacebookLoginClient.loadSdk('en_US');
-        FacebookLoginClient.init({ appId: "1136090037453915", version: 'v9.0' });
-    };
-
-    useEffect(() => {
-        loadFB();
-    }, []);
-
-
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     return (
-        <Grid container direction="column" spacing={isMobile ? 0 : 2}>
-            <Grid item>
-                <Grid container spacing={2}>
-                    <Grid item xs={4} sm={4}>
-                        <Button
-                            fullWidth
-                            color="secondary"
-                            variant="outlined"
-                            startIcon={<FacebookIcon />}
-                            onClick={() => handleSocialLogin('facebook')}
-                        >
-                            Facebook
-                        </Button>
-                    </Grid>
-                    <Grid item xs={4} sm={4}>
-                        <Button
-                            fullWidth
-                            color="secondary"
-                            variant="outlined"
-                            startIcon={<GoogleIcon />}
-                            onClick={() => handleSocialLogin('google')}
-                        >
-                            Google
-                        </Button>
-                    </Grid>
-                    <Grid item xs={4} sm={4}>
-                        <Button
-                            fullWidth
-                            color="secondary"
-                            variant="outlined"
-                            startIcon={<AppleIcon />}
-                            onClick={() => handleSocialLogin('apple')}
-                        >
-                            Apple
-                        </Button>
-                    </Grid>
-                </Grid>
+        <Grid container direction="column" spacing={isMobile ? 0 : 2} >
+            <Grid item  >
+                <Button
+                    style={{ padding: 1 }}
+                    fullWidth
+                    color="secondary"
+                    variant="outlined"
+                    startIcon={<GoogleIcon />}
+                    onClick={() => googleLogin()}
+                >
+                    Google
+                </Button>
+                {error && <p>{error}</p>}
             </Grid>
             <Grid item>
                 <Divider>{t("or")}</Divider>
             </Grid>
-            {error && (
-                <Grid item>
-                    <p style={{ color: 'red' }}>{error}</p>
-                </Grid>
-            )}
-            {user && (
-                <Grid item>
-                    <h3>Logged in User Information:</h3>
-                    <p>Name: {user.name}</p>
-                    <p>Email: {user.email}</p>
-                    {user.picture && (
-                        <img src={user.picture} alt="User profile" style={{ width: 50, height: 50, borderRadius: '50%' }} />
-                    )}
-                </Grid>
-            )}
         </Grid>
     );
 };

@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 import { observer } from 'mobx-react';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { useLocation } from 'react-router-dom';
 import { TypeJob } from '../DataTypes';
 
@@ -50,19 +51,12 @@ const CompanyDetailCard = styled(Card)(({ theme }) => ({
 
 
 const JobDetail: React.FC = observer(() => {
+    const { t } = useTranslation();
     const location = useLocation();
     const job = location.state.job as TypeJob;
     const theme = useTheme();
     const [expanded, setExpanded] = React.useState(false);
-    const jobDescription = `
-${job.Requirements} Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla faucibus, eros vel dictum consectetur, 
-ipsum quam dictum ligula, et accumsan odio augue quis arcu. Pellentesque vehicula semper orci. 
-Aenean laoreet condimentum velit. Curabitur ac lectus vitae arcu vehicula posuere nec ac libero. 
-Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
-Integer ac nibh auctor, ullamcorper erat id, porttitor mi. Vivamus condimentum, sapien id pretium 
-mattis, arcu odio consequat nunc, ac ullamcorper ipsum dolor sit amet velit. Nulla facilisi. 
-Phasellus non dignissim lectus.
-`;
+    const jobDescription = job.Description
     const maxDescriptionLength = 300; // Gösterilecek maksimum karakter sayısı
 
     const isLongDescription = jobDescription.length > maxDescriptionLength;
@@ -86,10 +80,7 @@ Phasellus non dignissim lectus.
                                 action={
                                     <div>
                                         <Button sx={{ marginRight: 1 }} variant="contained" color="primary">
-                                            Başvur
-                                        </Button>
-                                        <Button variant="contained" color="primary">
-                                            Kaydet
+                                            {t("apply")}
                                         </Button>
                                         <IconButton aria-label="share">
                                             <ShareIcon />

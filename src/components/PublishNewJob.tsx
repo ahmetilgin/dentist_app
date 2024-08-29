@@ -1,23 +1,33 @@
-import { Button, Card, CardContent, CardHeader, Container, Grid, TextField } from '@mui/material';
+import { Button, Card, CardContent, CardHeader, Container, FormControl, Grid, InputLabel, MenuItem, Select, SelectChangeEvent, TextField } from '@mui/material';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { QueryResult } from '../DataTypes';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 import SearchComponent from './SearchComponent';
 
+export enum EmploymentType {
+    NO_OPTION_SELECTED = "-",
+    ON_SITE = "on_site",
+    FULL_TIME = "full_time",
+    PART_TIME = "part_time",
+    REMOTE = "remote",
+    HYBRID = "hybrid"
+}
+
+
 const PublishNewJob = () => {
     const [job, setJob] = useState({
         jobTitle: '',
         description: '',
         requirements: '',
-        location: '',
-        salaryRange: '',
-        employmentType: '',
+        location: '-',
+        salaryRange: '-',
+        employmentType: EmploymentType.ON_SITE,
         datePosted: new Date().getTime(), // convert to timestamp
         applicationDeadline: new Date().getTime(), // convert to timestamp
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
         setJob({ ...job, [name]: value });
     };
@@ -94,14 +104,25 @@ const PublishNewJob = () => {
                             />
                         </Grid>
                         <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label={t("employment_type")}
-                                name="employmentType"
-                                onChange={handleChange}
-                            />
+                            <FormControl fullWidth>
+                                <InputLabel >{t("employment_type")}</InputLabel>
+                                <Select
+                                    value={job.employmentType}
+                                    name="employmentType"
+                                    label={t("employment_type")}
+                                    onChange={(event: SelectChangeEvent<string>) => {
+                                        handleChange(event)
+                                    }}
+                                >
+                                    {Object.values(EmploymentType).map((type) => (
+                                        <MenuItem key={type} value={type}>
+                                            {t(type)}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </Grid>
-                        <Grid item xs={12}> {/* Date picker for deadline */}
+                        <Grid item xs={12}>
                             <TextField
                                 fullWidth
                                 label={t("application_deadline")}
@@ -116,7 +137,7 @@ const PublishNewJob = () => {
                                     jobService.publishJob(job)
                                 }
                             }>
-                                Submit
+                                {t("publish_job")}
                             </Button>
                         </Grid>
                     </Grid>
