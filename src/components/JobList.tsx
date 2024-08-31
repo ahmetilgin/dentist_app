@@ -24,8 +24,6 @@ const JobList: React.FC<{ jobList: TypeJob[] | undefined }> = observer((jobList)
         if (job) {
             navigate('/job_detail', { state: { job: Object.assign({}, job) } });
         }
-        // Burada başvuru işlemi için gerekli fonksiyonu çağırabilirsiniz
-        console.log(`Applying for job with ID: ${job}`);
     };
 
     if (jobList.jobList && jobList.jobList.length === 0) {
@@ -68,11 +66,9 @@ const JobCard: React.FC<JobCardProps> = ({ job, handleApply, isMobile, t }) => {
                         {job.Description.length > 100 ? `${job.Description.substring(0, 100)}...` : job.Description}
                     </Typography>
                 )}
-                <Box display="flex" justifyContent="space-between" alignItems="center" flexWrap="wrap">
-                    <Chip label={t(`employmentTypes.${job.EmploymentType}`)} color="primary" size={isMobile ? 'small' : 'medium'} />
-                    <Typography variant="body2" sx={{ mt: isMobile ? 1 : 0 }}>
-                        {t('jobList.salary')}: {job.SalaryRange}
-                    </Typography>
+                <Box display="flex" alignItems="center" flexWrap="wrap">
+                    <Chip label={t(`${job.EmploymentType}`)} color="primary" size={isMobile ? 'small' : 'medium'} />
+                    <Chip label={job.SalaryRange} color="secondary" size={isMobile ? 'small' : 'medium'} />
                 </Box>
                 <Box mt={2}>
                     <Typography variant="caption" display="block">

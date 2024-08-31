@@ -8,7 +8,7 @@ const ErrorPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        navigate(-1); // Bir önceki sayfaya git
+        navigate(-1);
     };
 
     return (

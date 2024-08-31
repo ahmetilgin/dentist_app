@@ -88,5 +88,6 @@
     "business_location:": "İşletme Konumu",
     "business_website": "İşletme Web Sitesi",
     "upload_logo": "Isletme Logosu Yükle",
-    "undefined": "Tanımsız"
+    "undefined": "Tanımsız",
+    "invalid_email": "Geçersiz e-posta adresi"
 }

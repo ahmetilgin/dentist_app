@@ -84,9 +84,10 @@
     "part_time": "Kohë e Pjesëshme",
     "remote": "Largësi",
     "hybrid": "Hibrid",
-    "business_description": "Përshkrimi i Biznesit",
     "business_location:": "Vendndodhja e Biznesit",
+    "business_description": "Përshkrimi i Biznesit",
     "business_website": "Faqja e Internetit e Biznesit",
     "upload_logo": "Ngarko Logon e Biznesit",
-    "undefined": "I papërcaktuar"
+    "undefined": "I papërcaktuar",
+    "invalid_email": "Adresa e emailit e pavlefshme"
 }

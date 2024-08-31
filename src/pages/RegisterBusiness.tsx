@@ -152,7 +152,7 @@ const RegisterNormalUserPage = observer(() => {
                                     type="text"
                                 />
                                 <SearchComponent
-                                    label="business_location"
+                                    label="business_location_"
                                     fetchOptions={(input) =>
                                         httpService.get<QueryResult>(
                                             `/public/country/${i18n.language}/${input}?`

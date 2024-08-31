@@ -62,6 +62,7 @@ const NormalUserLogin: React.FC = () => {
                     label={t("password")}
                     type="password"
                     id="password"
+
                     autoComplete="current-password"
                     value={userInfo.password}
                     onChange={(e) => {

@@ -12,7 +12,7 @@ class JobService {
 
     searchJobs = (keyword: string, location: string): Promise<TypeJob[]> => {
         return this.httpService
-            .get<{ jobs: TypeJobs }>(`/public/jobs/search/${location}/${keyword}`)
+            .get<{ jobs: TypeJobs }>(`/public/jobs/search/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`)
             .then((res) => {
                 if (res != null) {
                     if (res.jobs != null) {

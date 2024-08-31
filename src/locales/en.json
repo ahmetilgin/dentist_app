@@ -84,9 +84,10 @@
     "part_time": "Part Time",
     "remote": "Remote",
     "hybrid": "Hybrid",
-    "business_description": "Business Description",
     "business_location:": "Business Location",
+    "business_description": "Business Description",
     "business_website": "Business Website",
     "upload_logo": "Upload Business Logo",
-    "undefined": "Undefined"
+    "undefined": "Undefined",
+    "invalid_email": "Invalid email address"
 }

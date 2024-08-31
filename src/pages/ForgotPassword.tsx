@@ -23,6 +23,15 @@ const ForgotPassword: React.FC = () => {
 		setIsBusiness(user_type === 'business');
 	}, [user_type]);
 
+	function validateEmail(email: string): Boolean {
+		const re = /\S+@\S+\.\S+/;
+		if (!re.test(email)) {
+			setError(t("invalid_email"));
+			return false;
+		}
+		return true;
+	}
+
 	return (<Container maxWidth="lg">
 		<h1>{t("Forgot Password")}</h1>
 		<TextField
@@ -33,24 +42,27 @@ const ForgotPassword: React.FC = () => {
 			onChange={(e) => setEmail(e.target.value)}
 		/>
 		<Button variant="contained" color="primary" onClick={async () => {
+			if (!validateEmail(email)) {
+				return
+			}
 			if (isBusiness) {
 				const result = await authService.sendEmailBusinessUser(email)
 				if (result) {
 					setError(null)
 				} else {
-					setError(t("reser_password_error"))
+					setError(t("reset_password_result_error"))
 				}
 			} else {
 				const result = await authService.sendEmailNormalUser(email)
 				if (result) {
 					setError(null)
 				} else {
-					setError(t("reser_password_error"))
+					setError(t("reset_password_result_error"))
 				}
 			}
 		}} >{t("Submit")}</Button>
 		{error == null && error !== undefined && <Alert severity="info">{t("reset_password_result_success")}</Alert>}
-		{error != null && error !== undefined && <Alert severity="error">{t("reset_password_result_error")}</Alert>}
+		{error != null && error !== undefined && <Alert severity="error">{error}</Alert>}
 	</Container>
 	);
 };
