@@ -1,18 +1,10 @@
-
-
-import {
-    Alert,
-    Button,
-    Card,
-    CardContent,
-    TextField
-} from "@mui/material";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import SocialMediaLogin from "../components/SocialMediaLogin";
-import { TypeUser } from "../DataTypes";
-import { useRootService } from "../providers/context_provider/ContextProvider";
+import { Alert, Button, Card, CardContent, TextField } from '@mui/material';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import SocialMediaLogin from '../components/SocialMediaLogin';
+import { TypeUser } from '../DataTypes';
+import { useRootService } from '../providers/context_provider/ContextProvider';
 
 const NormalUserLogin: React.FC = () => {
     const { t } = useTranslation();
@@ -20,19 +12,18 @@ const NormalUserLogin: React.FC = () => {
     const navigate = useNavigate();
 
     const [userInfo, setUserInfo] = useState<TypeUser>({
-        email: "",
-        password: "",
+        email: '',
+        password: '',
     });
     const [error, setError] = useState<string | null>(null); // State for error message
 
     const login = async () => {
         let result = await authService.loginUser(userInfo);
         if (result) {
-            navigate("/home");
+            navigate('/home');
         } else {
-            setError(t("login_failed_message")); // Set error message
+            setError(t('login_failed_message')); // Set error message
         }
-
     };
 
     return (
@@ -44,59 +35,55 @@ const NormalUserLogin: React.FC = () => {
                     required
                     fullWidth
                     id="username"
-                    label={t("email")}
+                    label={t('email')}
+                    sx={{ mt: 1, mb: 1 }}
                     name="username"
                     autoFocus
+                    size="small"
                     value={userInfo.email}
                     onChange={(e) => {
                         setUserInfo({
-                            ...userInfo, email: e.target.value
-                        })
+                            ...userInfo,
+                            email: e.target.value,
+                        });
                     }}
                 />
                 <TextField
                     margin="normal"
                     required
                     fullWidth
+                    size="small"
                     name="password"
-                    label={t("password")}
+                    label={t('password')}
                     type="password"
                     id="password"
-
+                    sx={{ mt: 1, mb: 1 }}
                     autoComplete="current-password"
                     value={userInfo.password}
                     onChange={(e) => {
                         setUserInfo({
-                            ...userInfo, password: e.target.value
-                        })
+                            ...userInfo,
+                            password: e.target.value,
+                        });
                     }}
                 />
                 {error && <Alert severity="error">{error}</Alert>} {/* Display error message */}
                 <Button
                     fullWidth
-                    color={"secondary"}
+                    color={'secondary'}
                     variant="outlined"
                     sx={{ mt: 1, mb: 1 }}
                     onClick={() => {
-                        login()
+                        login();
                     }}
                 >
-                    {t("signin_business")}
+                    {t('signin_business')}
                 </Button>
-                <Button
-                    fullWidth
-                    variant="text"
-                    sx={{ mt: 1, mb: 1 }}
-                    onClick={
-                        () => navigate(`/register/normal_user`)
-                    }
-
-                >
-                    {t("not_registered_yet")}
+                <Button fullWidth variant="text" sx={{ mt: 1, mb: 1 }} onClick={() => navigate(`/register/normal_user`)}>
+                    {t('not_registered_yet')}
                 </Button>
             </CardContent>
-
-        </Card >
+        </Card>
     );
 };
 

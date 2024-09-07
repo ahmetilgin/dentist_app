@@ -1,8 +1,8 @@
 import GoogleIcon from '@mui/icons-material/Google';
-import { Button, Divider, Grid, useMediaQuery, useTheme } from "@mui/material";
-import { TokenResponse, useGoogleLogin } from "@react-oauth/google";
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
+import { Button, Divider, Grid, useMediaQuery, useTheme } from '@mui/material';
+import { TokenResponse, useGoogleLogin } from '@react-oauth/google';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Request } from 'superagent';
 import { useRootService } from '../providers/context_provider/ContextProvider';
 
@@ -22,11 +22,8 @@ const SocialMediaLogin: React.FC = () => {
     const fetchGoogleUserInfo = async (accessToken: string) => {
         const googleReq = (request: Request) => {
             request.set('Authorization', `Bearer ${accessToken}`);
-        }
-        const response = await httpService.get<any>(
-            'https://www.googleapis.com/oauth2/v3/userinfo',
-            googleReq
-        );
+        };
+        const response = await httpService.get<any>('https://www.googleapis.com/oauth2/v3/userinfo', googleReq);
 
         if (!response.ok) {
             throw new Error('Failed to fetch user information');
@@ -37,12 +34,12 @@ const SocialMediaLogin: React.FC = () => {
             id: data.sub,
             name: data.name,
             email: data.email,
-            picture: data.picture
+            picture: data.picture,
         };
     };
 
     const googleLogin = useGoogleLogin({
-        onSuccess: async (tokenResponse: Omit<TokenResponse, "error" | "error_description" | "error_uri">) => {
+        onSuccess: async (tokenResponse: Omit<TokenResponse, 'error' | 'error_description' | 'error_uri'>) => {
             console.log('Google Login Success:', tokenResponse);
             try {
                 const userInfo = await fetchGoogleUserInfo(tokenResponse.access_token);
@@ -57,28 +54,21 @@ const SocialMediaLogin: React.FC = () => {
         onError: (error) => {
             console.log('Google Login Failed:', error);
             setError('Google login failed');
-        }
+        },
     });
 
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     return (
-        <Grid container direction="column" spacing={isMobile ? 0 : 2} >
-            <Grid item  >
-                <Button
-                    style={{ padding: 1 }}
-                    fullWidth
-                    color="secondary"
-                    variant="outlined"
-                    startIcon={<GoogleIcon />}
-                    onClick={() => googleLogin()}
-                >
+        <Grid container direction="column" spacing={isMobile ? 0 : 1}>
+            <Grid item>
+                <Button style={{ padding: 1 }} fullWidth color="secondary" variant="outlined" startIcon={<GoogleIcon />} onClick={() => googleLogin()}>
                     Google
                 </Button>
                 {error && <p>{error}</p>}
             </Grid>
             <Grid item>
-                <Divider>{t("or")}</Divider>
+                <Divider>{t('or')}</Divider>
             </Grid>
         </Grid>
     );

@@ -1,27 +1,13 @@
+// HomePage.tsx
 import SearchIcon from '@mui/icons-material/Search';
-import {
-    AppBar,
-    Box,
-    Button,
-    Chip,
-    Container,
-    Grid,
-    Toolbar,
-    Typography,
-    useMediaQuery,
-    useTheme,
-} from '@mui/material';
+import { Box, Button, Chip, Container, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { observer } from 'mobx-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import SearchComponent from '../components/SearchComponent';
 import { QueryResult } from '../DataTypes';
-import {
-    useRootService,
-    useRootStore,
-} from '../providers/context_provider/ContextProvider';
-import logo from '../static/logo.png';
+import { useRootService, useRootStore } from '../providers/context_provider/ContextProvider';
 
 const HomePage = observer(() => {
     const theme = useTheme();
@@ -33,7 +19,7 @@ const HomePage = observer(() => {
     const [selectedProfession, setSelectedProfession] = useState<string>('');
     const [selectedRegion, setSelectedRegion] = useState<string>('');
     const navigate = useNavigate();
-    const { userStore, jobStore } = useRootStore();
+    const { jobStore } = useRootStore();
 
     useEffect(() => {
         jobService.getPopularJobs();
@@ -41,52 +27,7 @@ const HomePage = observer(() => {
 
     return (
         <Grid>
-            <AppBar position="static" color="primary">
-                <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <div
-                        style={{
-                            display: 'flex',
-                            gap: '20px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <img src={logo} alt="logo" style={{ width: '50px' }} />
-                        <Typography variant="h6">{t('karriere')}</Typography>
-                    </div>
-                    <div
-                        style={{
-                            display: 'flex',
-                            gap: '20px',
-                            alignItems: 'center',
-                        }}
-                    >
-                        <Button
-                            variant="outlined"
-                            color="primary"
-                            onClick={() => {
-                                navigate('/publish_new_job');
-                            }}
-                        >
-                            {t('publish_job')}
-                        </Button>
-                        {userStore.isAuthenticated ? (
-                            []
-                        ) : (
-                            <Button
-                                variant="outlined"
-                                color="secondary"
-                                onClick={() => {
-                                    navigate('/login');
-                                }}
-                            >
-                                {t('login_signup')}
-                            </Button>
-                        )}
-                    </div>
-                </Toolbar>
-            </AppBar>
-
-            <Container maxWidth="lg" sx={{ mt: 4 }} className='background'>
+            <Container maxWidth="lg" sx={{ mt: 4 }} className="background">
                 <Typography variant="h4" gutterBottom color="text">
                     {t('discover_career_opportunities')}
                 </Typography>
@@ -98,11 +39,7 @@ const HomePage = observer(() => {
                     <Grid item xs={12} sm={5}>
                         <SearchComponent
                             label="search_position_or_company"
-                            fetchOptions={(input) =>
-                                httpService.get<QueryResult>(
-                                    `/public/jobs/search_professions/${input}`
-                                )
-                            }
+                            fetchOptions={(input) => httpService.get<QueryResult>(`/public/jobs/search_professions/${input}`)}
                             onSelect={(selectedItem) => {
                                 if (selectedItem != null) {
                                     setSelectedProfession(selectedItem);
@@ -113,11 +50,7 @@ const HomePage = observer(() => {
                     <Grid item xs={12} sm={5}>
                         <SearchComponent
                             label="search_city_or_district"
-                            fetchOptions={(input) =>
-                                httpService.get<QueryResult>(
-                                    `/public/country/${i18n.language}/${input}?`
-                                )
-                            }
+                            fetchOptions={(input) => httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)}
                             onSelect={(selectedItem) => {
                                 if (selectedItem != null) {
                                     setSelectedRegion(selectedItem);
@@ -133,8 +66,8 @@ const HomePage = observer(() => {
                             size="large"
                             startIcon={<SearchIcon />}
                             sx={{ height: '56px' }}
-                            onClick={async () => {
-                                navigate(`/search_result/${selectedProfession || "-"}/${selectedRegion || "-"}`);
+                            onClick={() => {
+                                navigate(`/search_result/${selectedProfession || '-'}/${selectedRegion || '-'}`);
                             }}
                         >
                             {t('find_job')}
@@ -159,9 +92,7 @@ const HomePage = observer(() => {
                         />
                     ))}
                 </Box>
-                {isMobile ? (
-                    <></>
-                ) : (
+                {!isMobile && (
                     <Typography variant="subtitle2" gutterBottom sx={{ mt: 2 }}>
                         {/* {t('job_postings')} */}
                     </Typography>

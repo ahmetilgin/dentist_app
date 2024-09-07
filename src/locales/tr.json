@@ -89,5 +89,10 @@
     "business_website": "İşletme Web Sitesi",
     "upload_logo": "Isletme Logosu Yükle",
     "undefined": "Tanımsız",
-    "invalid_email": "Geçersiz e-posta adresi"
+    "invalid_email": "Geçersiz e-posta adresi",
+    "name_surname": "Ad Soyad",
+    "phone_number": "Telefon Numarası",
+    "address": "Adres",
+    "cv_view": "CV Görüntüle",
+    "personal_information": "Kişisel Bilgiler"
 }
