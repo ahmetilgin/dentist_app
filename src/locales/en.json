@@ -89,5 +89,13 @@
     "business_website": "Business Website",
     "upload_logo": "Upload Business Logo",
     "undefined": "Undefined",
-    "invalid_email": "Invalid email address"
+    "invalid_email": "Invalid email address",
+    "name_surname": "Name Surname",
+    "phone_number": "Phone Number",
+    "address": "Address",
+    "cv_view": "CV View",
+    "personal_information": "Personal Information",
+    "sq": "Albanian",
+    "en": "English",
+    "tr": "Turkish"
 }
