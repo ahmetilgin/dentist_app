@@ -97,24 +97,64 @@ function ApplyButton() {
 	);
 }
 
-function JobDescription() {
+function JobDescription({ job }: { job: TypeJob }) {
 	return (
-		<div className="space-y-4">
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et
-				dolore magna aliqua.
-			</p>
-			<h3 className="text-lg font-semibold">Summary</h3>
-			<p>
-				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-				consequat.
-			</p>
-			<h3 className="text-lg font-semibold">Responsibilities</h3>
-			<ul className="list-disc list-inside">
-				<li>Duis aute irure dolor in reprehenderit</li>
-				<li>Excepteur sint occaecat cupidatat non proident</li>
-				<li>Sunt in culpa qui officia deserunt mollit anim id est laborum</li>
-			</ul>
+		<div className="space-y-4 p-4">
+			{job.DatePosted && (
+				<div className="text-sm text-muted-foreground">
+					<strong>İlan Tarihi: </strong>
+					{new Date(job.DatePosted).toLocaleDateString()}
+				</div>
+			)}
+
+			{job.Description && (
+				<div className="text-lg font-semibold">
+					<strong>Açıklama: </strong>
+					{job.Description}
+				</div>
+			)}
+
+			{job.Requirements && (
+				<div className="text-sm">
+					<strong>Gereksinimler: </strong>
+					{job.Requirements}
+				</div>
+			)}
+
+			{job.Location && (
+				<div className="text-sm text-muted-foreground">
+					<strong>Konum: </strong>
+					{job.Location}
+				</div>
+			)}
+
+			{job.UserID && (
+				<div className="text-sm text-muted-foreground">
+					<strong>Şirket: </strong>
+					{job.UserID}
+				</div>
+			)}
+
+			{job.EmploymentType && (
+				<div className="text-sm text-muted-foreground">
+					<strong>İstihdam Türü: </strong>
+					{job.EmploymentType}
+				</div>
+			)}
+
+			{job.SalaryRange && (
+				<div className="text-sm text-muted-foreground">
+					<strong>Maaş Aralığı: </strong>
+					{job.SalaryRange}
+				</div>
+			)}
+
+			{job.ApplicationDeadline && (
+				<div className="text-sm text-muted-foreground">
+					<strong>Son Başvuru Tarihi: </strong>
+					{new Date(job.ApplicationDeadline).toLocaleDateString()}
+				</div>
+			)}
 		</div>
 	);
 }
@@ -124,14 +164,19 @@ function JobListItem({
 	company,
 	location,
 	onClicked,
+	selected,
 }: {
 	title: string;
 	company: string;
 	location: string;
 	onClicked: () => void;
+	selected?: boolean;
 }) {
 	return (
-		<div className="p-4 border-b last:border-b-0 cursor-pointer" onClick={onClicked}>
+		<div
+			className={`${selected ? 'bg-muted' : ''} p-4 border-b last:border-b-0 cursor-pointer`}
+			onClick={onClicked}
+		>
 			<div>
 				<div className="w-12 h-12 bg-secondary flex items-center justify-center">
 					<span className="text-2xl font-bold">{company[0]}</span>
@@ -178,6 +223,7 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 								title={job.JobTitle}
 								company={job.UserID}
 								location={job.Location}
+								selected={job.JobTitle === selectedJob?.JobTitle}
 								onClicked={() => openJobDetail(job)}
 							/>
 						))}
@@ -199,7 +245,7 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 								<ApplyButton />
 							</CardContent>
 							<CardFooter>
-								<JobDescription />
+								<JobDescription job={selectedJob} />
 							</CardFooter>
 						</Card>
 					)}

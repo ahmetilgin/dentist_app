@@ -63,18 +63,20 @@ export default function AutoComplete({ label, fetchOptions, onValueChanged, plac
 				)}
 			</div>
 			{isOpen && data && data.query_result && data.query_result.length > 0 && (
-				<div className="absolute z-10 w-full top-full left-0 mt-1 bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-auto">
+				<div className="absolute z-20 bg-accent w-full top-full left-0 mt-1  rounded-md shadow-lg max-h-60 overflow-auto divide-y">
 					{data.query_result.map((item) => (
-						<div
-							key={item}
-							onClick={() => {
-								onValueChanged(item);
-								setInputValue(item);
-								setIsOpen(false);
-							}}
-							className="p-2 hover:bg-gray-100 cursor-pointer"
-						>
-							{item}
+						<div>
+							<div
+								key={item}
+								onClick={() => {
+									onValueChanged(item);
+									setInputValue(item);
+									setIsOpen(false);
+								}}
+								className="p-2  cursor-pointer"
+							>
+								{item}
+							</div>
 						</div>
 					))}
 				</div>

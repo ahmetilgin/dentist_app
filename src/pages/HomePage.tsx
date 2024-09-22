@@ -7,119 +7,6 @@ import { BriefcaseBusiness, MapPin, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const dummyJobs: TypeJob[] = [
-	{
-		UserID: '1',
-		JobTitle: 'Software Engineer',
-		Description: 'Develop and maintain web applications.',
-		Requirements: '3+ years of experience in software development.',
-		Location: 'Istanbul, Turkey',
-		SalaryRange: '5000-7000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-01-01',
-		ApplicationDeadline: '2023-02-01',
-	},
-	{
-		UserID: '2',
-		JobTitle: 'Data Scientist',
-		Description: 'Analyze and interpret complex data sets.',
-		Requirements: '2+ years of experience in data science.',
-		Location: 'Ankara, Turkey',
-		SalaryRange: '6000-8000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-01-15',
-		ApplicationDeadline: '2023-03-01',
-	},
-	{
-		UserID: '3',
-		JobTitle: 'Product Manager',
-		Description: 'Lead product development teams.',
-		Requirements: '5+ years of experience in product management.',
-		Location: 'Izmir, Turkey',
-		SalaryRange: '7000-9000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-02-01',
-		ApplicationDeadline: '2023-03-15',
-	},
-	{
-		UserID: '4',
-		JobTitle: 'UX Designer',
-		Description: 'Design user interfaces and experiences.',
-		Requirements: '3+ years of experience in UX design.',
-		Location: 'Antalya, Turkey',
-		SalaryRange: '4000-6000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-02-10',
-		ApplicationDeadline: '2023-03-20',
-	},
-	{
-		UserID: '5',
-		JobTitle: 'DevOps Engineer',
-		Description: 'Manage and automate infrastructure.',
-		Requirements: '4+ years of experience in DevOps.',
-		Location: 'Bursa, Turkey',
-		SalaryRange: '5500-7500 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-02-20',
-		ApplicationDeadline: '2023-04-01',
-	},
-	{
-		UserID: '6',
-		JobTitle: 'Marketing Specialist',
-		Description: 'Develop and execute marketing strategies.',
-		Requirements: '2+ years of experience in marketing.',
-		Location: 'Adana, Turkey',
-		SalaryRange: '3500-5000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-03-01',
-		ApplicationDeadline: '2023-04-15',
-	},
-	{
-		UserID: '7',
-		JobTitle: 'HR Manager',
-		Description: 'Manage HR operations and recruitment.',
-		Requirements: '5+ years of experience in HR.',
-		Location: 'Gaziantep, Turkey',
-		SalaryRange: '6000-8000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-03-10',
-		ApplicationDeadline: '2023-04-30',
-	},
-	{
-		UserID: '8',
-		JobTitle: 'Sales Manager',
-		Description: 'Lead sales teams and strategies.',
-		Requirements: '4+ years of experience in sales.',
-		Location: 'Konya, Turkey',
-		SalaryRange: '5000-7000 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-03-20',
-		ApplicationDeadline: '2023-05-01',
-	},
-	{
-		UserID: '9',
-		JobTitle: 'Customer Support Specialist',
-		Description: 'Provide customer support and service.',
-		Requirements: '2+ years of experience in customer support.',
-		Location: 'Kayseri, Turkey',
-		SalaryRange: '3000-4500 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-03-25',
-		ApplicationDeadline: '2023-05-10',
-	},
-	{
-		UserID: '10',
-		JobTitle: 'Financial Analyst',
-		Description: 'Analyze financial data and trends.',
-		Requirements: '3+ years of experience in financial analysis.',
-		Location: 'Eskisehir, Turkey',
-		SalaryRange: '5500-7500 USD',
-		EmploymentType: 'Full-time',
-		DatePosted: '2023-04-01',
-		ApplicationDeadline: '2023-05-20',
-	},
-];
-
 export default function HomePage() {
 	const [selectedRegion, setSelectedRegion] = useState<string>('-');
 	const [selectedPosition, setSelectedPosition] = useState<string>('-');
@@ -133,9 +20,9 @@ export default function HomePage() {
 	return (
 		<div
 			className={`flex flex-col items-center m-auto content-center justify-normal sm:${
-				jobResults.length > 0 ? 'justify-normal' : 'justify-center'
+				jobResults.length > 0 ? 'justify-normal ' : 'justify-center'
 			} 
-				h-screen mt-0`}
+				h-screen  pt-20`}
 		>
 			<div className="hidden sm:block w-full lg:w-2/3 mb-4 p-5 ">
 				<h1 className="text-2xl font-bold">{t('discover_career_opportunities')}</h1>
@@ -184,8 +71,8 @@ export default function HomePage() {
 								});
 							}}
 						>
-							{t('search_job')}
-							<Search className="font-normal" />
+							{t('search_job').toUpperCase()}
+							<Search className="ml-2" />
 						</Button>
 					</div>
 				</div>

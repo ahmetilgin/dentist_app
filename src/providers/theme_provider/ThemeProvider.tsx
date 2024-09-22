@@ -13,13 +13,10 @@ export const CustomThemeProvider: React.FC<React.PropsWithChildren<{}>> = ({ chi
 
 	const setTheme = (mode: Theme) => {
 		setMode(mode);
+		document.documentElement.setAttribute('class', mode);
 	};
 
-	return (
-		<ThemeContext.Provider value={{ setTheme, mode }}>
-			<div className={mode}>{children}</div>
-		</ThemeContext.Provider>
-	);
+	return <ThemeContext.Provider value={{ setTheme, mode }}>{children}</ThemeContext.Provider>;
 };
 
 export const useCustomTheme = (): ThemeContextProps => {
