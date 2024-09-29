@@ -19,10 +19,9 @@ export default function HomePage() {
 
 	return (
 		<div
-			className={`flex flex-col items-center m-auto content-center justify-normal sm:${
-				jobResults.length > 0 ? 'justify-normal ' : 'justify-center'
-			} 
-				h-screen  pt-20`}
+			className={`flex flex-col items-center transition-all ease-linear h-screen  ${
+				jobResults.length > 0 ? 'translate-y-20' : 'translate-y-1/3'
+			}`}
 		>
 			<div className="hidden sm:block w-full lg:w-2/3 mb-4 p-5 ">
 				<h1 className="text-2xl font-bold">{t('discover_career_opportunities')}</h1>
