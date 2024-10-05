@@ -1,23 +1,15 @@
 import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { AllElements } from './components/AllElementsJustToSee';
-import PublishNewJob from './components/PublishNewJob';
+import { NavigationBar } from './components/NavigationBar';
 import './i18n';
 import './index.css';
-import ForgotPassword from './pages/ForgotPassword';
-import Home from './pages/Home';
-import JobDetail from './pages/JobDetail';
-import JobSearchPage from './pages/JobSearchPage';
-import LoginPage from './pages/Login';
-import RegisterPage from './pages/RegisterPage';
-import ResetPassword from './pages/ResetPassword';
+import HomePage from './pages/HomePage';
+import { LoginPage } from './pages/LoginPage';
 import { useRootStore } from './providers/context_provider/ContextProvider';
-import { useCustomTheme } from './providers/theme_provider/ThemeProvider';
 
 const App = observer(() => {
 	const { userStore } = useRootStore();
-	const { setTheme } = useCustomTheme();
 
 	useEffect(() => {
 		if (window.location.pathname === '/publish_new_job') {
@@ -27,23 +19,26 @@ const App = observer(() => {
 		}
 	}, [userStore.isAuthenticated]);
 
-	useEffect(() => {
-		setTheme(userStore.activeTheme);
-	}, [userStore.activeTheme, setTheme]);
-
 	return (
-		<Routes>
-			<Route path="/" element={<Home />} />
-			<Route path="/login" element={<LoginPage />} />
-			<Route path="/home" element={<Home />} />
-			<Route path="/register/:user_type" element={<RegisterPage />} />
-			<Route path="/search_result/:keyword/:region" element={<JobSearchPage />} />
-			<Route path="/all_elements" element={<AllElements />} />
-			<Route path="/publish_new_job" element={<PublishNewJob />} />
-			<Route path="/forgot_password" element={<ForgotPassword />} />
-			<Route path="/reset-password/:token" element={<ResetPassword />} />
-			<Route path="/job_detail" element={<JobDetail />} />
-		</Routes>
+		<>
+			<NavigationBar />
+			<Routes>
+				<Route path="/" element={<HomePage />} />
+				<Route path="/login" element={<LoginPage />} />
+				{/* <Route path="/home" element={<Home />} />
+                <Route path="/register/normal_user" element={<RegisterNormalUserPage />} />
+                <Route path="/register/business_user" element={<RegisterBusinessUserPage />} />
+                <Route path="/search_result/:keyword/:region" element={<JobSearchPage />} />
+                <Route path="/all_elements" element={<AllElements />} />
+                <Route path="/publish_new_job" element={<PublishNewJob />} />
+                <Route path="/forgot_password/:user_type" element={<ForgotPassword />} />
+                <Route path="/reset-password/:token" element={<ResetPassword />} />
+                <Route path="/job_detail" element={<JobDetail />} />
+                <Route path="/error" element={<ErrorPage />} />
+                <Route path="*" element={<ErrorPage />} />
+                <Route path="/preview_cv" element={<PrepareCV />} /> */}
+			</Routes>
+		</>
 	);
 });
 
