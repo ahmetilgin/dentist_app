@@ -20,7 +20,7 @@ i18n.use(LanguageDetector)
 			},
 		},
 		debug: true,
-		fallbackLng: 'en',
+		fallbackLng: 'al', // Varsayılan dil Arnavutça yapıldı
 		interpolation: {
 			escapeValue: false,
 		},

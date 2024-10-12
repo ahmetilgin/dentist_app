@@ -28,7 +28,7 @@ export function NavigationBar() {
 							Karriere
 						</h1>
 					</div>
-					<div className="flex items-end place-content-between space-x-2">
+					<div className="flex items-center place-content-between space-x-2 ">
 						{pathname !== '/login' && (
 							<div className="flex items-center">
 								<Button

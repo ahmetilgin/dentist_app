@@ -46,19 +46,9 @@ class JobService {
 			.catch((err: any) => console.log(err));
 	};
 
-	getPopularJobs() {
-		this.httpService
-			.get<QueryResult>('/public/jobs/get_populer_professions')
-			.then((res) => {
-				if (res != null) {
-					if (res.query_result != null) {
-						this.jobStore.popularJobs = res.query_result;
-					}
-				}
-			})
-			.catch((err: any) => {
-				console.log(err);
-			});
+
+	getPopularJobs(location: string) {
+		return this.httpService.get<QueryResult>(`/public/jobs/get_populer_professions/${location}`);
 	}
 }
 

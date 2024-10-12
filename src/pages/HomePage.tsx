@@ -1,21 +1,30 @@
 import AutoComplete from '@/components/AutoComplete';
 import JobListing from '@/components/JobList';
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { QueryResult, TypeJob } from '@/DataTypes';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { BriefcaseBusiness, MapPin, Search } from 'lucide-react';
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export default function HomePage() {
 	const [selectedRegion, setSelectedRegion] = useState<string>('-');
 	const [selectedPosition, setSelectedPosition] = useState<string>('-');
-
+	const [topJobs, setTopJobs] = useState<string[]>([]);
 	const [jobResults, setJobResults] = useState<TypeJob[]>([]);
 
 	const { httpService } = useRootService();
 	const { t, i18n } = useTranslation();
 	const { jobService } = useRootService();
+
+	useEffect(() => {
+		jobService.getPopularJobs(i18n.language).then((res: QueryResult) => {
+			if (res && res.query_result) {
+				setTopJobs(res.query_result);
+			}
+		});
+	}, [jobService, i18n]);
 
 	return (
 		<div
@@ -33,7 +42,9 @@ export default function HomePage() {
 						<AutoComplete
 							label="search_position_or_company"
 							fetchOptions={(input: string) =>
-								httpService.get<QueryResult>(`/public/jobs/search_professions/${input}?`)
+								httpService.get<QueryResult>(
+									`/public/jobs/search_professions/${i18n.language}/${input}?`
+								)
 							}
 							icon={
 								<BriefcaseBusiness className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
@@ -75,6 +86,13 @@ export default function HomePage() {
 							{t('search_job').toUpperCase()}
 							<Search className="ml-2" />
 						</Button>
+					</div>
+					<div>
+						{topJobs.map((job: string, index: number) => (
+							<Badge key={index} variant="secondary">
+								{job}
+							</Badge>
+						))}
 					</div>
 				</div>
 				{jobResults != null && jobResults.length > 0 && <JobListing jobs={jobResults} />}
