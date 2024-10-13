@@ -10,7 +10,7 @@ class JobService {
 		this.jobStore = jobStore;
 	}
 
-	searchJobs = (keyword: string, location: string): Promise<TypeJob[]> => {
+	searchJobs = (keyword: string, location: string, region: string): Promise<TypeJob[]> => {
 		if (keyword === '') {
 			keyword = '-';
 		}
@@ -21,7 +21,7 @@ class JobService {
 
 		return this.httpService
 			.get<{ jobs: TypeJobs }>(
-				`/public/jobs/search/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
+				`/public/jobs/search/${region}/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
 			)
 			.then((res) => {
 				if (res != null) {
@@ -45,7 +45,6 @@ class JobService {
 			})
 			.catch((err: any) => console.log(err));
 	};
-
 
 	getPopularJobs(location: string) {
 		return this.httpService.get<QueryResult>(`/public/jobs/get_populer_professions/${location}`);

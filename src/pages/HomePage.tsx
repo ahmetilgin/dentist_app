@@ -18,6 +18,14 @@ export default function HomePage() {
 	const { t, i18n } = useTranslation();
 	const { jobService } = useRootService();
 
+	const searchJobs = () => {
+		jobService
+			.searchJobs(selectedPosition, selectedRegion, i18n.language)
+			.then((result: SetStateAction<TypeJob[]> | null) => {
+				if (result != null) setJobResults(result);
+			});
+	};
+
 	useEffect(() => {
 		jobService.getPopularJobs(i18n.language).then((res: QueryResult) => {
 			if (res && res.query_result) {
@@ -73,28 +81,28 @@ export default function HomePage() {
 						/>
 					</div>
 					<div className="grid mt-5 sm:mt-0 w-full sm:w-1/4">
-						<Button
-							className="mt-auto text-md font-medium "
-							onClick={() => {
-								jobService
-									.searchJobs(selectedPosition, selectedRegion)
-									.then((result: SetStateAction<TypeJob[]> | null) => {
-										if (result != null) setJobResults(result);
-									});
-							}}
-						>
+						<Button className="mt-auto text-md font-medium " onClick={searchJobs}>
 							{t('search_job').toUpperCase()}
 							<Search className="ml-2" />
 						</Button>
 					</div>
-					<div>
+				</div>
+				{jobResults != null && jobResults.length == 0 && (
+					<div className="mt-5">
+						<h5 className="text font-bold">{t('popular_searches')}</h5>
 						{topJobs.map((job: string, index: number) => (
-							<Badge key={index} variant="secondary">
+							<Badge
+								variant="outline"
+								className="mr-2 mb-2 cursor-pointer"
+								key={index}
+								onClick={searchJobs}
+							>
 								{job}
 							</Badge>
 						))}
 					</div>
-				</div>
+				)}
+
 				{jobResults != null && jobResults.length > 0 && <JobListing jobs={jobResults} />}
 			</div>
 		</div>
