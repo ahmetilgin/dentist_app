@@ -71,9 +71,6 @@
     "part_time": "Part Time",
     "remote": "Remote",
     "hybrid": "Hybrid",
-    "business_location:": "Business Location",
-    "business_description": "Business Description",
-    "business_website": "Business Website",
     "upload_logo": "Upload Business Logo",
     "undefined": "Undefined",
     "invalid_email": "Invalid email address",
@@ -107,5 +104,19 @@
         "remember_me": "Remember me",
         "desc": "Enter your details below to login to your account",
         "title": "Login"
+    },
+    "registration": {
+        "title": "Register",
+        "description": "Please select your account type",
+        "candidate": "Candidate Registration",
+        "employer": "Employer Registration"
+    },
+    "employer": {
+        "businessName": "Business Name",
+        "businessAddress": "Business Address",
+        "businessDescription": "Business Description",
+        "businessLocation": "Business Location",
+        "businessWebsite": "Business Website",
+        "businessLogo": "Business Logo"
     }
 }

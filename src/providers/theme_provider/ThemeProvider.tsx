@@ -19,6 +19,7 @@ export const CustomThemeProvider: React.FC<React.PropsWithChildren<{}>> = ({ chi
 	return <ThemeContext.Provider value={{ setTheme, mode }}>{children}</ThemeContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCustomTheme = (): ThemeContextProps => {
 	const context = useContext(ThemeContext);
 	if (!context) {

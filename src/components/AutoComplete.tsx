@@ -66,7 +66,7 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 				)}
 			</div>
 			{isOpen && data && data.query_result && data.query_result.length > 0 && (
-				<div className="absolute z-20 bg-accent w-full top-full left-0 mt-1  rounded-md shadow-lg max-h-60 overflow-auto divide-y backdrop-blur	">
+				<div className="absolute z-20 w-full top-full left-0 mt-1  rounded-md shadow-lg max-h-60 overflow-auto divide-y backdrop-blur">
 					{data.query_result.map((item: string) => (
 						<div
 							key={item}
@@ -75,7 +75,7 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 								setInputValue(item);
 								setIsOpen(false);
 							}}
-							className="backdrop-blur hover:bg-gray-200 p-2 cursor-pointer"
+							className="backdrop-blur hover:bg-ring p-2 cursor-pointer"
 						>
 							{item}
 						</div>

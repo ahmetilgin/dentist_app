@@ -22,7 +22,7 @@ export function LoginForm() {
 					<div className="grid gap-2">
 						<div className="flex items-center">
 							<Label htmlFor="password">{t('login.password')}</Label>
-							<a href="#" className="ml-auto inline-block text-sm underline">
+							<a href="/forgot_password" className="ml-auto inline-block text-sm underline">
 								{t('login.forgot_password')}
 							</a>
 						</div>
@@ -33,7 +33,7 @@ export function LoginForm() {
 					</Button>
 					<div className="mt-4 text-center text-sm">
 						{t('login.no_account')}{' '}
-						<a href="#" className="underline">
+						<a href="/register" className="underline">
 							{t('login.register')}
 						</a>
 					</div>

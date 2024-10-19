@@ -62,9 +62,6 @@
     "part_time": "Yarı Zamanlı",
     "remote": "Uzaktan",
     "hybrid": "Hibrit",
-    "business_description": "İşletme Açıklaması",
-    "business_location:": "İşletme Konumu",
-    "business_website": "İşletme Web Sitesi",
     "upload_logo": "Isletme Logosu Yükle",
     "undefined": "Tanımsız",
     "invalid_email": "Geçersiz e-posta adresi",
@@ -98,5 +95,19 @@
         "remember_me": "Beni Hatirla",
         "desc": "Hesabınıza giriş yapmak için lütfen bilgilerinizi girin",
         "title": "Giriş Yap"
+    },
+    "registration": {
+        "title": "Kayıt Ol",
+        "description": "Lütfen kayıt türünüzü seçin",
+        "candidate": "Aday Kaydı",
+        "employer": "İşveren Kaydı"
+    },
+    "employer": {
+        "businessName": "İşletme Adı",
+        "businessAddress": "İşletme Adresi",
+        "businessDescription": "İşletme Açıklaması",
+        "businessLocation": "İşletme Konumu",
+        "businessWebsite": "İşletme Web Sitesi",
+        "businessLogo": "İşletme Logosu"
     }
 }

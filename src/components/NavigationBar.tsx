@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { useRootStore } from '@/providers/context_provider/ContextProvider';
 import { useCustomTheme } from '@/providers/theme_provider/ThemeProvider';
 import { Globe, Menu, Moon, Sun } from 'lucide-react';
 import { useState } from 'react';
@@ -11,6 +12,7 @@ export function NavigationBar() {
 	const { mode, setTheme } = useCustomTheme();
 	const { t, i18n } = useTranslation();
 	const [menuOpen, setMenuOpen] = useState(false);
+	const { userStore } = useRootStore();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { pathname } = location;
@@ -55,6 +57,7 @@ export function NavigationBar() {
 						<button
 							className={`p-2 rounded-full border  flex items-end`}
 							onClick={() => {
+								userStore.setTheme(mode === 'light' ? 'dark' : 'light');
 								setTheme(mode === 'light' ? 'dark' : 'light');
 							}}
 						>
@@ -99,6 +102,7 @@ export function NavigationBar() {
 										<button
 											className={`p-2 rounded-none border w-full justify-center  flex items-end`}
 											onClick={() => {
+												userStore.setTheme(mode === 'light' ? 'dark' : 'light');
 												setTheme(mode === 'light' ? 'dark' : 'light');
 											}}
 										>
