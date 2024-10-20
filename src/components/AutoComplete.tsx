@@ -57,7 +57,7 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 						setIsOpen(true);
 					}}
 					value={inputValue}
-					placeholder={placeholder}
+					placeholder={t(placeholder ?? '')}
 				/>
 				{isLoading && (
 					<div className="absolute right-2 top-1/2 transform -translate-y-1/2">

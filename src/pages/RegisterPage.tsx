@@ -2,7 +2,7 @@ import RegistrationForm from '@/components/RegistrationForm';
 
 export function RegisterPage() {
 	return (
-		<div className="flex items-center h-screen">
+		<div className="flex h-screen">
 			<RegistrationForm />
 		</div>
 	);

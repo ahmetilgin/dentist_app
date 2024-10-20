@@ -94,13 +94,15 @@
         "email": "E-posta Adresi",
         "remember_me": "Beni Hatirla",
         "desc": "Hesabınıza giriş yapmak için lütfen bilgilerinizi girin",
-        "title": "Giriş Yap"
+        "title": "Giriş Yap",
+        "password_confirm": "Şifreyi Onayla"
     },
     "registration": {
         "title": "Kayıt Ol",
-        "description": "Lütfen kayıt türünüzü seçin",
+        "description": "Hesabınızı oluşturmak için lütfen bilgilerinizi girin",
         "candidate": "Aday Kaydı",
-        "employer": "İşveren Kaydı"
+        "employer": "İşveren Kaydı",
+        "submit": "Kayıt Ol"
     },
     "employer": {
         "businessName": "İşletme Adı",
@@ -109,5 +111,14 @@
         "businessLocation": "İşletme Konumu",
         "businessWebsite": "İşletme Web Sitesi",
         "businessLogo": "İşletme Logosu"
+    },
+    "placeholder": {
+        "location": "Ankara, İstanbul, İzmir...",
+        "email": "ornek@email.com",
+        "position": "Microsoft, Software Developer, Project Manager..."
+    },
+    "error": {
+        "register": "Hesap oluşturulurken hata oluştu. Lütfen bilgilerinizi kontrol edin.",
+        "passwordNotMatch": "Sifreler ayni olmalidir."
     }
 }

@@ -3,18 +3,24 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { ArrowLeft, Building2, UserCircle } from 'lucide-react';
-import { useState } from 'react';
+import { QueryResult, RegisterBusinessUser, TypeUser } from '@/DataTypes';
+import { useRootService } from '@/providers/context_provider/ContextProvider';
+import { ArrowLeft, Building2, MapPin, UserCircle } from 'lucide-react';
+import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
-// Simüle edilmiş useTranslation hook'u
+import AutoComplete from './AutoComplete';
+import { Alert, AlertDescription } from './ui/alert';
 
 const CandidateRegistration = () => {
+	const [error, setError] = useState(false);
+	const [errorContent, setErrorContent] = useState('');
+	const { authService } = useRootService();
 	const { t } = useTranslation();
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
-	});
+		confirmPassword: '',
+	} as TypeUser);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
@@ -23,8 +29,21 @@ const CandidateRegistration = () => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log('Candidate form data:', formData);
-		// Burada aday form verilerini gönderme işlemi yapılabilir
+		if (formData.password !== formData.password) {
+			setError(true);
+			setErrorContent(t('error.passwordNotMatch'));
+			setTimeout(() => setError(false), 3000);
+			return;
+		}
+		authService.registerUser(formData).then((res) => {
+			if (res) {
+				window.location.href = '/';
+			} else {
+				setError(true);
+				setErrorContent(t('error.register'));
+				setTimeout(() => setError(false), 3000);
+			}
+		});
 	};
 
 	return (
@@ -35,7 +54,7 @@ const CandidateRegistration = () => {
 					id="email"
 					name="email"
 					type="email"
-					placeholder={t('login.email')}
+					placeholder={t('placeholder.email')}
 					required
 					value={formData.email}
 					onChange={handleInputChange}
@@ -52,6 +71,22 @@ const CandidateRegistration = () => {
 					onChange={handleInputChange}
 				/>
 			</div>
+			<div className="grid sm:gap-2">
+				<Label htmlFor="confirmPassword">{t('login.password_confirm')}</Label>
+				<Input
+					id="confirmPassword"
+					name="confirmPassword"
+					type="password"
+					required
+					value={formData.confirmPassword}
+					onChange={handleInputChange}
+				/>
+			</div>
+			{error && (
+				<Alert variant="destructive">
+					<AlertDescription>{errorContent}</AlertDescription>
+				</Alert>
+			)}
 			<Button type="submit" className="w-full">
 				{t('login.submit')}
 			</Button>
@@ -60,17 +95,22 @@ const CandidateRegistration = () => {
 };
 
 const EmployerRegistration = () => {
-	const { t } = useTranslation();
+	const [error, setError] = useState(false);
+	const [errorContent, setErrorContent] = useState('');
+	const { httpService, authService } = useRootService();
+
+	const { t, i18n } = useTranslation();
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
+		confirmPassword: '',
 		businessName: '',
 		businessAddress: '',
 		businessDescription: '',
 		businessLocation: '',
 		businessWebsite: '',
 		businessLogo: '',
-	});
+	} as RegisterBusinessUser);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
@@ -79,8 +119,19 @@ const EmployerRegistration = () => {
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		console.log('Employer form data:', formData);
-		// Burada işveren form verilerini gönderme işlemi yapılabilir
+		if (formData.password !== formData.confirmPassword) {
+			setError(true);
+			setErrorContent(t('error.passwordNotMatch'));
+			return;
+		}
+		authService.registerBusiness(formData).then((res) => {
+			if (res) {
+				window.location.href = '/';
+			} else {
+				setError(true);
+				setErrorContent(t('error.register'));
+			}
+		});
 	};
 
 	return (
@@ -91,20 +142,31 @@ const EmployerRegistration = () => {
 					id="email"
 					name="email"
 					type="email"
-					placeholder={t('login.email')}
+					placeholder={t('placeholder.email')}
 					required
 					value={formData.email}
 					onChange={handleInputChange}
 				/>
 			</div>
 			<div className="grid sm:gap-2">
-				<Label htmlFor="password">{t('form.password')}</Label>
+				<Label htmlFor="password">{t('login.password')}</Label>
 				<Input
 					id="password"
 					name="password"
 					type="password"
 					required
 					value={formData.password}
+					onChange={handleInputChange}
+				/>
+			</div>
+			<div className="grid sm:gap-2">
+				<Label htmlFor="confirmPassword">{t('login.password_confirm')}</Label>
+				<Input
+					id="confirmPassword"
+					name="confirmPassword"
+					type="password"
+					required
+					value={formData.confirmPassword}
 					onChange={handleInputChange}
 				/>
 			</div>
@@ -138,12 +200,22 @@ const EmployerRegistration = () => {
 				/>
 			</div>
 			<div className="grid sm:gap-2">
-				<Label htmlFor="businessLocation">{t('employer.businessLocation')}</Label>
-				<Input
-					id="businessLocation"
-					name="businessLocation"
-					value={formData.businessLocation}
-					onChange={handleInputChange}
+				<AutoComplete
+					label="employer.businessLocation"
+					placeholder={t('placeholder.location')}
+					fetchOptions={(input: string) =>
+						httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)
+					}
+					icon={
+						<MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
+					}
+					onValueChanged={(selectedItem: SetStateAction<string> | null) => {
+						if (selectedItem != null) {
+							setFormData((prev) => {
+								return { ...prev, businessLocation: selectedItem.toString() };
+							});
+						}
+					}}
 				/>
 			</div>
 			<div className="grid sm:gap-2">
@@ -166,8 +238,13 @@ const EmployerRegistration = () => {
 					onChange={handleInputChange}
 				/>
 			</div>
+			{error && (
+				<Alert variant="destructive">
+					<AlertDescription>{errorContent}</AlertDescription>
+				</Alert>
+			)}
 			<Button type="submit" className="w-full">
-				{t('form.submit')}
+				{t('login.submit')}
 			</Button>
 		</form>
 	);
@@ -178,7 +255,7 @@ export default function RegistrationForm() {
 	const [userType, setUserType] = useState<'candidate' | 'employer' | null>(null);
 
 	return (
-		<div className="flex min-h-screen w-full items-center justify-normal sm:justify-center">
+		<div className="flex min-h-screen items-start sm:items-center w-full justify-normal sm:justify-center">
 			<Card className="w-full max-w-2xl">
 				<CardHeader>
 					<CardTitle className="text-2xl">
@@ -199,7 +276,7 @@ export default function RegistrationForm() {
 								className="h-32 flex flex-col items-center justify-center space-y-2"
 								onClick={() => setUserType('candidate')}
 							>
-								<UserCircle className="h-96 w-96" />
+								<UserCircle className="!size-6" />
 								<span>{t('registration.candidate')}</span>
 							</Button>
 							<Button
@@ -207,7 +284,7 @@ export default function RegistrationForm() {
 								className="h-32 flex flex-col items-center justify-center space-y-2"
 								onClick={() => setUserType('employer')}
 							>
-								<Building2 className="h-96 w-96" />
+								<Building2 className="!size-6" />
 								<span>{t('registration.employer')}</span>
 							</Button>
 						</div>

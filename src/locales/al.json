@@ -105,13 +105,16 @@
         "desc": "Shkruani detajet tuaja më poshtë për të hyrë në llogarinë tuaj",
         "register": "Regjistrohu",
         "title": "Identifikohu",
-        "submit": "Identifikohu"
+        "submit": "Identifikohu",
+        "password_confirm": "Konfirmo Fjalëkalimin"
     },
     "registration": {
         "title": "Regjistrohu",
-        "description": "Ju lutem zgjidhni llojin e regjistrimit tuaj",
+        "description": "Regjistrohu më poshtë të hyrë të një llogari. Klikoni ne identifikimi dështoi më poshtë të hyrë të një llogari.",
         "candidate": "Kandidatit",
-        "employer": "Punëdhënësit"
+        "employer": "Punëdhënësit",
+        "submit": "Regjistrohu",
+        "locationPlaceholder": "Shkodër, Tiranë, Kruje..."
     },
     "employer": {
         "businessName": "Emri i Biznesit",
@@ -120,5 +123,14 @@
         "businessLocation": "Vendndodhja e Biznesit",
         "businessWebsite": "Faqja e Internetit e Biznesit",
         "businessLogo": "Logo Biznesit"
+    },
+    "placeholder": {
+        "location": "Shkodër, Tiranë, Kruje...",
+        "email": "example@email.com",
+        "position": "Microsoft, Software Developer, Project Manager..."
+    },
+    "error": {
+        "register": "Regjistrimi dështoi. Kontrolloni detajet tuaja më poshtë të hyrë të një llogari.",
+        "passwordNotMatch": "Fjalëkalimet në keni ndryshuar."
     }
 }

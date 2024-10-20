@@ -20,6 +20,7 @@ export const RootStoreProvider: React.FC<React.PropsWithChildren<{}>> = ({ child
 	return <RootStoreContext.Provider value={store}>{children}</RootStoreContext.Provider>;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useRootService = (): RootService => {
 	const context = useContext(RootStoreContext);
 	if (!context) {
@@ -28,6 +29,7 @@ export const useRootService = (): RootService => {
 	return context.rootService;
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useRootStore = (): RootStore => {
 	const context = useContext(RootStoreContext);
 	if (!context) {

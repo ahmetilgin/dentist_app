@@ -80,7 +80,14 @@ export function NavigationBar() {
 							{menuOpen && (
 								<Card className="absolute z-10 top-16 right-0 p-2">
 									{pathname !== '/login' && (
-										<Button className="w-full rounded-none">{t('login_signup')}</Button>
+										<Button
+											className="w-full rounded-none"
+											onClick={() => {
+												navigate('/login');
+											}}
+										>
+											{t('login_signup')}
+										</Button>
 									)}
 
 									<div className="flex flex-row mt-1">

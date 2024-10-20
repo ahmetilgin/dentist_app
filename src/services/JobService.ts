@@ -41,7 +41,7 @@ class JobService {
 		this.httpService
 			.post('/public/jobs', job)
 			.then(() => {
-				this.searchJobs('', '');
+				this.searchJobs('', '', '');
 			})
 			.catch((err: any) => console.log(err));
 	};

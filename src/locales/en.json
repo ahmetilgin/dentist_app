@@ -103,13 +103,16 @@
         "email": "Email Address",
         "remember_me": "Remember me",
         "desc": "Enter your details below to login to your account",
-        "title": "Login"
+        "title": "Login",
+        "password_confirm": "Confirm Password"
     },
     "registration": {
         "title": "Register",
-        "description": "Please select your account type",
+        "description": "Enter your details below to create your account",
         "candidate": "Candidate Registration",
-        "employer": "Employer Registration"
+        "employer": "Employer Registration",
+        "submit": "Submit",
+        "locationPlaceholder": "Shkodër, Tiranë, Kruje..."
     },
     "employer": {
         "businessName": "Business Name",
@@ -118,5 +121,14 @@
         "businessLocation": "Business Location",
         "businessWebsite": "Business Website",
         "businessLogo": "Business Logo"
+    },
+    "placeholder": {
+        "location": "Shkodër, Tiranë, Kruje...",
+        "email": "example@email.com",
+        "position": "Microsoft, Software Developer, Project Manager..."
+    },
+    "error": {
+        "register": "An error occurred while registering. Please check your credentials.",
+        "passwordNotMatch": "Passwords don't match."
     }
 }

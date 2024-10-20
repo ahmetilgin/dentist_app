@@ -49,6 +49,7 @@ export default function HomePage() {
 					<div className="w-full">
 						<AutoComplete
 							label="search_position_or_company"
+							placeholder="placeholder.position"
 							fetchOptions={(input: string) =>
 								httpService.get<QueryResult>(
 									`/public/jobs/search_professions/${i18n.language}/${input}?`
@@ -66,6 +67,7 @@ export default function HomePage() {
 					</div>
 					<div className="w-full">
 						<AutoComplete
+							placeholder="placeholder.location"
 							label="search_city_or_district"
 							fetchOptions={(input: string) =>
 								httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)

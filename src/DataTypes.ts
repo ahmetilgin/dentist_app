@@ -10,7 +10,7 @@ export interface BusinessUserLoginInformation {
 }
 export interface RegisterBusinessUser {
 	password: string;
-	confirm_password: string;
+	confirmPassword: string;
 	email: string;
 	businessName: string;
 	businessAddress: string;
@@ -23,6 +23,7 @@ export interface RegisterBusinessUser {
 export interface TypeUser {
 	email: string;
 	password: string;
+	confirmPassword: string;
 }
 
 export interface TypeJob {
