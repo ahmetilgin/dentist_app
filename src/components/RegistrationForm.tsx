@@ -8,6 +8,7 @@ import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { ArrowLeft, Building2, MapPin, UserCircle } from 'lucide-react';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import AutoComplete from './AutoComplete';
 import { Alert, AlertDescription } from './ui/alert';
 
@@ -16,6 +17,8 @@ const CandidateRegistration = () => {
 	const [errorContent, setErrorContent] = useState('');
 	const { authService } = useRootService();
 	const { t } = useTranslation();
+	const navigate = useNavigate();
+
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -37,7 +40,7 @@ const CandidateRegistration = () => {
 		}
 		authService.registerUser(formData).then((res) => {
 			if (res) {
-				window.location.href = '/';
+				navigate('/login');
 			} else {
 				setError(true);
 				setErrorContent(t('error.register'));
@@ -98,6 +101,7 @@ const EmployerRegistration = () => {
 	const [error, setError] = useState(false);
 	const [errorContent, setErrorContent] = useState('');
 	const { httpService, authService } = useRootService();
+	const navigate = useNavigate();
 
 	const { t, i18n } = useTranslation();
 	const [formData, setFormData] = useState({
@@ -126,7 +130,7 @@ const EmployerRegistration = () => {
 		}
 		authService.registerBusiness(formData).then((res) => {
 			if (res) {
-				window.location.href = '/';
+				navigate('/login');
 			} else {
 				setError(true);
 				setErrorContent(t('error.register'));

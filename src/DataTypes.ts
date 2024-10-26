@@ -61,3 +61,8 @@ export enum EnumEmploymentType {
 	Internship = 'internship',
 	Temporary = 'temporary',
 }
+
+export enum EnumUserType {
+	EMPLOYER,
+	CANDIDATE,
+}

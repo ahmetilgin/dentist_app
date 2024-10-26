@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { EnumUserType } from '@/DataTypes';
 import { useRootStore } from '@/providers/context_provider/ContextProvider';
 import { useCustomTheme } from '@/providers/theme_provider/ThemeProvider';
 import { Globe, Menu, Moon, Sun } from 'lucide-react';
@@ -31,7 +32,7 @@ export function NavigationBar() {
 						</h1>
 					</div>
 					<div className="flex items-center place-content-between space-x-2 ">
-						{pathname !== '/login' && (
+						{!userStore.isAuthenticated && pathname !== '/login' && (
 							<div className="flex items-center">
 								<Button
 									onClick={() => {
@@ -41,6 +42,15 @@ export function NavigationBar() {
 									{t('login_signup')}
 								</Button>
 							</div>
+						)}
+						{userStore.isAuthenticated && userStore.userType == EnumUserType.EMPLOYER && (
+							<Button
+								onClick={() => {
+									navigate('/publish-job');
+								}}
+							>
+								{t('publish_job')}
+							</Button>
 						)}
 						<Select onValueChange={(value) => i18n.changeLanguage(value)}>
 							<SelectTrigger className="w-[130px] " leftIcon={<Globe className="text-center text-xs " />}>

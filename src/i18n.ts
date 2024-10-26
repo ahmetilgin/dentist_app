@@ -24,6 +24,7 @@ i18n.use(LanguageDetector)
 		interpolation: {
 			escapeValue: false,
 		},
+		lng: 'al',
 		detection: {
 			order: ['localStorage', 'cookie', 'navigator', 'htmlTag', 'path', 'subdomain'],
 			lookupLocalStorage: 'i18nextLng',

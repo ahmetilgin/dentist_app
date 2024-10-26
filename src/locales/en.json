@@ -104,7 +104,9 @@
         "remember_me": "Remember me",
         "desc": "Enter your details below to login to your account",
         "title": "Login",
-        "password_confirm": "Confirm Password"
+        "password_confirm": "Confirm Password",
+        "candidate_login": "Candidate Login",
+        "employer_login": "Employer Login"
     },
     "registration": {
         "title": "Register",

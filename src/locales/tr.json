@@ -95,7 +95,9 @@
         "remember_me": "Beni Hatirla",
         "desc": "Hesabınıza giriş yapmak için lütfen bilgilerinizi girin",
         "title": "Giriş Yap",
-        "password_confirm": "Şifreyi Onayla"
+        "password_confirm": "Şifreyi Onayla",
+        "candidate_login": "Aday Girişi",
+        "employer_login": "İşveren Girişi"
     },
     "registration": {
         "title": "Kayıt Ol",

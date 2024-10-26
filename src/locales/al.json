@@ -106,7 +106,9 @@
         "register": "Regjistrohu",
         "title": "Identifikohu",
         "submit": "Identifikohu",
-        "password_confirm": "Konfirmo Fjalëkalimin"
+        "password_confirm": "Konfirmo Fjalëkalimin",
+        "candidate_login": "Kandidatit Identifikohu",
+        "employer_login": "Punëdhënësit Identifikohu"
     },
     "registration": {
         "title": "Regjistrohu",
