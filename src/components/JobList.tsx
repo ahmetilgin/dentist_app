@@ -33,10 +33,10 @@ function FilterCombobox({ title, options }: { title: string; options: string[] }
 					</CardContent>
 					<CardFooter className="flex justify-between">
 						<Button variant="outline" size="sm">
-							{t('reset')}
+							{t('job_posting.reset')}
 						</Button>
 						<Button size="sm" onClick={() => setOpen(false)}>
-							{t('apply')}
+							{t('job_posting.apply')}
 						</Button>
 					</CardFooter>
 				</Card>
@@ -45,33 +45,23 @@ function FilterCombobox({ title, options }: { title: string; options: string[] }
 	);
 }
 
-function TopFilters() {
+function TopFilters({ companies }: { companies: string[] }) {
 	const { t } = useTranslation();
 	return (
-		<div className="w-full border-b">
-			<div className="w-full">
-				<div className="flex w-full py-4 space-x-2 overflow-y-hidden overflow-x-scroll sm:overflow-x-hidden">
-					<FilterCombobox
-						title={t('workplace_type')}
-						options={
-							Object.values(EnumWorkplaceType).map((type) => {
-								return t(type);
-							}) as string[]
-						}
-					/>
-					<FilterCombobox
-						title={t('employment_type')}
-						options={
-							Object.values(EnumEmploymentType).map((type) => {
-								return t(type);
-							}) as string[]
-						}
-					/>
-					<FilterCombobox title={t('company')} options={['Dolby', 'Wayve', 'Sigma Software', t('other')]} />
-					<Button variant="ghost" size="sm" className="h-10 whitespace-nowrap">
-						{t('reset')}
-					</Button>
-				</div>
+		<div className="w-full border-b bg-gray-50 shadow-md">
+			<div className="flex w-full py-4 space-x-2 overflow-y-hidden overflow-x-scroll sm:overflow-x-hidden px-4">
+				<FilterCombobox
+					title={t('job_posting.workplace_type')}
+					options={Object.values(EnumWorkplaceType).map((type) => t(type)) as string[]}
+				/>
+				<FilterCombobox
+					title={t('job_posting.employment_type')}
+					options={Object.values(EnumEmploymentType).map((type) => t(type)) as string[]}
+				/>
+				<FilterCombobox title={t('general.company')} options={[...companies]} />
+				<Button variant="ghost" size="sm" className="h-10 whitespace-nowrap">
+					{t('job_posting.reset')}
+				</Button>
 			</div>
 		</div>
 	);
@@ -82,16 +72,17 @@ function JobInfo({ title, location, company }: { title: string; location: string
 		<div>
 			<h2 className="text-2xl font-bold">{title}</h2>
 			<p className="text-muted-foreground">{location}</p>
-			<p className="mt-2">{company}</p>
+			<p className="mt-2 text-sm text-gray-500">{company}</p>
 		</div>
 	);
 }
 
 function ApplyButton() {
 	const { t } = useTranslation();
+
 	return (
 		<div className="flex items-center space-x-2">
-			<Button>{t('apply_now')}</Button>
+			<Button>{t('job_posting.apply')}</Button>
 			<Button variant="outline" size="icon">
 				<Share2 className="h-4 w-4" />
 			</Button>
@@ -101,61 +92,53 @@ function ApplyButton() {
 
 function JobDescription({ job }: { job: TypeJob }) {
 	const { t } = useTranslation();
+	const formatDate = (date: string) =>
+		new Date(date).toLocaleDateString(undefined, {
+			year: 'numeric',
+			month: 'long',
+			day: 'numeric',
+		});
 	return (
-		<div className="space-y-4 p-4">
+		<div className="space-y-4">
 			{job.DatePosted && (
-				<div className="text-sm text-muted-foreground">
-					<strong>{t('date_posted')}: </strong>
-					{new Date(job.DatePosted).toLocaleDateString()}
+				<div>
+					<span className="font-medium">{t('job_posting.date_posted')}: </span>
+					<span>{formatDate(job.DatePosted)}</span>
 				</div>
 			)}
-
+			{job.ApplicationDeadline && (
+				<div>
+					<span className="font-medium">{t('job_posting.application_deadline')}: </span>
+					<span>{formatDate(job.ApplicationDeadline)}</span>
+				</div>
+			)}
 			{job.Description && (
 				<div className="text-lg font-semibold">
-					<strong>{t('description')}: </strong>
-					{job.Description}
+					{t('job_posting.description')}: <p className="mt-1 text-gray-600">{job.Description}</p>
 				</div>
 			)}
-
 			{job.Requirements && (
 				<div className="text-sm">
-					<strong>{t('job_requirements')}: </strong>
-					{job.Requirements}
+					<span className="font-medium">{t('job_posting.job_requirements')}:</span>
+					<p className="mt-1 text-gray-600">{job.Requirements}</p>
 				</div>
 			)}
-
-			{job.Location && (
-				<div className="text-sm text-muted-foreground">
-					<strong>{t('location')}: </strong>
-					{job.Location}
-				</div>
-			)}
-
 			{job.UserID && (
-				<div className="text-sm text-muted-foreground">
-					<strong>{t('company')}: </strong>
-					{job.UserID}
+				<div className="flex text-sm text-gray-500">
+					<span className="font-medium">{t('general.company')}: </span>
+					<span>{job.UserID}</span>
 				</div>
 			)}
-
 			{job.EmploymentType && (
-				<div className="text-sm text-muted-foreground">
-					<strong>{t('employment_type')}: </strong>
-					{job.EmploymentType}
+				<div className="flex text-sm text-gray-500">
+					<span className="font-medium">{t('job_posting.employment_type')}: </span>
+					<span>{job.EmploymentType}</span>
 				</div>
 			)}
-
 			{job.SalaryRange && (
-				<div className="text-sm text-muted-foreground">
-					<strong>{t('job_salary_range')}: </strong>
-					{job.SalaryRange}
-				</div>
-			)}
-
-			{job.ApplicationDeadline && (
-				<div className="text-sm text-muted-foreground">
-					<strong>{t('application_deadline')}: </strong>
-					{new Date(job.ApplicationDeadline).toLocaleDateString()}
+				<div className="flex text-sm text-gray-500">
+					<span className="font-medium">{t('job_posting.salary')}: </span>
+					<span>{job.SalaryRange}</span>
 				</div>
 			)}
 		</div>
@@ -177,18 +160,22 @@ function JobListItem({
 }) {
 	return (
 		<div
-			className={`${selected ? 'bg-muted' : ''} p-4 border-b last:border-b-0 cursor-pointer`}
+			className={`${
+				selected ? 'bg-blue-50 border-l-4 border-blue-600' : 'bg-white'
+			} p-4 border-b last:border-b-0 cursor-pointer hover:bg-blue-100 transition duration-150`}
 			onClick={onClicked}
 		>
-			<div>
-				<div className="w-12 h-12 bg-secondary flex items-center justify-center">
+			<div className="flex items-center space-x-4">
+				<div className="w-12 h-12 bg-secondary flex items-center justify-center rounded-full">
 					<span className="text-2xl font-bold">{company[0]}</span>
-					{/* sirket logosunun buraya gelmesi lazim */}
+					{/* Şirket logosunun burada görünmesi için logo ekleme */}
 				</div>
-				<p className="text-sm text-muted-foreground">{company}</p>
+				<div>
+					<p className="text-sm text-gray-500">{company}</p>
+					<h3 className="font-semibold text-lg mt-1">{title}</h3>
+					<p className="text-sm text-gray-400">{location}</p>
+				</div>
 			</div>
-			<h3 className="font-semibold mt-2">{title}</h3>
-			<p className="text-sm text-muted-foreground">{location}</p>
 		</div>
 	);
 }
@@ -198,15 +185,9 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 	const [selectedJob, setSelectedJob] = React.useState<TypeJob | null>(null);
 
 	useEffect(() => {
-		const handlePopState = () => {
-			setShowDetail(false);
-		};
-
+		const handlePopState = () => setShowDetail(false);
 		window.addEventListener('popstate', handlePopState);
-
-		return () => {
-			window.removeEventListener('popstate', handlePopState);
-		};
+		return () => window.removeEventListener('popstate', handlePopState);
 	}, []);
 
 	const openJobDetail = (job: TypeJob) => {
@@ -215,9 +196,11 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 		window.history.pushState(null, '', window.location.href);
 	};
 
+	const companies = jobs.map((job) => job.UserID);
+
 	return (
 		<div className="flex flex-col h-full pb-10">
-			<TopFilters />
+			<TopFilters companies={companies} />
 			<div className="flex h-full">
 				<ScrollArea className={`${showDetail ? 'hidden sm:block' : ''} w-full sm:w-1/3 border-r pb-5`}>
 					<div className="pr-4">
@@ -235,22 +218,18 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 				</ScrollArea>
 				<div className={`${showDetail ? 'block' : 'hidden'} sm:block flex-1 overflow-auto`}>
 					{selectedJob && (
-						<Card className="rounded-none h-full">
+						<Card className="rounded-none h-full shadow-md">
 							<CardHeader>
-								<div className="flex items-start space-x-4">
-									<JobInfo
-										title={selectedJob.JobTitle}
-										location={selectedJob.Location}
-										company={selectedJob.UserID}
-									/>
-								</div>
+								<JobInfo
+									title={selectedJob.JobTitle}
+									location={selectedJob.Location}
+									company={selectedJob.UserID}
+								/>
 							</CardHeader>
 							<CardContent>
 								<ApplyButton />
-							</CardContent>
-							<CardFooter>
 								<JobDescription job={selectedJob} />
-							</CardFooter>
+							</CardContent>
 						</Card>
 					)}
 				</div>

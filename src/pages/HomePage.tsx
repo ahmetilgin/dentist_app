@@ -41,14 +41,14 @@ export default function HomePage() {
 			}`}
 		>
 			<div className="hidden sm:block w-full lg:w-2/3 mb-4 p-5 ">
-				<h1 className="text-2xl font-bold">{t('discover_career_opportunities')}</h1>
-				<h4 className="text-xl font-normal">{t('job_postings_thousands_of_companies')}</h4>
+				<h1 className="text-2xl font-bold">{t('general.discover_career_opportunities')}</h1>
+				<h4 className="text-xl font-normal">{t('general.job_postings_thousands_of_companies')}</h4>
 			</div>
 			<div className="flex flex-col h-full w-full sm:w-full lg:w-2/3 p-5">
 				<div className="flex flex-col sm:flex-row sm:space-x-5 w-full">
 					<div className="w-full">
 						<AutoComplete
-							label="search_position_or_company"
+							label="general.search_position_or_company"
 							placeholder="placeholder.position"
 							fetchOptions={(input: string) =>
 								httpService.get<QueryResult>(
@@ -68,7 +68,7 @@ export default function HomePage() {
 					<div className="w-full">
 						<AutoComplete
 							placeholder="placeholder.location"
-							label="search_city_or_district"
+							label="general.search_city_or_district"
 							fetchOptions={(input: string) =>
 								httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)
 							}
@@ -84,14 +84,14 @@ export default function HomePage() {
 					</div>
 					<div className="grid mt-5 sm:mt-0 w-full sm:w-1/4">
 						<Button className="mt-auto text-md font-medium " onClick={searchJobs}>
-							{t('search_job').toUpperCase()}
+							{t('general.search_job').toUpperCase()}
 							<Search className="ml-2" />
 						</Button>
 					</div>
 				</div>
 				{jobResults != null && jobResults.length == 0 && (
 					<div className="mt-5">
-						<h5 className="text font-bold">{t('popular_searches')}</h5>
+						<h5 className="text font-bold">{t('general.popular_searches')}</h5>
 						{topJobs.map((job: string, index: number) => (
 							<Badge
 								variant="outline"

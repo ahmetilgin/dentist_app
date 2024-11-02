@@ -258,16 +258,26 @@ export default function RegistrationForm() {
 	const { t } = useTranslation();
 	const [userType, setUserType] = useState<'candidate' | 'employer' | null>(null);
 
+	const navigate = useNavigate();
 	return (
 		<div className="flex min-h-screen items-start sm:items-center w-full justify-normal sm:justify-center">
 			<Card className="w-full max-w-2xl">
 				<CardHeader>
 					<CardTitle className="text-2xl">
-						{userType && (
-							<Button variant="ghost" className="mb-2" onClick={() => setUserType(null)}>
-								<ArrowLeft className="h-6 w-6" />
-							</Button>
-						)}
+						<Button
+							variant="ghost"
+							className="mb-2"
+							onClick={() => {
+								if (userType) {
+									setUserType(null);
+								} else {
+									navigate('/login');
+								}
+							}}
+						>
+							<ArrowLeft className="h-6 w-6" />
+						</Button>
+
 						{t('registration.title')}
 					</CardTitle>
 					{userType && <CardDescription>{t('registration.description')}</CardDescription>}

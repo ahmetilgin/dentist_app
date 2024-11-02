@@ -49,9 +49,9 @@ export type Language = 'al' | 'tr' | 'en';
 export type Theme = 'light' | 'dark';
 
 export enum EnumWorkplaceType {
-	Remote = 'remote',
-	Office = 'office',
-	Hybrid = 'hybrid',
+	Remote = 'workplace_type.Remote',
+	Office = 'workplace_type.Office',
+	Hybrid = 'workplace_type.Hybrid',
 }
 
 export enum EnumEmploymentType {

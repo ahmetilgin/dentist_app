@@ -39,7 +39,7 @@ export function NavigationBar() {
 										navigate('/login');
 									}}
 								>
-									{t('login_signup')}
+									{t('general.login_signup')}
 								</Button>
 							</div>
 						)}
@@ -54,13 +54,13 @@ export function NavigationBar() {
 						)}
 						<Select onValueChange={(value) => i18n.changeLanguage(value)}>
 							<SelectTrigger className="w-[130px] " leftIcon={<Globe className="text-center text-xs " />}>
-								<SelectValue placeholder={t(i18n.language)} />
+								<SelectValue placeholder={t('general.' + i18n.language)} />
 							</SelectTrigger>
 							<SelectContent>
 								<SelectGroup>
-									<SelectItem value="en">{t('en')}</SelectItem>
-									<SelectItem value="tr">{t('tr')}</SelectItem>
-									<SelectItem value="al">{t('al')}</SelectItem>
+									<SelectItem value="en">{t('general.en')}</SelectItem>
+									<SelectItem value="tr">{t('general.tr')}</SelectItem>
+									<SelectItem value="al">{t('general.al')}</SelectItem>
 								</SelectGroup>
 							</SelectContent>
 						</Select>
@@ -96,7 +96,7 @@ export function NavigationBar() {
 												navigate('/login');
 											}}
 										>
-											{t('login_signup')}
+											{t('general.login_signup')}
 										</Button>
 									)}
 
@@ -106,13 +106,13 @@ export function NavigationBar() {
 												className="w-[130px] rounded-none "
 												leftIcon={<Globe className="text-center text-xs " />}
 											>
-												<SelectValue placeholder={t(i18n.language)} />
+												<SelectValue placeholder={t('general.' + i18n.language)} />
 											</SelectTrigger>
 											<SelectContent>
 												<SelectGroup>
-													<SelectItem value="en">{t('en')}</SelectItem>
-													<SelectItem value="tr">{t('tr')}</SelectItem>
-													<SelectItem value="al">{t('al')}</SelectItem>
+													<SelectItem value="en">{t('general.en')}</SelectItem>
+													<SelectItem value="tr">{t('general.tr')}</SelectItem>
+													<SelectItem value="al">{t('general.al')}</SelectItem>
 												</SelectGroup>
 											</SelectContent>
 										</Select>

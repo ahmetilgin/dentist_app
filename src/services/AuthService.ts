@@ -72,7 +72,7 @@ class AuthService {
 
 	sendEmailBusinessUser(email: string) {
 		return this.httpService
-			.post('/auth/send-email-business-user', { email })
+			.post('/auth/send-password-reset-business-user', { email })
 			.then(() => {
 				return true;
 			})
@@ -84,7 +84,7 @@ class AuthService {
 
 	sendEmailNormalUser(email: string) {
 		return this.httpService
-			.post('/auth/send-email-normal-user', { email })
+			.post('/auth/send-password-reset-normal-user', { email })
 			.then(() => {
 				return true;
 			})
