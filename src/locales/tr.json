@@ -32,7 +32,8 @@
     "placeholder": {
         "location": "Ankara, İstanbul, İzmir...",
         "email": "ornek@email.com",
-        "position": "Microsoft, Software Developer, Project Manager..."
+        "position": "Microsoft, Software Developer, Project Manager...",
+        "employment_type": "İşe alım tipini seçin"
     },
     "error": {
         "register": "Hesap oluşturulurken hata oluştu. Lütfen bilgilerinizi kontrol edin.",
@@ -78,7 +79,10 @@
         "delete": "Sil",
         "save": "Kaydet",
         "cancel": "İptal",
-        "apply": "Başvur"
+        "apply": "Başvur",
+        "create_new_job_posting": "Yeni İş İlanı Oluştur",
+        "title": "İş Adı",
+        "publish_job": "İş Yayınla"
     },
     "workplace_type": {
         "Remote": "Uzaktan",

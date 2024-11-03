@@ -37,7 +37,7 @@ class JobService {
 			});
 	};
 
-	publishJob = (job: any) => {
+	publishJob = (job: TypeJob) => {
 		this.httpService
 			.post('/public/jobs', job)
 			.then(() => {

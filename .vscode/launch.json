@@ -5,11 +5,25 @@
 	"version": "0.2.0",
 	"configurations": [
 		{
+			"name": "Attach to Edge",
+			"port": 4000,
+			"request": "launch",
+			"type": "msedge",
+			"webRoot": "${workspaceFolder}"
+		},
+		{
 			"type": "chrome",
 			"request": "launch",
 			"name": "Launch Chrome against localhost",
 			"url": "http://localhost:4000",
 			"webRoot": "${workspaceFolder}"
+		},
+		{
+			"name": "Launch index.html",
+			"type": "firefox",
+			"request": "launch",
+			"reAttach": true,
+			"url": "http://localhost:4000"
 		}
 	]
 }

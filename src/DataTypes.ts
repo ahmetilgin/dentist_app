@@ -55,11 +55,11 @@ export enum EnumWorkplaceType {
 }
 
 export enum EnumEmploymentType {
-	FullTime = 'fulltime',
-	PartTime = 'parttime',
-	Contract = 'contract',
-	Internship = 'internship',
-	Temporary = 'temporary',
+	FullTime = 'employment_type.FullTime',
+	PartTime = 'employment_type.PartTime',
+	Contract = 'employment_type.Contract',
+	Internship = 'employment_type.Internship',
+	Temporary = 'employment_type.Temporary',
 }
 
 export enum EnumUserType {

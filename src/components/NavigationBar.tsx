@@ -46,10 +46,10 @@ export function NavigationBar() {
 						{userStore.isAuthenticated && userStore.userType == EnumUserType.EMPLOYER && (
 							<Button
 								onClick={() => {
-									navigate('/publish-job');
+									navigate('/publish_job');
 								}}
 							>
-								{t('publish_job')}
+								{t('job_posting.publish_job')}
 							</Button>
 						)}
 						<Select onValueChange={(value) => i18n.changeLanguage(value)}>

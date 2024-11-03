@@ -95,7 +95,7 @@ export default function HomePage() {
 						{topJobs.map((job: string, index: number) => (
 							<Badge
 								variant="outline"
-								className="mr-2 mb-2 cursor-pointer"
+								className="mr-2 mb-2 cursor-pointer capitalize"
 								key={index}
 								onClick={searchJobs}
 							>

@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { EnumEmploymentType, EnumWorkplaceType, TypeJob } from '@/DataTypes';
+import DOMPurify from 'dompurify';
 import { ChevronDown, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
@@ -92,6 +93,9 @@ function ApplyButton() {
 
 function JobDescription({ job }: { job: TypeJob }) {
 	const { t } = useTranslation();
+	const sanitizedDescription = DOMPurify.sanitize(job.Description);
+	const sanitizedRequirements = DOMPurify.sanitize(job.Requirements);
+
 	const formatDate = (date: string) =>
 		new Date(date).toLocaleDateString(undefined, {
 			year: 'numeric',
@@ -114,17 +118,18 @@ function JobDescription({ job }: { job: TypeJob }) {
 			)}
 			{job.Description && (
 				<div className="text-lg font-semibold">
-					{t('job_posting.description')}: <p className="mt-1 text-gray-600">{job.Description}</p>
+					{t('job_posting.description')}:{' '}
+					<div className="mt-1" dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
 				</div>
 			)}
 			{job.Requirements && (
 				<div className="text-sm">
 					<span className="font-medium">{t('job_posting.job_requirements')}:</span>
-					<p className="mt-1 text-gray-600">{job.Requirements}</p>
+					<div className="mt-1" dangerouslySetInnerHTML={{ __html: sanitizedRequirements }} />
 				</div>
 			)}
 			{job.UserID && (
-				<div className="flex text-sm text-gray-500">
+				<div className="flex text-sm ">
 					<span className="font-medium">{t('general.company')}: </span>
 					<span>{job.UserID}</span>
 				</div>

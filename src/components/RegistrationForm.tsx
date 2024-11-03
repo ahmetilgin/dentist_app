@@ -118,7 +118,22 @@ const EmployerRegistration = () => {
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
 		const { name, value } = e.target;
-		setFormData((prev) => ({ ...prev, [name]: value }));
+		if (name === 'businessLogo') {
+			const file = (e.target as HTMLInputElement).files?.[0];
+			if (file) {
+				const reader = new FileReader();
+				reader.onload = () => {
+					if (reader.result) {
+						setFormData((prev) => ({ ...prev, [name]: reader.result as string }));
+					}
+				};
+				reader.readAsDataURL(file);
+			} else {
+				setFormData((prev) => ({ ...prev, [name]: '' }));
+			}
+		} else {
+			setFormData((prev) => ({ ...prev, [name]: value }));
+		}
 	};
 
 	const handleSubmit = (e: React.FormEvent) => {

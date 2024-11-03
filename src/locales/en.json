@@ -32,7 +32,8 @@
     "placeholder": {
         "location": "Shkodër, Tiranë, Kruje...",
         "email": "example@email.com",
-        "position": "Microsoft, Software Developer, Project Manager..."
+        "position": "Microsoft, Software Developer, Project Manager...",
+        "employment_type": "Select the type of employment"
     },
     "error": {
         "register": "An error occurred while registering. Please check your credentials.",
@@ -78,7 +79,10 @@
         "delete": "Delete",
         "save": "Save",
         "cancel": "Cancel",
-        "apply": "Apply"
+        "apply": "Apply",
+        "create_new_job_posting": "Create New Job Post",
+        "title": "Job Title",
+        "publish_job": "Publish Job"
     },
     "workplace_type": {
         "Remote": "Remote",
