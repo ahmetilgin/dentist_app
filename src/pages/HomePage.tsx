@@ -2,7 +2,7 @@ import AutoComplete from '@/components/AutoComplete';
 import JobListing from '@/components/JobList';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { QueryResult, TypeJob } from '@/DataTypes';
+import { JobData, QueryResult } from '@/DataTypes';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { BriefcaseBusiness, MapPin, Search } from 'lucide-react';
 import { SetStateAction, useEffect, useState } from 'react';
@@ -12,7 +12,7 @@ export default function HomePage() {
 	const [selectedRegion, setSelectedRegion] = useState<string>('-');
 	const [selectedPosition, setSelectedPosition] = useState<string>('-');
 	const [topJobs, setTopJobs] = useState<string[]>([]);
-	const [jobResults, setJobResults] = useState<TypeJob[]>([]);
+	const [jobResults, setJobResults] = useState<JobData[]>([]);
 
 	const { httpService } = useRootService();
 	const { t, i18n } = useTranslation();
@@ -21,7 +21,7 @@ export default function HomePage() {
 	const searchJobs = () => {
 		jobService
 			.searchJobs(selectedPosition, selectedRegion, i18n.language)
-			.then((result: SetStateAction<TypeJob[]> | null) => {
+			.then((result: SetStateAction<JobData[]>) => {
 				if (result != null) setJobResults(result);
 			});
 	};

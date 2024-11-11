@@ -21,7 +21,7 @@ export function NavigationBar() {
 		<div className=" w-full border-b absolute">
 			<div className="p-5 mx-auto py-4">
 				<div className="hidden sm:flex items-center justify-between">
-					<div className="flex items-center space-x-2">
+				<div className="flex items-center space-x-2">
 						<h1
 							className="text-2xl font-bold cursor-pointer"
 							onClick={() => {

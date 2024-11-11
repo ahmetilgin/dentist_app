@@ -76,7 +76,12 @@ function Login({ role }: { role: string }) {
 			<div className="grid gap-2">
 				<div className="flex items-center">
 					<Label htmlFor="password">{t('login.password')}</Label>
-					<a href={'/forgot_password/' + role} className="ml-auto inline-block text-sm underline">
+					<a
+						className="ml-auto inline-block text-sm underline"
+						onClick={() => {
+							navigate('/forgot_password/' + role);
+						}}
+					>
 						{t('login.forgot_password')}
 					</a>
 				</div>
@@ -100,7 +105,7 @@ function Login({ role }: { role: string }) {
 			</div>
 			<div className="mt-4 text-center text-sm">
 				{t('login.no_account')}{' '}
-				<a href="/register" className="underline">
+				<a className="underline" onClick={() => navigate('/register')}>
 					{t('login.register')}
 				</a>
 			</div>
@@ -143,7 +148,7 @@ export function LoginForm() {
 								onClick={() => setUserType('candidate')}
 							>
 								<UserCircle className="!size-6" />
-								<span>{t('registration.candidate')}</span>
+								<span>{t('login.candidate_login')}</span>
 							</Button>
 							<Button
 								variant="outline"
@@ -151,7 +156,7 @@ export function LoginForm() {
 								onClick={() => setUserType('employer')}
 							>
 								<Building2 className="!size-6" />
-								<span>{t('registration.employer')}</span>
+								<span>{t('login.employer_login')}</span>
 							</Button>
 						</div>
 					) : (

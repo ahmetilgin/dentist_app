@@ -26,6 +26,16 @@ export interface TypeUser {
 	confirmPassword: string;
 }
 
+export interface TypeBusinessUser {
+	email: string;
+	BusinessName: string;
+	BusinessAddress: string;
+	BusinessDescription: string;
+	BusinessLocation: string;
+	BusinessWebsite: string;
+	BusinessLogo: string;
+}
+
 export interface TypeJob {
 	UserID: string;
 	JobTitle: string;
@@ -36,6 +46,11 @@ export interface TypeJob {
 	EmploymentType: string;
 	DatePosted: string;
 	ApplicationDeadline: string;
+}
+
+export interface JobData {
+	jobDetail: TypeJob;
+	businessUserData: TypeBusinessUser;
 }
 
 export interface TypeJobSearch {

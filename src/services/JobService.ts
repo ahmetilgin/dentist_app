@@ -1,4 +1,4 @@
-import { QueryResult, TypeJob, TypeJobs } from '../DataTypes';
+import { JobData, QueryResult, TypeJob, TypeJobs } from '../DataTypes';
 import { JobStore } from '../stores/JobStore';
 import HttpService from './HttpService';
 
@@ -10,7 +10,7 @@ class JobService {
 		this.jobStore = jobStore;
 	}
 
-	searchJobs = (keyword: string, location: string, region: string): Promise<TypeJob[]> => {
+	searchJobs = (keyword: string, location: string, region: string): Promise<JobData[]> => {
 		if (keyword === '') {
 			keyword = '-';
 		}

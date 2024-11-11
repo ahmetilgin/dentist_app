@@ -4,12 +4,12 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { EnumEmploymentType, EnumWorkplaceType, TypeJob } from '@/DataTypes';
-import DOMPurify from 'dompurify';
+import { EnumEmploymentType, EnumWorkplaceType, JobData } from '@/DataTypes';
 import { ChevronDown, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import ReactQuill from 'react-quill-new';
 
 function FilterCombobox({ title, options }: { title: string; options: string[] }) {
 	const [open, setOpen] = React.useState(false);
@@ -49,7 +49,7 @@ function FilterCombobox({ title, options }: { title: string; options: string[] }
 function TopFilters({ companies }: { companies: string[] }) {
 	const { t } = useTranslation();
 	return (
-		<div className="w-full border-b bg-gray-50 shadow-md">
+		<div className="w-full border-b shadow-md">
 			<div className="flex w-full py-4 space-x-2 overflow-y-hidden overflow-x-scroll sm:overflow-x-hidden px-4">
 				<FilterCombobox
 					title={t('job_posting.workplace_type')}
@@ -91,10 +91,8 @@ function ApplyButton() {
 	);
 }
 
-function JobDescription({ job }: { job: TypeJob }) {
+function JobDescription({ job }: { job: JobData }) {
 	const { t } = useTranslation();
-	const sanitizedDescription = DOMPurify.sanitize(job.Description);
-	const sanitizedRequirements = DOMPurify.sanitize(job.Requirements);
 
 	const formatDate = (date: string) =>
 		new Date(date).toLocaleDateString(undefined, {
@@ -104,46 +102,45 @@ function JobDescription({ job }: { job: TypeJob }) {
 		});
 	return (
 		<div className="space-y-4">
-			{job.DatePosted && (
+			{job.jobDetail.DatePosted && (
 				<div>
 					<span className="font-medium">{t('job_posting.date_posted')}: </span>
-					<span>{formatDate(job.DatePosted)}</span>
+					<span>{formatDate(job.jobDetail.DatePosted)}</span>
 				</div>
 			)}
-			{job.ApplicationDeadline && (
+			{job.jobDetail.ApplicationDeadline && (
 				<div>
 					<span className="font-medium">{t('job_posting.application_deadline')}: </span>
-					<span>{formatDate(job.ApplicationDeadline)}</span>
+					<span>{formatDate(job.jobDetail.ApplicationDeadline)}</span>
 				</div>
 			)}
-			{job.Description && (
+			{job.jobDetail.Description && (
 				<div className="text-lg font-semibold">
-					{t('job_posting.description')}:{' '}
-					<div className="mt-1" dangerouslySetInnerHTML={{ __html: sanitizedDescription }} />
+					<ReactQuill value={job.jobDetail.Description} readOnly={true} theme={'bubble'} />
 				</div>
 			)}
-			{job.Requirements && (
+			{job.jobDetail.Requirements && (
 				<div className="text-sm">
 					<span className="font-medium">{t('job_posting.job_requirements')}:</span>
-					<div className="mt-1" dangerouslySetInnerHTML={{ __html: sanitizedRequirements }} />
+					<ReactQuill value={job.jobDetail.Requirements} readOnly={true} theme={'bubble'} />
 				</div>
 			)}
-			{job.UserID && (
+			{job.jobDetail.UserID && (
 				<div className="flex text-sm ">
 					<span className="font-medium">{t('general.company')}: </span>
-					<span>{job.UserID}</span>
+					<span>{job.jobDetail.UserID}</span>
 				</div>
 			)}
-			{job.EmploymentType && (
+			{job.jobDetail.EmploymentType && (
 				<div className="flex text-sm text-gray-500">
 					<span className="font-medium">{t('job_posting.employment_type')}: </span>
-					<span>{job.EmploymentType}</span>
+					<span>{job.jobDetail.EmploymentType}</span>
 				</div>
 			)}
-			{job.SalaryRange && (
+			{job.jobDetail.SalaryRange && (
 				<div className="flex text-sm text-gray-500">
 					<span className="font-medium">{t('job_posting.salary')}: </span>
-					<span>{job.SalaryRange}</span>
+					<span>{job.jobDetail.SalaryRange}</span>
 				</div>
 			)}
 		</div>
@@ -151,12 +148,14 @@ function JobDescription({ job }: { job: TypeJob }) {
 }
 
 function JobListItem({
+	logo,
 	title,
 	company,
 	location,
 	onClicked,
 	selected,
 }: {
+	logo: string;
 	title: string;
 	company: string;
 	location: string;
@@ -166,14 +165,13 @@ function JobListItem({
 	return (
 		<div
 			className={`${
-				selected ? 'bg-blue-50 border-l-4 border-blue-600' : 'bg-white'
+				selected ? 'border ' : ''
 			} p-4 border-b last:border-b-0 cursor-pointer hover:bg-blue-100 transition duration-150`}
 			onClick={onClicked}
 		>
 			<div className="flex items-center space-x-4">
 				<div className="w-12 h-12 bg-secondary flex items-center justify-center rounded-full">
-					<span className="text-2xl font-bold">{company[0]}</span>
-					{/* Şirket logosunun burada görünmesi için logo ekleme */}
+					<img className="w-8 h-8" src={logo}></img>
 				</div>
 				<div>
 					<p className="text-sm text-gray-500">{company}</p>
@@ -185,9 +183,9 @@ function JobListItem({
 	);
 }
 
-export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
+export default function JobListing({ jobs }: { jobs: JobData[] }) {
 	const [showDetail, setShowDetail] = React.useState(false);
-	const [selectedJob, setSelectedJob] = React.useState<TypeJob | null>(null);
+	const [selectedJob, setSelectedJob] = React.useState<JobData | null>(null);
 
 	useEffect(() => {
 		const handlePopState = () => setShowDetail(false);
@@ -195,13 +193,13 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 		return () => window.removeEventListener('popstate', handlePopState);
 	}, []);
 
-	const openJobDetail = (job: TypeJob) => {
+	const openJobDetail = (job: JobData) => {
 		setShowDetail(true);
 		setSelectedJob(job);
 		window.history.pushState(null, '', window.location.href);
 	};
 
-	const companies = jobs.map((job) => job.UserID);
+	const companies = jobs.map((job) => job.businessUserData.BusinessName);
 
 	return (
 		<div className="flex flex-col h-full pb-10">
@@ -212,10 +210,11 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 						{jobs.map((job, index) => (
 							<JobListItem
 								key={index}
-								title={job.JobTitle}
-								company={job.UserID}
-								location={job.Location}
-								selected={job.JobTitle === selectedJob?.JobTitle}
+								title={job.jobDetail.JobTitle}
+								company={job.businessUserData.BusinessName}
+								location={job.jobDetail.Location}
+								selected={job.jobDetail.JobTitle === selectedJob?.jobDetail.JobTitle}
+								logo={job.businessUserData.BusinessLogo}
 								onClicked={() => openJobDetail(job)}
 							/>
 						))}
@@ -226,9 +225,9 @@ export default function JobListing({ jobs }: { jobs: TypeJob[] }) {
 						<Card className="rounded-none h-full shadow-md">
 							<CardHeader>
 								<JobInfo
-									title={selectedJob.JobTitle}
-									location={selectedJob.Location}
-									company={selectedJob.UserID}
+									title={selectedJob.jobDetail.JobTitle}
+									location={selectedJob.jobDetail.Location}
+									company={selectedJob.businessUserData.BusinessName}
 								/>
 							</CardHeader>
 							<CardContent>
