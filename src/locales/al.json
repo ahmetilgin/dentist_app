@@ -64,7 +64,10 @@
         "search_job": "GJENI PUNË",
         "popular_searches": "KËRKIME POPULLORE",
         "company": "Kompani",
-        "position": "Pozicion"
+        "position": "Pozicion",
+        "light_mode": "Mod i Lajt",
+        "dark_mode": "Mod i Dardhe",
+        "logout": "Logohu"
     },
     "job_posting": {
         "job": "Punë",

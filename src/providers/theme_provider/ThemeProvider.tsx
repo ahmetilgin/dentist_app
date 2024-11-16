@@ -1,5 +1,6 @@
 import { Theme } from '@/DataTypes';
 import { createContext, useContext, useState } from 'react';
+import { useRootStore } from '../context_provider/ContextProvider';
 
 interface ThemeContextProps {
 	setTheme: (mode: Theme) => void;
@@ -8,8 +9,10 @@ interface ThemeContextProps {
 
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
-export const CustomThemeProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
-	const [mode, setMode] = useState<Theme>('light');
+export const CustomThemeProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
+	const { userStore } = useRootStore();
+	const [mode, setMode] = useState<Theme>(userStore.activeTheme);
+	document.documentElement.setAttribute('class', mode);
 
 	const setTheme = (mode: Theme) => {
 		setMode(mode);

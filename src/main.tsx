@@ -9,12 +9,12 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
 	<React.StrictMode>
-		<CustomThemeProvider>
-			<RootStoreProvider>
+		<RootStoreProvider>
+			<CustomThemeProvider>
 				<BrowserRouter>
 					<App />
 				</BrowserRouter>
-			</RootStoreProvider>
-		</CustomThemeProvider>
+			</CustomThemeProvider>
+		</RootStoreProvider>
 	</React.StrictMode>
 );

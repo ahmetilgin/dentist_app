@@ -62,7 +62,10 @@
         "search_job": "İŞ BUL",
         "popular_searches": "POPÜLER ARAMALAR",
         "company": "Sirket",
-        "position": "Pozisyon"
+        "position": "Pozisyon",
+        "light_mode": "Acık Mod",
+        "dark_mode": "Koyu Mod",
+        "logout": "Çıkış Yap"
     },
     "job_posting": {
         "job": "İş",
@@ -81,7 +84,7 @@
         "cancel": "İptal",
         "apply": "Başvur",
         "create_new_job_posting": "Yeni İş İlanı Oluştur",
-        "title": "İş Adı",
+        "title": "İlan Başlığı",
         "publish_job": "İş Yayınla"
     },
     "workplace_type": {

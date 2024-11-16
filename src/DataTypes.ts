@@ -58,7 +58,7 @@ export interface TypeJobSearch {
 	location: string;
 }
 
-export type TypeJobs = TypeJob[];
+export type TypeJobs = JobData[];
 export type QueryResult = { query_result: string[] };
 export type Language = 'al' | 'tr' | 'en';
 export type Theme = 'light' | 'dark';
@@ -78,6 +78,7 @@ export enum EnumEmploymentType {
 }
 
 export enum EnumUserType {
+	UNKNOWN,
 	EMPLOYER,
 	CANDIDATE,
 }

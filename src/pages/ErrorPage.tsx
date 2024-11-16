@@ -16,7 +16,7 @@ export default function NotFound() {
 					<Button variant="outline" onClick={() => navigate('/')}>
 						{t('general.back_to_home')}
 					</Button>
-					<Button variant="outline" onClick={() => window.history.back()}>
+					<Button variant="outline" onClick={() => navigate(-1)}>
 						{t('general.go_back')}
 					</Button>
 				</div>

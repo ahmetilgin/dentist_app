@@ -15,10 +15,24 @@ export class UserStore {
 		this.isAuthenticated = JSON.parse(this.getFromStorage('isAuthenticated', 'sessionStorage') || 'false');
 		this.token = this.getFromStorage('token', 'sessionStorage');
 		this.rememberMe = JSON.parse(this.getFromStorage('rememberMe', 'localStorage') || 'false');
+		const userType = this.getFromStorage('userType', 'sessionStorage');
+		if (userType === null) return;
+		this.userType = parseInt(userType) as EnumUserType;
 	}
 
-	private getFromStorage(key: string, storageType: 'localStorage' | 'sessionStorage'): string | null {
-		return window[storageType].getItem(key);
+	private getFromStorage(
+		key: string,
+		storageType: 'localStorage' | 'sessionStorage',
+		defaultValue?: string
+	): string | null {
+		const value = window[storageType].getItem(key);
+		if (value !== null) {
+			return value;
+		}
+		if (defaultValue) {
+			return defaultValue;
+		}
+		return null;
 	}
 
 	private setToStorage(key: string, value: string, storageType: 'localStorage' | 'sessionStorage') {
@@ -63,6 +77,7 @@ export class UserStore {
 	logout() {
 		this.setToken(null);
 		this.setAuthenticated(false);
+		this.setUserType(EnumUserType.UNKNOWN);
 	}
 
 	getToken(): string | null {
@@ -71,5 +86,6 @@ export class UserStore {
 
 	setUserType(userType: EnumUserType) {
 		this.userType = userType;
+		this.setToStorage('userType', userType.toString(), 'sessionStorage');
 	}
 }

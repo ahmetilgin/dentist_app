@@ -7,11 +7,11 @@ export interface RootContext {
 	rootService: RootService;
 }
 const RootStoreContext = createContext<RootContext>({
-	rootStore: {} as any,
-	rootService: {} as any,
+	rootStore: {} as RootStore,
+	rootService: {} as RootService,
 });
 
-export const RootStoreProvider: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
+export const RootStoreProvider: React.FC<React.PropsWithChildren<object>> = ({ children }) => {
 	const store = useMemo(() => {
 		const rootStore = new RootStore();
 		const rootService = new RootService(rootStore);

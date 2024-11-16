@@ -62,7 +62,10 @@
         "search_job": "FIND JOB",
         "popular_searches": "POPULAR SEARCHES",
         "company": "Company",
-        "position": "Position"
+        "position": "Position",
+        "light_mode": "Light Mode",
+        "dark_mode": "Dark Mode",
+        "logout": "Logout"
     },
     "job_posting": {
         "job": "Job",

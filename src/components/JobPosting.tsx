@@ -5,11 +5,12 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { EnumEmploymentType, QueryResult, TypeJob } from '@/DataTypes';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
-import { BriefcaseBusiness, MapPin } from 'lucide-react';
+import { ArrowLeft, BriefcaseBusiness, MapPin } from 'lucide-react';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 import AutoComplete from './AutoComplete';
 
 export function JobPostingFormComponent() {
@@ -76,11 +77,22 @@ export function JobPostingFormComponent() {
 		],
 	};
 
+	const navigate = useNavigate();
+
 	return (
-		<div className="flex justify-center items-center min-h-screen p-0 sm:p-4 w-full sm:w-8/12">
+		<div className="flex justify-center items-center min-h-screen p-0 sm:p-4 w-full sm:w-10/12 lg:w-8/12">
 			<Card className="w-full">
 				<CardHeader>
-					<CardTitle className="text-2xl font-bold text-center">
+					<CardTitle className="text-2xl font-bold ">
+						<Button
+							variant="ghost"
+							className="mb-2"
+							onClick={() => {
+								navigate(-1);
+							}}
+						>
+							<ArrowLeft className="h-6 w-6" />
+						</Button>
 						{t('job_posting.create_new_job_posting')}
 					</CardTitle>
 				</CardHeader>

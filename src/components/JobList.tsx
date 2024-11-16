@@ -4,7 +4,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { EnumEmploymentType, EnumWorkplaceType, JobData } from '@/DataTypes';
+import { EnumEmploymentType, EnumWorkplaceType, JobData, TypeJobs } from '@/DataTypes';
 import { ChevronDown, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
@@ -183,7 +183,7 @@ function JobListItem({
 	);
 }
 
-export default function JobListing({ jobs }: { jobs: JobData[] }) {
+export default function JobListing({ jobs }: { jobs: TypeJobs }) {
 	const [showDetail, setShowDetail] = React.useState(false);
 	const [selectedJob, setSelectedJob] = React.useState<JobData | null>(null);
 

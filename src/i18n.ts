@@ -20,16 +20,17 @@ i18n.use(LanguageDetector)
 			},
 		},
 		debug: true,
-		fallbackLng: 'al', // Varsayılan dil Arnavutça yapıldı
+		fallbackLng: 'al',
 		interpolation: {
 			escapeValue: false,
 		},
-		lng: 'al',
+		lng: localStorage.getItem('i18nextLng') || 'al',
 		detection: {
-			order: ['localStorage', 'cookie', 'navigator', 'htmlTag', 'path', 'subdomain'],
+			order: ['localStorage', 'cookie', 'querystring', 'navigator', 'htmlTag'],
 			lookupLocalStorage: 'i18nextLng',
 			lookupCookie: 'i18next',
 			caches: ['localStorage', 'cookie'],
+			excludeCacheFor: ['cimode'],
 		},
 	});
 
