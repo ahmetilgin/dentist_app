@@ -37,6 +37,7 @@ export interface TypeBusinessUser {
 }
 
 export interface TypeJob {
+	ID: string;
 	UserID: string;
 	JobTitle: string;
 	Description: string;

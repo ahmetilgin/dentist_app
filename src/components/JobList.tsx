@@ -4,12 +4,15 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { EnumEmploymentType, EnumWorkplaceType, JobData, TypeJobs } from '@/DataTypes';
+import { EnumEmploymentType, EnumUserType, EnumWorkplaceType, JobData, TypeJobs } from '@/DataTypes';
+import { useToast } from '@/hooks/use-toast';
+import { useRootService, useRootStore } from '@/providers/context_provider/ContextProvider';
 import { ChevronDown, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill-new';
+import { useNavigate } from 'react-router-dom';
 
 function FilterCombobox({ title, options }: { title: string; options: string[] }) {
 	const [open, setOpen] = React.useState(false);
@@ -78,12 +81,56 @@ function JobInfo({ title, location, company }: { title: string; location: string
 	);
 }
 
-function ApplyButton() {
+function ApplyButton({ jobId }: { jobId: string }) {
 	const { t } = useTranslation();
+	const { jobService } = useRootService();
+	const { userStore } = useRootStore();
+	const navigate = useNavigate();
+	const { toast } = useToast();
 
 	return (
 		<div className="flex items-center space-x-2">
-			<Button>{t('job_posting.apply')}</Button>
+			<Button
+				onClick={() => {
+					if (userStore.isAuthenticated && userStore.userType === EnumUserType.CANDIDATE) {
+						jobService
+							.applyJob(jobId)
+							.then((res) => {
+								if (res) {
+									toast({
+										title: t('job_posting.successfully_applied'),
+										description: t('job_posting.successfully_applied_desc'),
+										variant: 'default',
+									});
+								} else {
+									toast({
+										title: t('job_posting.already_applied'),
+										description: t('job_posting.already_applied_desc'),
+										variant: 'default',
+									});
+								}
+							})
+							.catch(() => {
+								toast({
+									title: t('job_posting.application_error'),
+									description: t('job_posting.application_error_desc'),
+									variant: 'destructive',
+								});
+							});
+					} else {
+						toast({
+							title: t('job_posting.login_to_apply'),
+							description: t('job_posting.login_to_apply_desc'),
+							variant: 'destructive',
+						});
+						setTimeout(() => {
+							navigate('/login');
+						}, 3000);
+					}
+				}}
+			>
+				{t('job_posting.apply')}
+			</Button>
 			<Button variant="outline" size="icon">
 				<Share2 className="h-4 w-4" />
 			</Button>
@@ -231,7 +278,7 @@ export default function JobListing({ jobs }: { jobs: TypeJobs }) {
 								/>
 							</CardHeader>
 							<CardContent>
-								<ApplyButton />
+								<ApplyButton jobId={selectedJob.jobDetail.ID} />
 								<JobDescription job={selectedJob} />
 							</CardContent>
 						</Card>

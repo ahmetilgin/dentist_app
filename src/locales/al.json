@@ -1,104 +1,112 @@
 {
-    "login": {
-        "email_placeholder": "Shkruani adresën tuaj të emailit",
-        "no_account": "Nuk keni llogari?",
-        "sign_up": "Regjistrohu",
-        "password": "Fjalëkalimi",
-        "forgot_password": "Harrove fjalëkalimin?",
-        "email": "Emaili",
-        "remember_me": "Më Kujto",
-        "desc": "Shkruani detajet tuaja më poshtë për të hyrë në llogarinë tuaj",
-        "register": "Regjistrohu",
-        "title": "Identifikohu",
-        "submit": "Identifikohu",
-        "password_confirm": "Konfirmo Fjalëkalimin",
-        "candidate_login": "Kandidatit Identifikohu",
-        "employer_login": "Punëdhënësit Identifikohu"
-    },
-    "registration": {
-        "title": "Regjistrohu",
-        "description": "Regjistrohu më poshtë të hyrë të një llogari. Klikoni ne identifikimi dështoi më poshtë të hyrë të një llogari.",
-        "candidate": "Kandidatit",
-        "employer": "Punëdhënësit",
-        "submit": "Regjistrohu",
-        "locationPlaceholder": "Shkodër, Tiranë, Kruje..."
-    },
-    "employer": {
-        "businessName": "Emri i Biznesit",
-        "businessAddress": "Adresa e Biznesit",
-        "businessDescription": "Pershkrimi i Biznesit",
-        "businessLocation": "Vendndodhja e Biznesit",
-        "businessWebsite": "Faqja e Internetit e Biznesit",
-        "businessLogo": "Logo Biznesit"
-    },
-    "placeholder": {
-        "location": "Shkodër, Tiranë, Kruje...",
-        "email": "example@email.com",
-        "position": "Microsoft, Software Developer, Project Manager...",
-        "employment_type": "Zgjidhni llojin e punësimit"
-    },
-    "error": {
-        "register": "Regjistrimi dështoi. Kontrolloni detajet tuaja më poshtë të hyrë të një llogari.",
-        "passwordNotMatch": "Fjalëkalimet në keni ndryshuar.",
-        "login": "Identifikimi dështoi. Kontrolloni detajet tuaja më poshtë të hyrë të një llogari.",
-        "page_not_found": "Na vjen keq, nuk mund të gjejmë faqen që kërkonit. Mund të kenë ndodhur një gabim në adresën e faqes ose faqja të ketë qenë e zhdukur.",
-        "404": "404 Faqja e Gjetur"
-    },
-    "forgot_password": {
-        "title": "Harrove fjalëkalimin?",
-        "description": "Ju lutem, shkruani email-in tuaj më poshtë",
-        "submit": "Dërgo lidhjen e rivendosjes së fjalëkalimit",
-        "send_password_reset_link_to_email": "Dërgo lidhjen e rivendosjes së fjalëkalimit në email-in tuaj"
-    },
-    "general": {
-        "go_back": "Kthehu prapa",
-        "back_to_home": "Kthehu në faqen kryesore",
-        "al": "Shqip",
-        "en": "Anglisht",
-        "tr": "Turqisht",
-        "login_signup": "Hyni / Regjistrohuni",
-        "discover_career_opportunities": "Zbuloni Mundësitë e Karrierës",
-        "job_postings_thousands_of_companies": "Mijëra njoftime pune nga mijëra kompani",
-        "search_position_or_company": "Kërkoni Pozicion ose Kompani",
-        "search_city_or_district": "Kërkoni Qytet ose Rreth",
-        "search_job": "GJENI PUNË",
-        "popular_searches": "KËRKIME POPULLORE",
-        "company": "Kompani",
-        "position": "Pozicion",
-        "light_mode": "Mod i Lajt",
-        "dark_mode": "Mod i Dardhe",
-        "logout": "Logohu"
-    },
-    "job_posting": {
-        "job": "Punë",
-        "description": "Përshkrimi",
-        "job_requirements": "Kërkesat",
-        "location": "Vendndodhja",
-        "salary": "Paga",
-        "workplace_type": "Lloji i Vendit të Punës",
-        "employment_type": "Lloji i Punës",
-        "date_posted": "Data e Postimit",
-        "application_deadline": "Afati i Fundit për Aplikim",
-        "job_posting": "Postimi i Punës",
-        "edit": "Ndrysho",
-        "delete": "Fshij",
-        "save": "Ruaj",
-        "cancel": "Anuloj",
-        "apply": "Apliko",
-        "create_new_job_posting": "Krijo Punë",
-        "title": "Titulli i Punës",
-        "publish_job": "Publiko punë"
-    },
-    "workplace_type": {
-        "Remote": "Në distancë",
-        "Office": "Zyrë",
-        "Hybrid": "Hibrid"
-    },
-    "employment_type": {
-        "FullTime": "Kohë e Plotë",
-        "PartTime": "Kohë e Pjeshme",
-        "Contract": "Kontratë",
-        "Internship": "Praktikë",
-        "Temporary": "Përkohshme"
-    }
+	"login": {
+		"email_placeholder": "Shkruani adresën tuaj të emailit",
+		"no_account": "Nuk keni llogari?",
+		"sign_up": "Regjistrohu",
+		"password": "Fjalëkalimi",
+		"forgot_password": "Harrove fjalëkalimin?",
+		"email": "Emaili",
+		"remember_me": "Më Kujto",
+		"desc": "Shkruani detajet tuaja më poshtë për të hyrë në llogarinë tuaj",
+		"register": "Regjistrohu",
+		"title": "Identifikohu",
+		"submit": "Identifikohu",
+		"password_confirm": "Konfirmo Fjalëkalimin",
+		"candidate_login": "Kandidatit Identifikohu",
+		"employer_login": "Punëdhënësit Identifikohu"
+	},
+	"registration": {
+		"title": "Regjistrohu",
+		"description": "Regjistrohu më poshtë të hyrë të një llogari. Klikoni ne identifikimi dështoi më poshtë të hyrë të një llogari.",
+		"candidate": "Kandidatit",
+		"employer": "Punëdhënësit",
+		"submit": "Regjistrohu",
+		"locationPlaceholder": "Shkodër, Tiranë, Kruje..."
+	},
+	"employer": {
+		"businessName": "Emri i Biznesit",
+		"businessAddress": "Adresa e Biznesit",
+		"businessDescription": "Pershkrimi i Biznesit",
+		"businessLocation": "Vendndodhja e Biznesit",
+		"businessWebsite": "Faqja e Internetit e Biznesit",
+		"businessLogo": "Logo Biznesit"
+	},
+	"placeholder": {
+		"location": "Shkodër, Tiranë, Kruje...",
+		"email": "example@email.com",
+		"position": "Microsoft, Software Developer, Project Manager...",
+		"employment_type": "Zgjidhni llojin e punësimit"
+	},
+	"error": {
+		"register": "Regjistrimi dështoi. Kontrolloni detajet tuaja më poshtë të hyrë të një llogari.",
+		"passwordNotMatch": "Fjalëkalimet në keni ndryshuar.",
+		"login": "Identifikimi dështoi. Kontrolloni detajet tuaja më poshtë të hyrë të një llogari.",
+		"page_not_found": "Na vjen keq, nuk mund të gjejmë faqen që kërkonit. Mund të kenë ndodhur një gabim në adresën e faqes ose faqja të ketë qenë e zhdukur.",
+		"404": "404 Faqja e Gjetur"
+	},
+	"forgot_password": {
+		"title": "Harrove fjalëkalimin?",
+		"description": "Ju lutem, shkruani email-in tuaj më poshtë",
+		"submit": "Dërgo lidhjen e rivendosjes së fjalëkalimit",
+		"send_password_reset_link_to_email": "Dërgo lidhjen e rivendosjes së fjalëkalimit në email-in tuaj"
+	},
+	"general": {
+		"go_back": "Kthehu prapa",
+		"back_to_home": "Kthehu në faqen kryesore",
+		"al": "Shqip",
+		"en": "Anglisht",
+		"tr": "Turqisht",
+		"login_signup": "Hyni / Regjistrohuni",
+		"discover_career_opportunities": "Zbuloni Mundësitë e Karrierës",
+		"job_postings_thousands_of_companies": "Mijëra njoftime pune nga mijëra kompani",
+		"search_position_or_company": "Kërkoni Pozicion ose Kompani",
+		"search_city_or_district": "Kërkoni Qytet ose Rreth",
+		"search_job": "GJENI PUNË",
+		"popular_searches": "KËRKIME POPULLORE",
+		"company": "Kompani",
+		"position": "Pozicion",
+		"light_mode": "Mod i Lajt",
+		"dark_mode": "Mod i Dardhe",
+		"logout": "Logohu"
+	},
+	"job_posting": {
+		"job": "Punë",
+		"description": "Përshkrimi",
+		"job_requirements": "Kërkesat",
+		"location": "Vendndodhja",
+		"salary": "Paga",
+		"workplace_type": "Lloji i Vendit të Punës",
+		"employment_type": "Lloji i Punës",
+		"date_posted": "Data e Postimit",
+		"application_deadline": "Afati i Fundit për Aplikim",
+		"job_posting": "Postimi i Punës",
+		"edit": "Ndrysho",
+		"delete": "Fshij",
+		"save": "Ruaj",
+		"cancel": "Anuloj",
+		"apply": "Apliko",
+		"create_new_job_posting": "Krijo Punë",
+		"title": "Titulli i Punës",
+		"publish_job": "Publiko punë",
+		"successfully_applied": "Aplikuar me sukses",
+		"successfully_applied_desc": "Aplikuar me sukses",
+		"already_applied": "Aplikuar me sukses",
+		"already_applied_desc": "Aplikuar me sukses",
+		"login_to_apply": "Identifikohu per t'i aplikuar",
+		"login_to_apply_desc": "Identifikohu per t'i aplikuar",
+		"application_error": "Aplikimi dështoi",
+		"application_error_desc": "Aplikimi dështoi"
+	},
+	"workplace_type": {
+		"Remote": "Në distancë",
+		"Office": "Zyrë",
+		"Hybrid": "Hibrid"
+	},
+	"employment_type": {
+		"FullTime": "Kohë e Plotë",
+		"PartTime": "Kohë e Pjeshme",
+		"Contract": "Kontratë",
+		"Internship": "Praktikë",
+		"Temporary": "Përkohshme"
+	}
 }

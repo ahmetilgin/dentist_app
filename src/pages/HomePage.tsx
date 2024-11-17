@@ -14,15 +14,19 @@ export default function HomePage() {
 	const [topJobs, setTopJobs] = useState<string[]>([]);
 	const [jobResults, setJobResults] = useState<TypeJobs>([]);
 
-	const { httpService } = useRootService();
 	const { t, i18n } = useTranslation();
 	const { jobService } = useRootService();
 
 	const searchJobs = () => {
 		jobService
 			.searchJobs(selectedPosition, selectedRegion, i18n.language)
-			.then((result: SetStateAction<TypeJobs>) => {
-				if (result != null) setJobResults(result);
+			.then((response: { jobs: TypeJobs }) => {
+				if (response.jobs) {
+					setJobResults(response.jobs);
+				}
+			})
+			.catch((err) => {
+				console.log(err);
 			});
 	};
 
@@ -50,11 +54,7 @@ export default function HomePage() {
 						<AutoComplete
 							label="general.search_position_or_company"
 							placeholder="placeholder.position"
-							fetchOptions={(input: string) =>
-								httpService.get<QueryResult>(
-									`/public/jobs/search_professions/${i18n.language}/${input}?`
-								)
-							}
+							fetchOptions={(input: string) => jobService.searchProfessions(input, i18n.language)}
 							icon={
 								<BriefcaseBusiness className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
 							}
@@ -69,9 +69,7 @@ export default function HomePage() {
 						<AutoComplete
 							placeholder="placeholder.location"
 							label="general.search_city_or_district"
-							fetchOptions={(input: string) =>
-								httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)
-							}
+							fetchOptions={(input: string) => jobService.searchLocations(input, i18n.language)}
 							icon={
 								<MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
 							}

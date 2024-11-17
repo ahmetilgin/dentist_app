@@ -3,7 +3,7 @@ import { EnumUserType } from '@/DataTypes';
 import { useRootStore } from '@/providers/context_provider/ContextProvider';
 import { useCustomTheme } from '@/providers/theme_provider/ThemeProvider';
 import { Globe, LogOut, Menu, Moon, Sun } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Card } from './ui/card';
@@ -22,20 +22,6 @@ export function NavigationBar() {
 		userStore.logout();
 		navigate('/');
 	};
-
-	useEffect(() => {
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any
-		function handleClickOutside(event: any) {
-			if (menuRef.current && !menuRef.current.contains(event.target)) {
-				setMenuOpen(false);
-			}
-		}
-
-		document.addEventListener('mousedown', handleClickOutside);
-		return () => {
-			document.removeEventListener('mousedown', handleClickOutside);
-		};
-	}, []);
 
 	return (
 		<div className="w-full border-b absolute">
@@ -73,15 +59,14 @@ export function NavigationBar() {
 							</Button>
 						)}
 						<div ref={menuRef} className="relative">
-							<button className="p-2 rounded-full border flex items-end">
-								<Menu
-									className="h-5 w-5"
-									onClick={() => {
-										setMenuOpen(!menuOpen);
-									}}
-								/>
+							<button
+								className="p-2 rounded-full border flex items-end"
+								onClick={() => {
+									setMenuOpen(!menuOpen);
+								}}
+							>
+								<Menu className="h-5 w-5" />
 							</button>
-
 							{menuOpen && (
 								<Card className="absolute z-10 top-12 right-0 p-2 space-y-2 min-w-[200px]">
 									<div className="space-y-2">

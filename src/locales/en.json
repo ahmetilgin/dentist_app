@@ -1,102 +1,110 @@
 {
-    "login": {
-        "email_placeholder": "Enter your email address",
-        "no_account": "Don't have an account?",
-        "sign_up": "Sign Up",
-        "password": "Password",
-        "forgot_password": "Forgot password?",
-        "email": "Email Address",
-        "remember_me": "Remember me",
-        "desc": "Enter your details below to login to your account",
-        "title": "Login",
-        "password_confirm": "Confirm Password",
-        "candidate_login": "Candidate Login",
-        "employer_login": "Employer Login"
-    },
-    "registration": {
-        "title": "Register",
-        "description": "Enter your details below to create your account",
-        "candidate": "Candidate Registration",
-        "employer": "Employer Registration",
-        "submit": "Submit",
-        "locationPlaceholder": "Shkodër, Tiranë, Kruje..."
-    },
-    "employer": {
-        "businessName": "Business Name",
-        "businessAddress": "Business Address",
-        "businessDescription": "Business Description",
-        "businessLocation": "Business Location",
-        "businessWebsite": "Business Website",
-        "businessLogo": "Business Logo"
-    },
-    "placeholder": {
-        "location": "Shkodër, Tiranë, Kruje...",
-        "email": "example@email.com",
-        "position": "Microsoft, Software Developer, Project Manager...",
-        "employment_type": "Select the type of employment"
-    },
-    "error": {
-        "register": "An error occurred while registering. Please check your credentials.",
-        "passwordNotMatch": "Passwords don't match.",
-        "login": "An error occurred while logging in. Please check your credentials.",
-        "page_not_found": "Sorry, we couldn't find the page you're looking for. Please check your link or try again later.",
-        "404": "404 Not Found"
-    },
-    "forgot_password": {
-        "title": "Forgot Password",
-        "description": "Please enter your email address",
-        "submit": "Forgot Password",
-        "send_password_reset_link_to_email": "Send Password Reset Link to Email"
-    },
-    "general": {
-        "go_back": "Go Back",
-        "back_to_home": "Back to Home",
-        "al": "Albanian",
-        "en": "English",
-        "tr": "Turkish",
-        "login_signup": "Log In / Sign Up",
-        "discover_career_opportunities": "Discover Career Opportunities",
-        "job_postings_thousands_of_companies": "Thousands postings from thousands of companies",
-        "search_position_or_company": "Search Position or Company",
-        "search_city_or_district": "Search City or District",
-        "search_job": "FIND JOB",
-        "popular_searches": "POPULAR SEARCHES",
-        "company": "Company",
-        "position": "Position",
-        "light_mode": "Light Mode",
-        "dark_mode": "Dark Mode",
-        "logout": "Logout"
-    },
-    "job_posting": {
-        "job": "Job",
-        "description": "Description",
-        "job_requirements": "Requirements",
-        "location": "Location",
-        "salary": "Salary",
-        "workplace_type": "Workplace Type",
-        "employment_type": "Employment Type",
-        "date_posted": "Date Posted",
-        "application_deadline": "Application Deadline",
-        "job_posting": "Job Post",
-        "edit": "Edit",
-        "delete": "Delete",
-        "save": "Save",
-        "cancel": "Cancel",
-        "apply": "Apply",
-        "create_new_job_posting": "Create New Job Post",
-        "title": "Job Title",
-        "publish_job": "Publish Job"
-    },
-    "workplace_type": {
-        "Remote": "Remote",
-        "Office": "Office",
-        "Hybrid": "Hybrid"
-    },
-    "employment_type": {
-        "FullTime": "Full Time",
-        "PartTime": "Part Time",
-        "Contract": "Contract",
-        "Internship": "Internship",
-        "Temporary": "Temporary"
-    }
+	"login": {
+		"email_placeholder": "Enter your email address",
+		"no_account": "Don't have an account?",
+		"sign_up": "Sign Up",
+		"password": "Password",
+		"forgot_password": "Forgot password?",
+		"email": "Email Address",
+		"remember_me": "Remember me",
+		"desc": "Enter your details below to login to your account",
+		"title": "Login",
+		"password_confirm": "Confirm Password",
+		"candidate_login": "Candidate Login",
+		"employer_login": "Employer Login"
+	},
+	"registration": {
+		"title": "Register",
+		"description": "Enter your details below to create your account",
+		"candidate": "Candidate Registration",
+		"employer": "Employer Registration",
+		"submit": "Submit",
+		"locationPlaceholder": "Shkodër, Tiranë, Kruje..."
+	},
+	"employer": {
+		"businessName": "Business Name",
+		"businessAddress": "Business Address",
+		"businessDescription": "Business Description",
+		"businessLocation": "Business Location",
+		"businessWebsite": "Business Website",
+		"businessLogo": "Business Logo"
+	},
+	"placeholder": {
+		"location": "Shkodër, Tiranë, Kruje...",
+		"email": "example@email.com",
+		"position": "Microsoft, Software Developer, Project Manager...",
+		"employment_type": "Select the type of employment"
+	},
+	"error": {
+		"register": "An error occurred while registering. Please check your credentials.",
+		"passwordNotMatch": "Passwords don't match.",
+		"login": "An error occurred while logging in. Please check your credentials.",
+		"page_not_found": "Sorry, we couldn't find the page you're looking for. Please check your link or try again later.",
+		"404": "404 Not Found"
+	},
+	"forgot_password": {
+		"title": "Forgot Password",
+		"description": "Please enter your email address",
+		"submit": "Forgot Password",
+		"send_password_reset_link_to_email": "Send Password Reset Link to Email"
+	},
+	"general": {
+		"go_back": "Go Back",
+		"back_to_home": "Back to Home",
+		"al": "Albanian",
+		"en": "English",
+		"tr": "Turkish",
+		"login_signup": "Log In / Sign Up",
+		"discover_career_opportunities": "Discover Career Opportunities",
+		"job_postings_thousands_of_companies": "Thousands postings from thousands of companies",
+		"search_position_or_company": "Search Position or Company",
+		"search_city_or_district": "Search City or District",
+		"search_job": "FIND JOB",
+		"popular_searches": "POPULAR SEARCHES",
+		"company": "Company",
+		"position": "Position",
+		"light_mode": "Light Mode",
+		"dark_mode": "Dark Mode",
+		"logout": "Logout"
+	},
+	"job_posting": {
+		"job": "Job",
+		"description": "Description",
+		"job_requirements": "Requirements",
+		"location": "Location",
+		"salary": "Salary",
+		"workplace_type": "Workplace Type",
+		"employment_type": "Employment Type",
+		"date_posted": "Date Posted",
+		"application_deadline": "Application Deadline",
+		"job_posting": "Job Post",
+		"edit": "Edit",
+		"delete": "Delete",
+		"save": "Save",
+		"cancel": "Cancel",
+		"apply": "Apply",
+		"create_new_job_posting": "Create New Job Post",
+		"title": "Job Title",
+		"publish_job": "Publish Job",
+		"successfully_applied": "Successfully Applied",
+		"successfully_applied_desc": "Successfully Applied",
+		"already_applied": "Already Applied",
+		"already_applied_desc": "Already Applied",
+		"login_to_apply": "Login to Apply",
+		"login_to_apply_desc": "Login to Apply",
+		"application_error": "Application Error",
+		"application_error_desc": "Application Error"
+	},
+	"workplace_type": {
+		"Remote": "Remote",
+		"Office": "Office",
+		"Hybrid": "Hybrid"
+	},
+	"employment_type": {
+		"FullTime": "Full Time",
+		"PartTime": "Part Time",
+		"Contract": "Contract",
+		"Internship": "Internship",
+		"Temporary": "Temporary"
+	}
 }

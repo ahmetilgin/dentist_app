@@ -1,102 +1,110 @@
 {
-    "login": {
-        "enter_mail": "Hesabınıza giriş yapmak için aşağıya e-posta adresinizi girin",
-        "email_placeholder": "E-posta adresinizi girin",
-        "no_account": "Hesabınız yok mu?",
-        "sign_up": "Kaydol",
-        "password": "Şifre",
-        "forgot_password": "Şifremi unuttum?",
-        "email": "E-posta Adresi",
-        "remember_me": "Beni Hatirla",
-        "desc": "Hesabınıza giriş yapmak için lütfen bilgilerinizi girin",
-        "title": "Giriş Yap",
-        "password_confirm": "Şifreyi Onayla",
-        "candidate_login": "Aday Girişi",
-        "employer_login": "İşveren Girişi"
-    },
-    "registration": {
-        "title": "Kayıt Ol",
-        "description": "Hesabınızı oluşturmak için lütfen bilgilerinizi girin",
-        "candidate": "Aday Kaydı",
-        "employer": "İşveren Kaydı",
-        "submit": "Kayıt Ol"
-    },
-    "employer": {
-        "businessName": "İşletme Adı",
-        "businessAddress": "İşletme Adresi",
-        "businessDescription": "İşletme Açıklaması",
-        "businessLocation": "İşletme Konumu",
-        "businessWebsite": "İşletme Web Sitesi",
-        "businessLogo": "İşletme Logosu"
-    },
-    "placeholder": {
-        "location": "Ankara, İstanbul, İzmir...",
-        "email": "ornek@email.com",
-        "position": "Microsoft, Software Developer, Project Manager...",
-        "employment_type": "İşe alım tipini seçin"
-    },
-    "error": {
-        "register": "Hesap oluşturulurken hata oluştu. Lütfen bilgilerinizi kontrol edin.",
-        "passwordNotMatch": "Sifreler ayni olmalidir.",
-        "login": "Giris yapilirken hata olustu. Lütfen bilgilerinizi kontrol edin.",
-        "page_not_found": "Üzgünüz, aradığınız sayfayı bulamadık. Yanlış bir bağlantı takip etmiş veya sayfa kaldırılmış solabilir.",
-        "404": "404 Sayfa Bulunamadı"
-    },
-    "forgot_password": {
-        "title": "Sifremi Unuttum",
-        "description": "Lutfen e-posta adresinizi girin",
-        "submit": "Sifremi Unuttum",
-        "send_password_reset_link_to_email": "Şifre Sıfırlama Bağlantısı Gönder"
-    },
-    "general": {
-        "go_back": "Önceki Sayfaya Dön",
-        "back_to_home": "Anasayfaya Dön",
-        "al": "Arnavutça",
-        "en": "İngilizce",
-        "tr": "Türkçe",
-        "login_signup": "Giriş Yap / Üye Ol",
-        "discover_career_opportunities": "Kariyer Fırsatlarını Keşfet",
-        "job_postings_thousands_of_companies": "Binlerce iş ilanı on binlerce şirket",
-        "search_position_or_company": "Pozisyon veya şirket ara",
-        "search_city_or_district": "Şehir veya ilçe ara",
-        "search_job": "İŞ BUL",
-        "popular_searches": "POPÜLER ARAMALAR",
-        "company": "Sirket",
-        "position": "Pozisyon",
-        "light_mode": "Acık Mod",
-        "dark_mode": "Koyu Mod",
-        "logout": "Çıkış Yap"
-    },
-    "job_posting": {
-        "job": "İş",
-        "description": "Açıklama",
-        "job_requirements": "Gereksinimler",
-        "location": "Konum",
-        "salary": "Maaş",
-        "workplace_type": "Çalışma Yeri",
-        "employment_type": "İşe Alım Tipi",
-        "date_posted": "Yayınlanma Tarihi",
-        "application_deadline": "Uygulama Son Tarihi",
-        "job_posting": "İş İlanı",
-        "edit": "Düzenle",
-        "delete": "Sil",
-        "save": "Kaydet",
-        "cancel": "İptal",
-        "apply": "Başvur",
-        "create_new_job_posting": "Yeni İş İlanı Oluştur",
-        "title": "İlan Başlığı",
-        "publish_job": "İş Yayınla"
-    },
-    "workplace_type": {
-        "Remote": "Uzaktan",
-        "Office": "Ofis",
-        "Hybrid": "Hybrid"
-    },
-    "employment_type": {
-        "FullTime": "Tam Zamanlı",
-        "PartTime": "Yarı Zamanlı",
-        "Contract": "Sözleşme",
-        "Internship": "Stajyer",
-        "Temporary": "Geçici"
-    }
+	"login": {
+		"enter_mail": "Hesabınıza giriş yapmak için aşağıya e-posta adresinizi girin",
+		"email_placeholder": "E-posta adresinizi girin",
+		"no_account": "Hesabınız yok mu?",
+		"sign_up": "Kaydol",
+		"password": "Şifre",
+		"forgot_password": "Şifremi unuttum?",
+		"email": "E-posta Adresi",
+		"remember_me": "Beni Hatirla",
+		"desc": "Hesabınıza giriş yapmak için lütfen bilgilerinizi girin",
+		"title": "Giriş Yap",
+		"password_confirm": "Şifreyi Onayla",
+		"candidate_login": "Aday Girişi",
+		"employer_login": "İşveren Girişi"
+	},
+	"registration": {
+		"title": "Kayıt Ol",
+		"description": "Hesabınızı oluşturmak için lütfen bilgilerinizi girin",
+		"candidate": "Aday Kaydı",
+		"employer": "İşveren Kaydı",
+		"submit": "Kayıt Ol"
+	},
+	"employer": {
+		"businessName": "İşletme Adı",
+		"businessAddress": "İşletme Adresi",
+		"businessDescription": "İşletme Açıklaması",
+		"businessLocation": "İşletme Konumu",
+		"businessWebsite": "İşletme Web Sitesi",
+		"businessLogo": "İşletme Logosu"
+	},
+	"placeholder": {
+		"location": "Ankara, İstanbul, İzmir...",
+		"email": "ornek@email.com",
+		"position": "Microsoft, Software Developer, Project Manager...",
+		"employment_type": "İşe alım tipini seçin"
+	},
+	"error": {
+		"register": "Hesap oluşturulurken hata oluştu. Lütfen bilgilerinizi kontrol edin.",
+		"passwordNotMatch": "Sifreler ayni olmalidir.",
+		"login": "Giris yapilirken hata olustu. Lütfen bilgilerinizi kontrol edin.",
+		"page_not_found": "Üzgünüz, aradığınız sayfayı bulamadık. Yanlış bir bağlantı takip etmiş veya sayfa kaldırılmış solabilir.",
+		"404": "404 Sayfa Bulunamadı"
+	},
+	"forgot_password": {
+		"title": "Sifremi Unuttum",
+		"description": "Lutfen e-posta adresinizi girin",
+		"submit": "Sifremi Unuttum",
+		"send_password_reset_link_to_email": "Şifre Sıfırlama Bağlantısı Gönder"
+	},
+	"general": {
+		"go_back": "Önceki Sayfaya Dön",
+		"back_to_home": "Anasayfaya Dön",
+		"al": "Arnavutça",
+		"en": "İngilizce",
+		"tr": "Türkçe",
+		"login_signup": "Giriş Yap / Üye Ol",
+		"discover_career_opportunities": "Kariyer Fırsatlarını Keşfet",
+		"job_postings_thousands_of_companies": "Binlerce iş ilanı on binlerce şirket",
+		"search_position_or_company": "Pozisyon veya şirket ara",
+		"search_city_or_district": "Şehir veya ilçe ara",
+		"search_job": "İŞ BUL",
+		"popular_searches": "POPÜLER ARAMALAR",
+		"company": "Sirket",
+		"position": "Pozisyon",
+		"light_mode": "Acık Mod",
+		"dark_mode": "Koyu Mod",
+		"logout": "Çıkış Yap"
+	},
+	"job_posting": {
+		"job": "İş",
+		"description": "Açıklama",
+		"job_requirements": "Gereksinimler",
+		"location": "Konum",
+		"salary": "Maaş",
+		"workplace_type": "Çalışma Yeri",
+		"employment_type": "İşe Alım Tipi",
+		"date_posted": "Yayınlanma Tarihi",
+		"application_deadline": "Uygulama Son Tarihi",
+		"job_posting": "İş İlanı",
+		"edit": "Düzenle",
+		"delete": "Sil",
+		"save": "Kaydet",
+		"cancel": "İptal",
+		"apply": "Başvur",
+		"create_new_job_posting": "Yeni İş İlanı Oluştur",
+		"title": "İlan Başlığı",
+		"publish_job": "İş Yayınla",
+		"successfully_applied": "Başvuru Yapıldı",
+		"successfully_applied_desc": "Başvuru Yapıldı",
+		"already_applied": "Başvuru Yapıldı",
+		"already_applied_desc": "Başvuru Yapıldı",
+		"login_to_apply": "Başvuru Yapmak İçin Giriş Yapın",
+		"login_to_apply_desc": "Başvuru Yapmak İçin Giriş Yapın",
+		"application_error": "Başvuru Yapılamadı",
+		"application_error_desc": "Başvuru Yapılamadı"
+	},
+	"workplace_type": {
+		"Remote": "Uzaktan",
+		"Office": "Ofis",
+		"Hybrid": "Hybrid"
+	},
+	"employment_type": {
+		"FullTime": "Tam Zamanlı",
+		"PartTime": "Yarı Zamanlı",
+		"Contract": "Sözleşme",
+		"Internship": "Stajyer",
+		"Temporary": "Geçici"
+	}
 }

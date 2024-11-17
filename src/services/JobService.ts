@@ -10,7 +10,11 @@ class JobService {
 		this.jobStore = jobStore;
 	}
 
-	searchJobs = (keyword: string, location: string, region: string): Promise<TypeJobs> => {
+	applyJob = (jobId: string) => {
+		return this.httpService.post('/public/jobs/apply_job', { job_id: jobId });
+	};
+
+	searchJobs = (keyword: string, location: string, region: string): Promise<{ jobs: TypeJobs }> => {
 		if (keyword === '') {
 			keyword = '-';
 		}
@@ -19,31 +23,21 @@ class JobService {
 			location = '-';
 		}
 
-		return this.httpService
-			.get<{ jobs: TypeJobs }>(
-				`/public/jobs/search/${region}/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
-			)
-			.then((res) => {
-				if (res != null) {
-					if (res.jobs != null) {
-						return res.jobs;
-					}
-				}
-				return [];
-			})
-			.catch((err: any) => {
-				console.log(err);
-				return [];
-			});
+		return this.httpService.get<{ jobs: TypeJobs }>(
+			`/public/jobs/search/${region}/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
+		);
+	};
+
+	searchProfessions = (keyword: string, region: string): Promise<QueryResult> => {
+		return this.httpService.get<QueryResult>(`/public/jobs/search_professions/${region}/${keyword}?`);
+	};
+
+	searchLocations = (keyword: string, region: string): Promise<QueryResult> => {
+		return this.httpService.get<QueryResult>(`/public/country/${region}/${keyword}`);
 	};
 
 	publishJob = (job: TypeJob) => {
-		this.httpService
-			.post('/public/jobs', job)
-			.then(() => {
-				this.searchJobs('', '', '');
-			})
-			.catch((err: any) => console.log(err));
+		return this.httpService.post('/public/jobs', job);
 	};
 
 	getPopularJobs(location: string) {
