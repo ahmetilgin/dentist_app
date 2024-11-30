@@ -7,7 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { EnumEmploymentType, EnumUserType, EnumWorkplaceType, JobData, TypeJobs } from '@/DataTypes';
 import { useToast } from '@/hooks/use-toast';
 import { useRootService, useRootStore } from '@/providers/context_provider/ContextProvider';
-import { ChevronDown, Share2 } from 'lucide-react';
+import { ArrowLeft, ChevronDown, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -40,7 +40,7 @@ function FilterCombobox({ title, options }: { title: string; options: string[] }
 							{t('job_posting.reset')}
 						</Button>
 						<Button size="sm" onClick={() => setOpen(false)}>
-							{t('job_posting.apply')}
+							{t('general.apply')}
 						</Button>
 					</CardFooter>
 				</Card>
@@ -71,13 +71,36 @@ function TopFilters({ companies }: { companies: string[] }) {
 	);
 }
 
-function JobInfo({ title, location, company }: { title: string; location: string; company: string }) {
+function JobInfo({ selectedJob, onClose }: { selectedJob: JobData; onClose: () => void }) {
+	const navigate = useNavigate();
 	return (
-		<div>
-			<h2 className="text-2xl font-bold">{title}</h2>
-			<p className="text-muted-foreground">{location}</p>
-			<p className="mt-2 text-sm text-gray-500">{company}</p>
-		</div>
+		<Card className="rounded-none h-full shadow-md">
+			<CardHeader>
+				<div className="flex items-center space-x-4">
+					<Button
+						variant="ghost"
+						className=" text-4xl"
+						onClick={() => {
+							navigate(-1);
+							onClose();
+						}}
+					>
+						<ArrowLeft className="h-12 w-12" />
+					</Button>
+					<div className="w-12 h-12 bg-secondary flex items-center justify-center rounded-full">
+						<img className="w-8 h-8" src={selectedJob.businessUserData.BusinessLogo} />
+					</div>
+					<div>
+						<h2 className="text-2xl font-bold">{selectedJob.jobDetail.JobTitle}</h2>
+						<p className="text-muted-foreground">{selectedJob.jobDetail.Location}</p>
+					</div>
+				</div>
+			</CardHeader>
+			<CardContent>
+				<ApplyButton jobId={selectedJob.jobDetail.ID} />
+				<JobDescription job={selectedJob} />
+			</CardContent>
+		</Card>
 	);
 }
 
@@ -200,7 +223,6 @@ function JobListItem({
 	company,
 	location,
 	onClicked,
-	selected,
 }: {
 	logo: string;
 	title: string;
@@ -211,9 +233,7 @@ function JobListItem({
 }) {
 	return (
 		<div
-			className={`${
-				selected ? 'border ' : ''
-			} p-4 border-b last:border-b-0 cursor-pointer hover:bg-blue-100 transition duration-150`}
+			className="p-4 border-b last:border-b-0 cursor-pointer hover:bg-primary-foreground transition duration-150 shadow-md"
 			onClick={onClicked}
 		>
 			<div className="flex items-center space-x-4">
@@ -246,45 +266,34 @@ export default function JobListing({ jobs }: { jobs: TypeJobs }) {
 		window.history.pushState(null, '', window.location.href);
 	};
 
+	const closeJobDetail = () => {
+		setShowDetail(false);
+		setSelectedJob(null);
+	};
 	const companies = jobs.map((job) => job.businessUserData.BusinessName);
 
 	return (
-		<div className="flex flex-col h-full pb-10">
+		<div className="flex flex-col h-full">
 			<TopFilters companies={companies} />
-			<div className="flex h-full">
-				<ScrollArea className={`${showDetail ? 'hidden sm:block' : ''} w-full sm:w-1/3 border-r pb-5`}>
-					<div className="pr-4">
-						{jobs.map((job, index) => (
-							<JobListItem
-								key={index}
-								title={job.jobDetail.JobTitle}
-								company={job.businessUserData.BusinessName}
-								location={job.jobDetail.Location}
-								selected={job.jobDetail.JobTitle === selectedJob?.jobDetail.JobTitle}
-								logo={job.businessUserData.BusinessLogo}
-								onClicked={() => openJobDetail(job)}
-							/>
-						))}
-					</div>
+			{!showDetail && (
+				<ScrollArea className={'flex h-full w-full border-r pb-5'}>
+					{jobs.map((job, index) => (
+						<JobListItem
+							key={index}
+							title={job.jobDetail.JobTitle}
+							company={job.businessUserData.BusinessName}
+							location={job.jobDetail.Location}
+							logo={job.businessUserData.BusinessLogo}
+							onClicked={() => openJobDetail(job)}
+						/>
+					))}
 				</ScrollArea>
-				<div className={`${showDetail ? 'block' : 'hidden'} sm:block flex-1 overflow-auto`}>
-					{selectedJob && (
-						<Card className="rounded-none h-full shadow-md">
-							<CardHeader>
-								<JobInfo
-									title={selectedJob.jobDetail.JobTitle}
-									location={selectedJob.jobDetail.Location}
-									company={selectedJob.businessUserData.BusinessName}
-								/>
-							</CardHeader>
-							<CardContent>
-								<ApplyButton jobId={selectedJob.jobDetail.ID} />
-								<JobDescription job={selectedJob} />
-							</CardContent>
-						</Card>
-					)}
+			)}
+			{showDetail && selectedJob && (
+				<div className={`${showDetail ? 'block' : 'hidden'} sm:block overflow-auto`}>
+					{<JobInfo selectedJob={selectedJob} onClose={() => closeJobDetail()} />}
 				</div>
-			</div>
+			)}
 		</div>
 	);
 }

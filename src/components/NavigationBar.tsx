@@ -1,137 +1,109 @@
+import { Globe, LogOut, Moon, Sun, User } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { Button } from '@/components/ui/button';
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+
 import { EnumUserType } from '@/DataTypes';
 import { useRootStore } from '@/providers/context_provider/ContextProvider';
 import { useCustomTheme } from '@/providers/theme_provider/ThemeProvider';
-import { Globe, LogOut, Menu, Moon, Sun } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Card } from './ui/card';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from './ui/select';
 
 export function NavigationBar() {
 	const { mode, setTheme } = useCustomTheme();
 	const { t, i18n } = useTranslation();
-	const [menuOpen, setMenuOpen] = useState(false);
 	const { userStore } = useRootStore();
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { pathname } = location;
-	const menuRef = useRef<HTMLDivElement>(null);
+
 	const handleLogout = () => {
 		userStore.logout();
 		navigate('/');
 	};
 
+	const changeLanguage = (lang: string) => {
+		i18n.changeLanguage(lang);
+	};
+
 	return (
-		<div className="w-full border-b absolute">
-			<div className="p-5 mx-auto py-4">
+		<header className="w-full border-b">
+			<div className="container mx-auto px-4 py-4">
 				<div className="flex items-center justify-between">
-					<div className="flex items-center space-x-2">
-						<h1
-							className="text-2xl font-bold cursor-pointer"
-							onClick={() => {
-								navigate('/');
-							}}
-						>
-							Karriere
-						</h1>
-					</div>
-					<div className="flex items-center space-x-2">
+					<h1 className="text-2xl font-bold cursor-pointer" onClick={() => navigate('/')}>
+						Karriere
+					</h1>
+					<nav className="flex items-center space-x-2">
 						{!userStore.isAuthenticated && pathname !== '/login' && (
-							<Button
-								onClick={() => {
-									navigate('/login');
-								}}
-							>
-								{t('general.login_signup')}
-							</Button>
+							<Button onClick={() => navigate('/login')}>{t('general.login_signup')}</Button>
 						)}
-						{userStore.userType == EnumUserType.EMPLOYER && (
-							<Button
-								className="w-full"
-								onClick={() => {
-									navigate('/publish_job');
-									setMenuOpen(false);
-								}}
-							>
+						{userStore.isAuthenticated && userStore.userType === EnumUserType.EMPLOYER && (
+							<Button variant="outline" onClick={() => navigate('/publish_job')}>
 								{t('job_posting.publish_job')}
 							</Button>
 						)}
-						<div ref={menuRef} className="relative">
-							<button
-								className="p-2 rounded-full border flex items-end"
-								onClick={() => {
-									setMenuOpen(!menuOpen);
-								}}
-							>
-								<Menu className="h-5 w-5" />
-							</button>
-							{menuOpen && (
-								<Card className="absolute z-10 top-12 right-0 p-2 space-y-2 min-w-[200px]">
-									<div className="space-y-2">
-										<Select
-											onValueChange={(value) => {
-												i18n.changeLanguage(value);
-												setMenuOpen(false);
-											}}
-										>
-											<SelectTrigger
-												className="w-full"
-												leftIcon={<Globe className="text-center text-xs" />}
-											>
-												<SelectValue placeholder={t('general.' + i18n.language)} />
-											</SelectTrigger>
-											<SelectContent>
-												<SelectGroup>
-													<SelectItem value="en">{t('general.en')}</SelectItem>
-													<SelectItem value="tr">{t('general.tr')}</SelectItem>
-													<SelectItem value="al">{t('general.al')}</SelectItem>
-												</SelectGroup>
-											</SelectContent>
-										</Select>
-										<button
-											className="p-2 border w-full flex items-center justify-center gap-2"
-											onClick={() => {
-												userStore.setTheme(mode === 'light' ? 'dark' : 'light');
-												setTheme(mode === 'light' ? 'dark' : 'light');
-												setMenuOpen(false);
-											}}
-										>
-											{mode === 'light' ? (
-												<>
-													<Moon className="h-4 w-4" />
-													<span>{t('general.dark_mode')}</span>
-												</>
-											) : (
-												<>
-													<Sun className="h-4 w-4" />
-													<span>{t('general.light_mode')}</span>
-												</>
-											)}
-										</button>
-									</div>
-									{userStore.isAuthenticated && (
-										<>
-											<Button
-												variant="outline"
-												onClick={() => {
-													handleLogout();
-													setMenuOpen(false);
-												}}
-												className="w-full flex items-center justify-center gap-2"
-											>
-												<LogOut className="h-4 w-4" />
-												{t('general.logout')}
-											</Button>
-										</>
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Button variant="outline" size="icon" className="h-9 w-9">
+									<Globe className="h-4 w-4" />
+									<span className="sr-only">{t('general.change_language')}</span>
+								</Button>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end">
+								<DropdownMenuItem onClick={() => changeLanguage('en')}>
+									{t('general.en')}
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => changeLanguage('tr')}>
+									{t('general.tr')}
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => changeLanguage('al')}>
+									{t('general.al')}
+								</DropdownMenuItem>
+								<DropdownMenuItem onClick={() => changeLanguage('it')}>
+									{t('general.it')}
+								</DropdownMenuItem>
+							</DropdownMenuContent>
+						</DropdownMenu>
+						<Button
+							variant="outline"
+							size="icon"
+							className="h-9 w-9"
+							onClick={() => setTheme(mode === 'light' ? 'dark' : 'light')}
+						>
+							{mode === 'light' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+							<span className="sr-only">{t('general.toggle_theme')}</span>
+						</Button>
+						{userStore.isAuthenticated && (
+							<DropdownMenu>
+								<DropdownMenuTrigger asChild>
+									<Button variant="outline" size="icon" className="h-9 w-9">
+										<User className="h-4 w-4" />
+										<span className="sr-only">{t('general.user_menu')}</span>
+									</Button>
+								</DropdownMenuTrigger>
+								<DropdownMenuContent align="end">
+									{userStore.userType === EnumUserType.EMPLOYER && (
+										<DropdownMenuItem onSelect={() => navigate('/manage_jobs')}>
+											{t('general.manage_jobs')}
+										</DropdownMenuItem>
 									)}
-								</Card>
-							)}
-						</div>
-					</div>
+									<DropdownMenuSeparator />
+									<DropdownMenuItem onSelect={handleLogout}>
+										<LogOut className="mr-2 h-4 w-4" />
+										<span>{t('general.logout')}</span>
+									</DropdownMenuItem>
+								</DropdownMenuContent>
+							</DropdownMenu>
+						)}
+					</nav>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 }

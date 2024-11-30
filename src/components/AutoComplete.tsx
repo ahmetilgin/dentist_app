@@ -44,7 +44,7 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 
 	return (
 		<div className="flex flex-col relative w-full" ref={containerRef}>
-			<Label htmlFor="search" className="text-md font-medium mb-1">
+			<Label  className="text-md font-medium mb-1">
 				{t(label)}
 			</Label>
 			<div className="relative">

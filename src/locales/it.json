@@ -1,0 +1,114 @@
+{
+    "login": {
+        "enter_mail": "Inserisci la tua email per accedere al tuo account",
+        "email_placeholder": "Inserisci il tuo indirizzo email",
+        "no_account": "Non hai un account?",
+        "sign_up": "Registrati",
+        "password": "Password",
+        "forgot_password": "Hai dimenticato la password?",
+        "email": "Indirizzo Email",
+        "remember_me": "Ricordami",
+        "desc": "Per accedere al tuo account, inserisci le tue credenziali",
+        "title": "Accedi",
+        "password_confirm": "Conferma Password",
+        "candidate_login": "Accesso Candidato",
+        "employer_login": "Accesso Datore di Lavoro"
+    },
+    "registration": {
+        "title": "Registrati",
+        "description": "Inserisci le tue informazioni per creare un account",
+        "candidate": "Registrazione Candidato",
+        "employer": "Registrazione Datore di Lavoro",
+        "submit": "Registrati"
+    },
+    "employer": {
+        "businessName": "Nome Azienda",
+        "businessAddress": "Indirizzo Azienda",
+        "businessDescription": "Descrizione Azienda",
+        "businessLocation": "Posizione Azienda",
+        "businessWebsite": "Sito Web Aziendale",
+        "businessLogo": "Logo Aziendale"
+    },
+    "placeholder": {
+        "location": "Roma, Milano, Napoli...",
+        "email": "esempio@email.com",
+        "position": "Microsoft, Sviluppatore Software, Project Manager...",
+        "employment_type": "Seleziona il tipo di impiego"
+    },
+    "error": {
+        "register": "Si è verificato un errore durante la creazione dell'account. Controlla le informazioni inserite.",
+        "passwordNotMatch": "Le password devono coincidere.",
+        "login": "Si è verificato un errore durante l'accesso. Controlla le informazioni inserite.",
+        "page_not_found": "Spiacenti, non siamo riusciti a trovare la pagina che stavi cercando. Potresti aver seguito un link errato o la pagina potrebbe essere stata rimossa.",
+        "404": "404 Pagina Non Trovata"
+    },
+    "forgot_password": {
+        "title": "Password Dimenticata",
+        "description": "Inserisci il tuo indirizzo email",
+        "submit": "Password Dimenticata",
+        "send_password_reset_link_to_email": "Invia Link per il Reset della Password"
+    },
+    "general": {
+        "go_back": "Torna alla Pagina Precedente",
+        "back_to_home": "Torna alla Home",
+        "al": "Shqip",
+        "en": "English",
+        "tr": "Türkçe",
+        "it": "Italiano",
+        "login_signup": "Accedi / Registrati",
+        "discover_career_opportunities": "Scopri Opportunità di Carriera",
+        "job_postings_thousands_of_companies": "Migliaia di offerte di lavoro, decine di migliaia di aziende",
+        "search_position_or_company": "Cerca una posizione o un'azienda",
+        "search_city_or_district": "Cerca una città o un quartiere",
+        "search_job": "TROVA UN LAVORO",
+        "popular_searches": "RICERCHE POPOLARI",
+        "company": "Azienda",
+        "position": "Posizione",
+        "light": "Modalità Chiara",
+        "dark": "Modalità Scura",
+        "logout": "Esci",
+        "apply": "Candidati",
+        "manage_jobs": "Gestisci Annunci"
+    },
+    "job_posting": {
+        "job": "Lavoro",
+        "description": "Descrizione",
+        "job_requirements": "Requisiti del Lavoro",
+        "location": "Posizione",
+        "salary": "Stipendio",
+        "workplace_type": "Tipo di Ambiente Lavorativo",
+        "employment_type": "Tipo di Impiego",
+        "date_posted": "Data di Pubblicazione",
+        "application_deadline": "Scadenza per le Candidature",
+        "job_posting": "Annuncio di Lavoro",
+        "edit": "Modifica",
+        "delete": "Elimina",
+        "save": "Salva",
+        "cancel": "Annulla",
+        "apply": "Candidati",
+        "create_new_job_posting": "Crea un Nuovo Annuncio di Lavoro",
+        "title": "Titolo del Lavoro",
+        "publish_job": "Pubblica Annuncio",
+        "successfully_applied": "Candidatura Inviata con Successo",
+        "successfully_applied_desc": "La tua candidatura è stata inviata con successo.",
+        "already_applied": "Hai Già Inviato una Candidatura",
+        "already_applied_desc": "Hai già inviato una candidatura per questo annuncio.",
+        "login_to_apply": "Accedi per Candidarti",
+        "login_to_apply_desc": "Accedi per completare la tua candidatura.",
+        "application_error": "Errore nella Candidatura",
+        "application_error_desc": "Si è verificato un errore durante l'invio della tua candidatura. Riprova.",
+        "reset": "Reimposta"
+    },
+    "workplace_type": {
+        "Remote": "Remoto",
+        "Office": "Ufficio",
+        "Hybrid": "Ibrido"
+    },
+    "employment_type": {
+        "FullTime": "Tempo Pieno",
+        "PartTime": "Part-Time",
+        "Contract": "Contratto",
+        "Internship": "Tirocinio",
+        "Temporary": "Temporaneo"
+    }
+}

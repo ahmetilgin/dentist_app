@@ -36,15 +36,15 @@ export default function HomePage() {
 				setTopJobs(res.query_result);
 			}
 		});
-	}, [jobService, i18n]);
+	}, [jobService, i18n.language]);
 
 	return (
 		<div
-			className={`flex flex-col items-center transition-all ease-linear h-screen ${
-				jobResults.length > 0 ? 'pt-[5em]' : 'pt-[10em]'
+			className={`flex flex-col items-center transition-all ease-linear h-full ${
+				jobResults.length > 0 ? 'pt-[0em]' : 'pt-0 sm:pt=[10em]'
 			}`}
 		>
-			<div className="hidden sm:block w-full lg:w-2/3 mb-4 p-5 ">
+			<div className="w-full lg:w-2/3 mb-4 p-5" style={{ display: jobResults.length > 0 ? 'none' : 'block' }}>
 				<h1 className="text-2xl font-bold">{t('general.discover_career_opportunities')}</h1>
 				<h4 className="text-xl font-normal">{t('general.job_postings_thousands_of_companies')}</h4>
 			</div>

@@ -3,6 +3,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
 import al from './locales/al.json';
 import en from './locales/en.json';
+import it from './locales/it.json';
 import tr from './locales/tr.json';
 
 i18n.use(LanguageDetector)
@@ -17,6 +18,9 @@ i18n.use(LanguageDetector)
 			},
 			tr: {
 				translation: tr,
+			},
+			it: {
+				translation: it,
 			},
 		},
 		debug: true,

@@ -4,10 +4,10 @@
 		"no_account": "Don't have an account?",
 		"sign_up": "Sign Up",
 		"password": "Password",
-		"forgot_password": "Forgot password?",
+		"forgot_password": "Forgot your password?",
 		"email": "Email Address",
-		"remember_me": "Remember me",
-		"desc": "Enter your details below to login to your account",
+		"remember_me": "Remember Me",
+		"description": "Log in to your account by entering the details below.",
 		"title": "Login",
 		"password_confirm": "Confirm Password",
 		"candidate_login": "Candidate Login",
@@ -15,38 +15,38 @@
 	},
 	"registration": {
 		"title": "Register",
-		"description": "Enter your details below to create your account",
+		"description": "Create your account by entering the details below.",
 		"candidate": "Candidate Registration",
 		"employer": "Employer Registration",
-		"submit": "Submit",
-		"locationPlaceholder": "Shkodër, Tiranë, Kruje..."
+		"submit": "Register",
+		"location_placeholder": "Shkodër, Tiranë, Krujë..."
 	},
 	"employer": {
-		"businessName": "Business Name",
-		"businessAddress": "Business Address",
-		"businessDescription": "Business Description",
-		"businessLocation": "Business Location",
-		"businessWebsite": "Business Website",
-		"businessLogo": "Business Logo"
+		"business_name": "Business Name",
+		"business_address": "Business Address",
+		"business_description": "Business Description",
+		"business_location": "Business Location",
+		"business_website": "Business Website",
+		"business_logo": "Business Logo"
 	},
-	"placeholder": {
-		"location": "Shkodër, Tiranë, Kruje...",
+	"placeholders": {
+		"location": "Shkodër, Tiranë, Krujë...",
 		"email": "example@email.com",
 		"position": "Microsoft, Software Developer, Project Manager...",
-		"employment_type": "Select the type of employment"
+		"employment_type": "Select employment type"
 	},
-	"error": {
-		"register": "An error occurred while registering. Please check your credentials.",
-		"passwordNotMatch": "Passwords don't match.",
-		"login": "An error occurred while logging in. Please check your credentials.",
-		"page_not_found": "Sorry, we couldn't find the page you're looking for. Please check your link or try again later.",
-		"404": "404 Not Found"
+	"errors": {
+		"register": "An error occurred while creating your account. Please check the provided information.",
+		"password_mismatch": "Passwords do not match.",
+		"login": "An error occurred during login. Please check your credentials.",
+		"page_not_found": "The page you are looking for cannot be found. It might have been removed or the link might be incorrect.",
+		"404": "404 - Page Not Found"
 	},
 	"forgot_password": {
 		"title": "Forgot Password",
-		"description": "Please enter your email address",
-		"submit": "Forgot Password",
-		"send_password_reset_link_to_email": "Send Password Reset Link to Email"
+		"description": "Enter your email address to reset your password.",
+		"submit": "Submit",
+		"send_reset_link": "Send Password Reset Link"
 	},
 	"general": {
 		"go_back": "Go Back",
@@ -54,9 +54,10 @@
 		"al": "Albanian",
 		"en": "English",
 		"tr": "Turkish",
+		"it": "Italian",
 		"login_signup": "Log In / Sign Up",
-		"discover_career_opportunities": "Discover Career Opportunities",
-		"job_postings_thousands_of_companies": "Thousands postings from thousands of companies",
+		"discover_opportunities": "Discover Career Opportunities",
+		"job_postings_description": "Thousands of job postings from hundreds of companies.",
 		"search_position_or_company": "Search Position or Company",
 		"search_city_or_district": "Search City or District",
 		"search_job": "FIND JOB",
@@ -65,46 +66,48 @@
 		"position": "Position",
 		"light_mode": "Light Mode",
 		"dark_mode": "Dark Mode",
-		"logout": "Logout"
+		"logout": "Logout",
+		"apply": "Apply",
+		"manage_jobs": "Manage Job Postings"
 	},
 	"job_posting": {
 		"job": "Job",
 		"description": "Description",
-		"job_requirements": "Requirements",
+		"requirements": "Requirements",
 		"location": "Location",
 		"salary": "Salary",
 		"workplace_type": "Workplace Type",
 		"employment_type": "Employment Type",
 		"date_posted": "Date Posted",
 		"application_deadline": "Application Deadline",
-		"job_posting": "Job Post",
+		"title": "Job Title",
 		"edit": "Edit",
 		"delete": "Delete",
 		"save": "Save",
 		"cancel": "Cancel",
 		"apply": "Apply",
-		"create_new_job_posting": "Create New Job Post",
-		"title": "Job Title",
+		"new_job_posting": "Create New Job Posting",
 		"publish_job": "Publish Job",
-		"successfully_applied": "Successfully Applied",
-		"successfully_applied_desc": "Successfully Applied",
+		"apply_success": "Application Successful",
+		"apply_success_desc": "Your application has been submitted successfully.",
 		"already_applied": "Already Applied",
-		"already_applied_desc": "Already Applied",
-		"login_to_apply": "Login to Apply",
-		"login_to_apply_desc": "Login to Apply",
+		"already_applied_desc": "You have already applied for this job.",
+		"login_to_apply": "Log In to Apply",
+		"login_to_apply_desc": "Please log in to complete your application.",
 		"application_error": "Application Error",
-		"application_error_desc": "Application Error"
+		"application_error_desc": "An error occurred while submitting your application. Please try again.",
+		"reset": "Reset"
 	},
 	"workplace_type": {
-		"Remote": "Remote",
-		"Office": "Office",
-		"Hybrid": "Hybrid"
+		"remote": "Remote",
+		"office": "Office",
+		"hybrid": "Hybrid"
 	},
 	"employment_type": {
-		"FullTime": "Full Time",
-		"PartTime": "Part Time",
-		"Contract": "Contract",
-		"Internship": "Internship",
-		"Temporary": "Temporary"
+		"full_time": "Full Time",
+		"part_time": "Part Time",
+		"contract": "Contract",
+		"internship": "Internship",
+		"temporary": "Temporary"
 	}
 }
