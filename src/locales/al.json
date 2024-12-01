@@ -12,7 +12,8 @@
 		"title": "Hyr",
 		"password_confirm": "Konfirmo Fjalëkalimin",
 		"candidate_login": "Hyr si Kandidat",
-		"employer_login": "Hyr si Punëdhënës"
+		"employer_login": "Hyr si Punëdhënës",
+		"register": "Regjistrohu"
 	},
 	"registration": {
 		"title": "Regjistrohu",

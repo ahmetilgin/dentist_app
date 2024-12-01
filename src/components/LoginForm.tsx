@@ -119,7 +119,7 @@ export function LoginForm() {
 
 	return (
 		<div>
-			<Card className="w-full max-w-2xl mt-[-200px]">
+			<Card className="w-full max-w-2xl">
 				<CardHeader>
 					<CardTitle className="text-2xl">
 						{userType && (

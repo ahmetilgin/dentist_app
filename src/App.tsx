@@ -27,28 +27,30 @@ const App = observer(() => {
 	}, [userStore.isAuthenticated, navigate, userStore.userType]);
 
 	return (
-		<>
+		<div className="h-screen flex flex-col w-full">
 			{(location.pathname === '/' || location.pathname === '/login') && <NavigationBar />}
-			<Routes>
-				<Route path="/" element={<HomePage />} />
-				<Route path="/login" element={<LoginPage />} />
-				<Route path="/register" element={<RegisterPage />} />
-				<Route path="/forgot_password/:role" element={<ForgotPassword />} />
-				<Route path="*" element={<ErrorPage />} />
-				<Route path="/publish_job" element={<PublishJob />} />
+			<div className="flex flex-col  flex-1 overflow-auto">
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/login" element={<LoginPage />} />
+					<Route path="/register" element={<RegisterPage />} />
+					<Route path="/forgot_password/:role" element={<ForgotPassword />} />
+					<Route path="*" element={<ErrorPage />} />
+					<Route path="/publish_job" element={<PublishJob />} />
 
-				{/* <Route path="/home" element={<Home />} />
-                <Route path="/register/normal_user" element={<RegisterNormalUserPage />} />
-                <Route path="/register/business_user" element={<RegisterBusinessUserPage />} />
-                <Route path="/search_result/:keyword/:region" element={<JobSearchPage />} />
-                <Route path="/all_elements" element={<AllElements />} />
-                <Route path="/publish_new_job" element={<PublishNewJob />} />
-                <Route path="/reset-password/:token" element={<ResetPassword />} />
-                <Route path="/job_detail" element={<JobDetail />} />
-                <Route path="/error" element={<ErrorPage />} />
-                <Route path="/preview_cv" element={<PrepareCV />} /> */}
-			</Routes>
-		</>
+					{/* <Route path="/home" element={<Home />} />
+					<Route path="/register/normal_user" element={<RegisterNormalUserPage />} />
+					<Route path="/register/business_user" element={<RegisterBusinessUserPage />} />
+					<Route path="/search_result/:keyword/:region" element={<JobSearchPage />} />
+					<Route path="/all_elements" element={<AllElements />} />
+					<Route path="/publish_new_job" element={<PublishNewJob />} />
+					<Route path="/reset-password/:token" element={<ResetPassword />} />
+					<Route path="/job_detail" element={<JobDetail />} />
+					<Route path="/error" element={<ErrorPage />} />
+					<Route path="/preview_cv" element={<PrepareCV />} /> */}
+				</Routes>
+			</div>
+		</div>
 	);
 });
 

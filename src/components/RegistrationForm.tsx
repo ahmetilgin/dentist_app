@@ -275,8 +275,8 @@ export default function RegistrationForm() {
 
 	const navigate = useNavigate();
 	return (
-		<div className="flex min-h-screen items-start sm:items-center w-full justify-normal sm:justify-center">
-			<Card className="w-full max-w-2xl">
+		<div className="flex min-h-full items-center w-full justify-normal sm:justify-center">
+			<Card className="w-full max-w-2xl ">
 				<CardHeader>
 					<CardTitle className="text-2xl">
 						<Button
@@ -297,16 +297,16 @@ export default function RegistrationForm() {
 					</CardTitle>
 					{userType && <CardDescription>{t('registration.description')}</CardDescription>}
 				</CardHeader>
-				<CardContent>
+				<CardContent className="p-2">
 					{!userType ? (
-						<div className="grid grid-cols-2 gap-4">
+						<div className="grid grid-cols-2 gap-2">
 							<Button
 								variant="outline"
 								className="h-32 flex flex-col items-center justify-center space-y-2"
 								onClick={() => setUserType('candidate')}
 							>
 								<UserCircle className="!size-6" />
-								<span>{t('registration.candidate')}</span>
+								<span className="text-sm font-semibold break-words">{t('registration.candidate')}</span>
 							</Button>
 							<Button
 								variant="outline"
@@ -314,7 +314,7 @@ export default function RegistrationForm() {
 								onClick={() => setUserType('employer')}
 							>
 								<Building2 className="!size-6" />
-								<span>{t('registration.employer')}</span>
+								<span className="text-sm font-semibold break-words">{t('registration.employer')}</span>
 							</Button>
 						</div>
 					) : (

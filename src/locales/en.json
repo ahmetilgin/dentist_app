@@ -11,7 +11,8 @@
 		"title": "Login",
 		"password_confirm": "Confirm Password",
 		"candidate_login": "Candidate Login",
-		"employer_login": "Employer Login"
+		"employer_login": "Employer Login",
+		"register": "Register"
 	},
 	"registration": {
 		"title": "Register",

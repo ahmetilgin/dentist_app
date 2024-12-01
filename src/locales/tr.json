@@ -12,7 +12,8 @@
 		"title": "Giriş Yap",
 		"password_confirm": "Şifreyi Onayla",
 		"candidate_login": "Aday Girişi",
-		"employer_login": "İşveren Girişi"
+		"employer_login": "İşveren Girişi",
+		"register": "Kaydol"
 	},
 	"registration": {
 		"title": "Kayıt Ol",

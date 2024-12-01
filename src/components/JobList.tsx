@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -7,7 +7,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { EnumEmploymentType, EnumUserType, EnumWorkplaceType, JobData, TypeJobs } from '@/DataTypes';
 import { useToast } from '@/hooks/use-toast';
 import { useRootService, useRootStore } from '@/providers/context_provider/ContextProvider';
-import { ArrowLeft, ChevronDown, Share2 } from 'lucide-react';
+import { ArrowLeft, ChevronDown, MapPin, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -52,8 +52,8 @@ function FilterCombobox({ title, options }: { title: string; options: string[] }
 function TopFilters({ companies }: { companies: string[] }) {
 	const { t } = useTranslation();
 	return (
-		<div className="w-full border-b shadow-md">
-			<div className="flex w-full py-4 space-x-2 overflow-y-hidden overflow-x-scroll sm:overflow-x-hidden px-4">
+		<div className="w-full border-b shadow-md mt-2 mb-2">
+			<div className="flex w-full space-x-2 overflow-y-hidden overflow-x-scroll sm:overflow-x-hidden">
 				<FilterCombobox
 					title={t('job_posting.workplace_type')}
 					options={Object.values(EnumWorkplaceType).map((type) => t(type)) as string[]}
@@ -73,34 +73,50 @@ function TopFilters({ companies }: { companies: string[] }) {
 
 function JobInfo({ selectedJob, onClose }: { selectedJob: JobData; onClose: () => void }) {
 	const navigate = useNavigate();
+
 	return (
-		<Card className="rounded-none h-full shadow-md">
-			<CardHeader>
+		<div className="flex flex-col h-full">
+			{/* Header */}
+			<div className="flex items-center justify-between p-4 border-b gap-4 md:gap-0">
+				<Button
+					variant="ghost"
+					className="w-8 h-8 text-2xl"
+					onClick={() => {
+						navigate(-1);
+						onClose();
+					}}
+				>
+					<ArrowLeft />
+				</Button>
 				<div className="flex items-center space-x-4">
-					<Button
-						variant="ghost"
-						className=" text-4xl"
-						onClick={() => {
-							navigate(-1);
-							onClose();
-						}}
-					>
-						<ArrowLeft className="h-12 w-12" />
-					</Button>
-					<div className="w-12 h-12 bg-secondary flex items-center justify-center rounded-full">
-						<img className="w-8 h-8" src={selectedJob.businessUserData.BusinessLogo} />
+					<div className="w-6 h-6 overflow-hidden rounded-full flex-shrink-0">
+						<img
+							className="w-full h-full object-cover"
+							src={selectedJob.businessUserData.BusinessLogo}
+							alt="Business Logo"
+						/>
 					</div>
-					<div>
-						<h2 className="text-2xl font-bold">{selectedJob.jobDetail.JobTitle}</h2>
-						<p className="text-muted-foreground">{selectedJob.jobDetail.Location}</p>
+					<div className="flex flex-col">
+						<h2 className="text-lg font-bold text-gray-800 truncate">{selectedJob.jobDetail.JobTitle}</h2>
+						<p className="flex items-center text-sm text-gray-500">
+							<MapPin className="h-4 w-4 mr-1" />
+							<span>{selectedJob.jobDetail.Location}</span>
+						</p>
 					</div>
 				</div>
-			</CardHeader>
-			<CardContent>
-				<ApplyButton jobId={selectedJob.jobDetail.ID} />
-				<JobDescription job={selectedJob} />
-			</CardContent>
-		</Card>
+				<Button variant="outline" size="icon">
+					<Share2 className="h-4 w-4" />
+				</Button>
+			</div>
+
+			{/* Content */}
+			<ScrollArea className="flex-1 p-4">
+				<div className="w-full">
+					<JobDescription job={selectedJob} />
+					<ApplyButton jobId={selectedJob.jobDetail.ID} />
+				</div>
+			</ScrollArea>
+		</div>
 	);
 }
 
@@ -112,8 +128,9 @@ function ApplyButton({ jobId }: { jobId: string }) {
 	const { toast } = useToast();
 
 	return (
-		<div className="flex items-center space-x-2">
+		<div className="flex items-center space-x-2 sticky bottom-0 align-middle w-full">
 			<Button
+				className="w-full"
 				onClick={() => {
 					if (userStore.isAuthenticated && userStore.userType === EnumUserType.CANDIDATE) {
 						jobService
@@ -154,9 +171,6 @@ function ApplyButton({ jobId }: { jobId: string }) {
 			>
 				{t('job_posting.apply')}
 			</Button>
-			<Button variant="outline" size="icon">
-				<Share2 className="h-4 w-4" />
-			</Button>
 		</div>
 	);
 }
@@ -170,47 +184,62 @@ function JobDescription({ job }: { job: JobData }) {
 			month: 'long',
 			day: 'numeric',
 		});
+
 	return (
-		<div className="space-y-4">
+		<div className="Space-y-6 shadow-md rounded-md">
+			{/* Date Posted */}
 			{job.jobDetail.DatePosted && (
-				<div>
-					<span className="font-medium">{t('job_posting.date_posted')}: </span>
-					<span>{formatDate(job.jobDetail.DatePosted)}</span>
+				<div className="flex items-center">
+					<span className="font-semibold text-gray-700">{t('job_posting.date_posted')}:</span>
+					<span className="ml-2 text-gray-600">{formatDate(job.jobDetail.DatePosted)}</span>
 				</div>
 			)}
+
+			{/* Application Deadline */}
 			{job.jobDetail.ApplicationDeadline && (
-				<div>
-					<span className="font-medium">{t('job_posting.application_deadline')}: </span>
-					<span>{formatDate(job.jobDetail.ApplicationDeadline)}</span>
+				<div className="flex items-center">
+					<span className="font-semibold text-gray-700">{t('job_posting.application_deadline')}:</span>
+					<span className="ml-2 text-gray-600">{formatDate(job.jobDetail.ApplicationDeadline)}</span>
 				</div>
 			)}
+
+			{/* Job Description */}
 			{job.jobDetail.Description && (
-				<div className="text-lg font-semibold">
+				<div>
+					<h3 className="text-lg font-bold text-gray-800">{t('job_posting.job_description')}</h3>
 					<ReactQuill value={job.jobDetail.Description} readOnly={true} theme={'bubble'} />
 				</div>
 			)}
+
+			{/* Job Requirements */}
 			{job.jobDetail.Requirements && (
-				<div className="text-sm">
-					<span className="font-medium">{t('job_posting.job_requirements')}:</span>
+				<div>
+					<h3 className="text-lg font-bold text-gray-800">{t('job_posting.job_requirements')}</h3>
 					<ReactQuill value={job.jobDetail.Requirements} readOnly={true} theme={'bubble'} />
 				</div>
 			)}
+
+			{/* Company Info */}
 			{job.jobDetail.UserID && (
-				<div className="flex text-sm ">
-					<span className="font-medium">{t('general.company')}: </span>
-					<span>{job.jobDetail.UserID}</span>
+				<div className="flex items-center">
+					<span className="font-semibold text-gray-700">{t('general.company')}:</span>
+					<span className="ml-2 text-gray-600">{job.jobDetail.UserID}</span>
 				</div>
 			)}
+
+			{/* Employment Type */}
 			{job.jobDetail.EmploymentType && (
-				<div className="flex text-sm text-gray-500">
-					<span className="font-medium">{t('job_posting.employment_type')}: </span>
-					<span>{job.jobDetail.EmploymentType}</span>
+				<div className="flex items-center">
+					<span className="font-semibold text-gray-700">{t('job_posting.employment_type')}:</span>
+					<span className="ml-2 text-gray-600">{job.jobDetail.EmploymentType}</span>
 				</div>
 			)}
+
+			{/* Salary Range */}
 			{job.jobDetail.SalaryRange && (
-				<div className="flex text-sm text-gray-500">
-					<span className="font-medium">{t('job_posting.salary')}: </span>
-					<span>{job.jobDetail.SalaryRange}</span>
+				<div className="flex items-center">
+					<span className="font-semibold text-gray-700">{t('job_posting.salary')}:</span>
+					<span className="ml-2 text-gray-600">{job.jobDetail.SalaryRange}</span>
 				</div>
 			)}
 		</div>
@@ -250,7 +279,7 @@ function JobListItem({
 	);
 }
 
-export default function JobListing({ jobs }: { jobs: TypeJobs }) {
+export default function JobListing({ jobs, jobSelected }: { jobs: TypeJobs; jobSelected: (job: boolean) => void }) {
 	const [showDetail, setShowDetail] = React.useState(false);
 	const [selectedJob, setSelectedJob] = React.useState<JobData | null>(null);
 
@@ -264,11 +293,14 @@ export default function JobListing({ jobs }: { jobs: TypeJobs }) {
 		setShowDetail(true);
 		setSelectedJob(job);
 		window.history.pushState(null, '', window.location.href);
+		jobSelected(true);
 	};
 
 	const closeJobDetail = () => {
 		setShowDetail(false);
 		setSelectedJob(null);
+		window.history.pushState(null, '', window.location.href);
+		jobSelected(false);
 	};
 	const companies = jobs.map((job) => job.businessUserData.BusinessName);
 
@@ -276,7 +308,7 @@ export default function JobListing({ jobs }: { jobs: TypeJobs }) {
 		<div className="flex flex-col h-full">
 			<TopFilters companies={companies} />
 			{!showDetail && (
-				<ScrollArea className={'flex h-full w-full border-r pb-5'}>
+				<ScrollArea className={'flex h-full w-full shadow-2xl'}>
 					{jobs.map((job, index) => (
 						<JobListItem
 							key={index}

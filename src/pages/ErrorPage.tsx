@@ -7,7 +7,7 @@ export default function NotFound() {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
 	return (
-		<div className="flex h-screen flex-col items-center justify-center bg-gray-100 px-4 dark:bg-gray-900 sm:px-6 md:px-8">
+		<div className="flex h-full flex-col items-center justify-center bg-gray-100 px-4 dark:bg-gray-900 sm:px-6 md:px-8">
 			<div className="text-center max-w-lg w-full">
 				<XCircle className="mx-auto mb-4 h-24 w-24 text-red-500" />
 				<h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-gray-100 sm:text-5xl">
@@ -26,4 +26,3 @@ export default function NotFound() {
 		</div>
 	);
 }
-

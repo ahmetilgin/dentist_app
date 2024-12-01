@@ -12,7 +12,8 @@
         "title": "Accedi",
         "password_confirm": "Conferma Password",
         "candidate_login": "Accesso Candidato",
-        "employer_login": "Accesso Datore di Lavoro"
+        "employer_login": "Accesso Datore di Lavoro",
+        "register": "Registrati"
     },
     "registration": {
         "title": "Registrati",
