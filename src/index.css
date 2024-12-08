@@ -2,76 +2,75 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-:root  {
-  --background: 201 100% 98%;
-  --foreground: 201 5% 10%;
-  --card: 201 50% 98%;
-  --card-foreground: 201 5% 15%;
-  --popover: 201 100% 98%;
-  --popover-foreground: 201 100% 10%;
-  --primary: 201 99% 49%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 201 30% 90%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 163 30% 95%;
-  --muted-foreground: 201 5% 40%;
-  --accent: 163 30% 90%;
-  --accent-foreground: 201 5% 15%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 201 5% 98%;
-  --border: 201 30% 82%;
-  --input: 201 30% 50%;
-  --ring: 201 99% 49%;
-  --radius: 0.75rem;
+:root {
+	--background: 60 14% 99%;
+	--foreground: 201 5% 10%;
+	--card: 201 50% 98%;
+	--card-foreground: 201 5% 15%;
+	--popover: 201 100% 98%;
+	--popover-foreground: 201 100% 10%;
+	--primary: 201 99% 49%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 201 30% 90%;
+	--secondary-foreground: 0 0% 0%;
+	--muted: 163 30% 95%;
+	--muted-foreground: 201 5% 40%;
+	--accent: 163 30% 90%;
+	--accent-foreground: 201 5% 15%;
+	--destructive: 0 100% 50%;
+	--destructive-foreground: 201 5% 98%;
+	--border: 201 30% 82%;
+	--input: 201 30% 50%;
+	--ring: 201 99% 49%;
+	--radius: 0.75rem;
 }
-.dark  {
-  --background: 201 50% 10%;
-  --foreground: 201 5% 98%;
-  --card: 201 50% 10%;
-  --card-foreground: 201 5% 98%;
-  --popover: 201 50% 5%;
-  --popover-foreground: 201 5% 98%;
-  --primary: 201 99% 49%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 201 30% 20%;
-  --secondary-foreground: 0 0% 100%;
-  --muted: 163 30% 25%;
-  --muted-foreground: 201 5% 65%;
-  --accent: 163 30% 25%;
-  --accent-foreground: 201 5% 95%;
-  --destructive: 0 100% 50%;
-  --destructive-foreground: 201 5% 98%;
-  --border: 201 30% 50%;
-  --input: 201 30% 50%;
-  --ring: 201 99% 49%;
-  --radius: 0.75rem;
+.dark {
+	--background: 180 80% 3%;
+	--foreground: 201 5% 98%;
+	--card: 201 50% 10%;
+	--card-foreground: 201 5% 98%;
+	--popover: 201 50% 5%;
+	--popover-foreground: 201 5% 98%;
+	--primary: 201 99% 49%;
+	--primary-foreground: 0 0% 100%;
+	--secondary: 201 30% 20%;
+	--secondary-foreground: 0 0% 100%;
+	--muted: 163 30% 25%;
+	--muted-foreground: 201 5% 65%;
+	--accent: 163 30% 25%;
+	--accent-foreground: 201 5% 95%;
+	--destructive: 0 100% 50%;
+	--destructive-foreground: 201 5% 98%;
+	--border: 201 30% 50%;
+	--input: 201 30% 50%;
+	--ring: 201 99% 49%;
+	--radius: 0.75rem;
 }
-
-
 
 * {
-  border-color: hsl(var(--border))
+	border-color: hsl(var(--border));
 }
 
 html {
-  scroll-behavior: smooth
+	scroll-behavior: smooth;
+	font-family: 'Roboto', sans-serif;
 }
 
 body {
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
-  font-synthesis-weight: none;
-  text-rendering: optimizeLegibility
+	background-color: hsl(var(--background));
+	color: hsl(var(--foreground));
+	font-synthesis-weight: none;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 .shadow {
-  --tw-shadow: 0 4px 6px -1px rgb(126 170 130 / 5%), 0 2px 4px -2px rgb(7 184 0 / 15%);
-  --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+	--tw-shadow: 0 4px 6px -1px rgb(126 170 130 / 5%), 0 2px 4px -2px rgb(7 184 0 / 15%);
+	--tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+	box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
-.ql-editor{
-  min-height:200px;
+.ql-editor {
+	min-height: 200px;
 }

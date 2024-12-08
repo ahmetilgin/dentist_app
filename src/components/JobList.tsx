@@ -7,7 +7,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { EnumEmploymentType, EnumUserType, EnumWorkplaceType, JobData, TypeJobs } from '@/DataTypes';
 import { useToast } from '@/hooks/use-toast';
 import { useRootService, useRootStore } from '@/providers/context_provider/ContextProvider';
-import { ArrowLeft, ChevronDown, MapPin, Share2 } from 'lucide-react';
+import { Separator } from '@radix-ui/react-select';
+import { ArrowLeft, Briefcase, Building2, CalendarDays, ChevronDown, CreditCard, MapPin, Share2 } from 'lucide-react';
 import * as React from 'react';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -97,8 +98,8 @@ function JobInfo({ selectedJob, onClose }: { selectedJob: JobData; onClose: () =
 						/>
 					</div>
 					<div className="flex flex-col">
-						<h2 className="text-lg font-bold text-gray-800 truncate">{selectedJob.jobDetail.JobTitle}</h2>
-						<p className="flex items-center text-sm text-gray-500">
+						<h2 className="text-lg font-bold truncate">{selectedJob.jobDetail.JobTitle}</h2>
+						<p className="flex items-center text-sm">
 							<MapPin className="h-4 w-4 mr-1" />
 							<span>{selectedJob.jobDetail.Location}</span>
 						</p>
@@ -175,76 +176,87 @@ function ApplyButton({ jobId }: { jobId: string }) {
 	);
 }
 
-function JobDescription({ job }: { job: JobData }) {
-	const { t } = useTranslation();
+export function JobDescription({ job }: { job: JobData }) {
+    const { t } = useTranslation();
+    const formatDate = (date: string) =>
+      new Date(date).toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      });
 
-	const formatDate = (date: string) =>
-		new Date(date).toLocaleDateString(undefined, {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		});
-
-	return (
-		<div className="Space-y-6 shadow-md rounded-md">
-			{/* Date Posted */}
-			{job.jobDetail.DatePosted && (
-				<div className="flex items-center">
-					<span className="font-semibold text-gray-700">{t('job_posting.date_posted')}:</span>
-					<span className="ml-2 text-gray-600">{formatDate(job.jobDetail.DatePosted)}</span>
-				</div>
-			)}
-
-			{/* Application Deadline */}
-			{job.jobDetail.ApplicationDeadline && (
-				<div className="flex items-center">
-					<span className="font-semibold text-gray-700">{t('job_posting.application_deadline')}:</span>
-					<span className="ml-2 text-gray-600">{formatDate(job.jobDetail.ApplicationDeadline)}</span>
-				</div>
-			)}
-
-			{/* Job Description */}
-			{job.jobDetail.Description && (
-				<div>
-					<h3 className="text-lg font-bold text-gray-800">{t('job_posting.job_description')}</h3>
-					<ReactQuill value={job.jobDetail.Description} readOnly={true} theme={'bubble'} />
-				</div>
-			)}
-
-			{/* Job Requirements */}
-			{job.jobDetail.Requirements && (
-				<div>
-					<h3 className="text-lg font-bold text-gray-800">{t('job_posting.job_requirements')}</h3>
-					<ReactQuill value={job.jobDetail.Requirements} readOnly={true} theme={'bubble'} />
-				</div>
-			)}
-
-			{/* Company Info */}
-			{job.jobDetail.UserID && (
-				<div className="flex items-center">
-					<span className="font-semibold text-gray-700">{t('general.company')}:</span>
-					<span className="ml-2 text-gray-600">{job.jobDetail.UserID}</span>
-				</div>
-			)}
-
-			{/* Employment Type */}
-			{job.jobDetail.EmploymentType && (
-				<div className="flex items-center">
-					<span className="font-semibold text-gray-700">{t('job_posting.employment_type')}:</span>
-					<span className="ml-2 text-gray-600">{job.jobDetail.EmploymentType}</span>
-				</div>
-			)}
-
-			{/* Salary Range */}
-			{job.jobDetail.SalaryRange && (
-				<div className="flex items-center">
-					<span className="font-semibold text-gray-700">{t('job_posting.salary')}:</span>
-					<span className="ml-2 text-gray-600">{job.jobDetail.SalaryRange}</span>
-				</div>
-			)}
-		</div>
-	);
-}
+    return (
+      <Card className="w-full max-w-3xl mx-auto">
+        <CardContent className="p-0">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {job.jobDetail.DatePosted && (
+              <div className="flex items-center space-x-2">
+                <CalendarDays className="h-5 w-5" />
+                <div>
+                  <span className="text-sm font-medium">{t('job_posting.date_posted')}:</span>
+                  <p className="text-sm">{formatDate(job.jobDetail.DatePosted)}</p>
+                </div>
+              </div>
+            )}
+            {job.jobDetail.ApplicationDeadline && (
+              <div className="flex items-center space-x-2">
+                <CalendarDays className="h-5 w-5" />
+                <div>
+                  <span className="text-sm font-medium">{t('job_posting.application_deadline')}:</span>
+                  <p className="text-sm">{formatDate(job.jobDetail.ApplicationDeadline)}</p>
+                </div>
+              </div>
+            )}
+          </div>
+          <Separator />
+          {job.jobDetail.Description && (
+            <div>
+              <div className="prose max-w-none">
+                <ReactQuill value={job.jobDetail.Description} readOnly={true} theme={'bubble'} />
+              </div>
+            </div>
+          )}
+          {job.jobDetail.Requirements && (
+            <div>
+              <div className="prose max-w-none">
+                <ReactQuill value={job.jobDetail.Requirements} readOnly={true} theme={'bubble'} />
+              </div>
+            </div>
+          )}
+          <Separator />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {job.jobDetail.UserID && (
+              <div className="flex items-center space-x-2">
+                <Building2 className="h-5 w-5" />
+                <div>
+                  <span className="text-sm font-medium">{t('general.company')}:</span>
+                  <p className="text-sm">{job.businessUserData.BusinessName}</p>
+                </div>
+              </div>
+            )}
+            {job.jobDetail.EmploymentType && (
+              <div className="flex items-center space-x-2">
+                <Briefcase className="h-5 w-5" />
+                <div>
+                  <span className="text-sm font-medium">{t('job_posting.employment_type')}:</span>
+                  <p className="text-sm">{job.jobDetail.EmploymentType}</p>
+                </div>
+              </div>
+            )}
+            {job.jobDetail.SalaryRange && (
+              <div className="flex items-center space-x-2">
+                <CreditCard className="h-5 w-5" />
+                <div>
+                  <span className="text-sm font-medium">{t('job_posting.salary')}:</span>
+                  <p className="text-sm">{job.jobDetail.SalaryRange}</p>
+                </div>
+              </div>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
 function JobListItem({
 	logo,
@@ -262,7 +274,7 @@ function JobListItem({
 }) {
 	return (
 		<div
-			className="p-4 border-b last:border-b-0 cursor-pointer hover:bg-primary-foreground transition duration-150 shadow-md"
+			className="p-4 border-b last:border-b-0 cursor-pointer hover:bg-primary-foreground transition duration-150 shadow-lg"
 			onClick={onClicked}
 		>
 			<div className="flex items-center space-x-4">

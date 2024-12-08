@@ -61,24 +61,24 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 				/>
 				{isLoading && (
 					<div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-						<Loader2 className="h-4 w-4 animate-spin text-gray-500" />
+						<Loader2 className="h-4 w-4 animate-spin " />
 					</div>
 				)}
 			</div>
 			{isOpen && data && data.query_result && data.query_result.length > 0 && (
-				<div className="absolute z-20 w-full top-full left-0 mt-1  rounded-md shadow-lg max-h-60 overflow-auto divide-y backdrop-blur">
+				<div className="absolute z-20 w-full top-full left-0 mt-1  rounded-md shadow-lg max-h-60 overflow-auto divide-y">
 					{data.query_result.map((item: string) => (
-						<div
+						<button
 							key={item}
 							onClick={() => {
 								onValueChanged(item);
 								setInputValue(item);
 								setIsOpen(false);
 							}}
-							className="backdrop-blur hover:bg-ring p-2 cursor-pointer"
+							className="backdrop-blur-sm hover:bg-ring p-2 cursor-pointer w-full text-left"
 						>
 							{item}
-						</div>
+						</button>
 					))}
 				</div>
 			)}

@@ -28,7 +28,7 @@ const App = observer(() => {
 	}, [userStore.isAuthenticated, navigate, userStore.userType]);
 
 	return (
-		<div className="h-screen flex flex-col w-full">
+		<div className="h-dvh flex flex-col w-full">
 			{(location.pathname === '/' || location.pathname === '/login' || location.pathname === '/manage_jobs') && (
 				<NavigationBar />
 			)}

@@ -4,11 +4,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
 import { EnumUserType } from '@/DataTypes';
@@ -34,7 +34,7 @@ export function NavigationBar() {
 
 	return (
 		<header className="w-full border-b">
-			<div className="container mx-auto px-4  py-4">
+			<div className=" mx-auto px-4  py-4">
 				<div className="flex items-center justify-between">
 					<h1 className="text-2xl font-bold cursor-pointer" onClick={() => navigate('/')}>
 						Karriere
@@ -52,7 +52,6 @@ export function NavigationBar() {
 							<DropdownMenuTrigger asChild>
 								<Button variant="outline" size="icon" className="h-9 w-9">
 									<Globe className="h-4 w-4" />
-									<span className="sr-only">{t('general.change_language')}</span>
 								</Button>
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
@@ -77,14 +76,12 @@ export function NavigationBar() {
 							onClick={() => setTheme(mode === 'light' ? 'dark' : 'light')}
 						>
 							{mode === 'light' ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
-							<span className="sr-only">{t('general.toggle_theme')}</span>
 						</Button>
 						{userStore.isAuthenticated && (
 							<DropdownMenu>
 								<DropdownMenuTrigger asChild>
 									<Button variant="outline" size="icon" className="h-9 w-9">
 										<User className="h-4 w-4" />
-										<span className="sr-only">{t('general.user_menu')}</span>
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
@@ -96,7 +93,6 @@ export function NavigationBar() {
 									<DropdownMenuSeparator />
 									<DropdownMenuItem onSelect={handleLogout}>
 										<LogOut className="mr-2 h-4 w-4" />
-										<span>{t('general.logout')}</span>
 									</DropdownMenuItem>
 								</DropdownMenuContent>
 							</DropdownMenu>

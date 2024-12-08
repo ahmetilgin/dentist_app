@@ -24,8 +24,8 @@ export function JobPostingFormComponent() {
 		Location: '',
 		SalaryRange: '',
 		EmploymentType: '',
-		DatePosted: '',
-		ApplicationDeadline: '',
+		DatePosted: new Date().toISOString().split('T')[0],
+		ApplicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
 	} as TypeJob);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +64,6 @@ export function JobPostingFormComponent() {
 
 	const modules = {
 		toolbar: [
-			[{ font: [] }],
 			[{ header: [1, 2, 3, 4, 5, 6, false] }],
 			['bold', 'italic', 'underline', 'strike'],
 			[{ color: [] }, { background: [] }],
@@ -195,31 +194,6 @@ export function JobPostingFormComponent() {
 								</SelectContent>
 							</Select>
 						</div>
-
-						<div className="space-y-2">
-							<Label htmlFor="DatePosted">{t('job_posting.date_posted')}</Label>
-							<Input
-								id="DatePosted"
-								name="DatePosted"
-								type="date"
-								value={jobData.DatePosted}
-								onChange={handleInputChange}
-								required
-							/>
-						</div>
-
-						<div className="space-y-2">
-							<Label htmlFor="ApplicationDeadline">{t('job_posting.application_deadline')}</Label>
-							<Input
-								id="ApplicationDeadline"
-								name="ApplicationDeadline"
-								type="date"
-								value={jobData.ApplicationDeadline}
-								onChange={handleInputChange}
-								required
-							/>
-						</div>
-
 						<Button type="submit" className="w-full">
 							{t('job_posting.create_new_job_posting')}
 						</Button>

@@ -40,8 +40,8 @@ export default function HomePage() {
 
 	return (
 		<div
-			className={`flex flex-col w-full h-full items-center justify-center transition-all m-auto ease-linear p-5 ${
-				jobResults.length > 0 ? 'pt-[0em]' : 'sm:pt-[10rem]'
+			className={`flex flex-col w-full h-full items-center justify-center transition-all m-auto ease-linear p-5  ${
+				jobResults.length > 0 ? 'pt-[0em]' : 'pt-[5em]'
 			}`}
 		>
 			<div className="w-full lg:w-2/3 mb-4" style={{ display: jobResults.length > 0 ? 'none' : 'block' }}>
