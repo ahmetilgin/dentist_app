@@ -270,9 +270,9 @@ function JobListItem({
 					<img className="w-8 h-8" src={logo}></img>
 				</div>
 				<div>
-					<p className="text-sm text-gray-500">{company}</p>
+					<p className="text-sm ">{company}</p>
 					<h3 className="font-semibold text-lg mt-1">{title}</h3>
-					<p className="text-sm text-gray-400">{location}</p>
+					<p className="text-sm">{location}</p>
 				</div>
 			</div>
 		</div>

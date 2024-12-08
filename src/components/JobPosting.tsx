@@ -104,7 +104,7 @@ export function JobPostingFormComponent() {
 								placeholder="placeholder.position"
 								fetchOptions={(input: string) =>
 									httpService.get<QueryResult>(
-										`/public/jobs/search_professions/${i18n.language}/${input}?`
+										`/api/jobs/search_professions/${i18n.language}/${input}?`
 									)
 								}
 								icon={
@@ -147,7 +147,7 @@ export function JobPostingFormComponent() {
 								label="job_posting.location"
 								placeholder={t('placeholder.location')}
 								fetchOptions={(input: string) =>
-									httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)
+									httpService.get<QueryResult>(`/api/country/${i18n.language}/${input}?`)
 								}
 								icon={
 									<MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />

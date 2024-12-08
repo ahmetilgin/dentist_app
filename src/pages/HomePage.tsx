@@ -40,11 +40,11 @@ export default function HomePage() {
 
 	return (
 		<div
-			className={`flex flex-col h-full items-center transition-all ease-linear p-5 ${
-				jobResults.length > 0 ? 'pt-[0em]' : 'pt-0 sm:pt=[10em]'
+			className={`flex flex-col w-full h-full items-center justify-center transition-all m-auto ease-linear p-5 ${
+				jobResults.length > 0 ? 'pt-[0em]' : 'sm:pt-[10rem]'
 			}`}
 		>
-			<div className="w-full lg:w-2/3 mb-4 p-5" style={{ display: jobResults.length > 0 ? 'none' : 'block' }}>
+			<div className="w-full lg:w-2/3 mb-4" style={{ display: jobResults.length > 0 ? 'none' : 'block' }}>
 				<h1 className="text-2xl font-bold">{t('general.discover_career_opportunities')}</h1>
 				<h4 className="text-xl font-normal">{t('general.job_postings_thousands_of_companies')}</h4>
 			</div>

@@ -59,6 +59,10 @@ export interface TypeJobSearch {
 	location: string;
 }
 
+export interface JobListResponse {
+	jobs: TypeJob[];
+}
+
 export type TypeJobs = JobData[];
 export type QueryResult = { query_result: string[] };
 export type Language = 'al' | 'tr' | 'en';

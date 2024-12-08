@@ -223,7 +223,7 @@ const EmployerRegistration = () => {
 					label="employer.businessLocation"
 					placeholder={t('placeholder.location')}
 					fetchOptions={(input: string) =>
-						httpService.get<QueryResult>(`/public/country/${i18n.language}/${input}?`)
+						httpService.get<QueryResult>(`/api/country/${i18n.language}/${input}?`)
 					}
 					icon={
 						<MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />

@@ -1,4 +1,4 @@
-import { QueryResult, TypeJob, TypeJobs } from '../DataTypes';
+import { JobListResponse, QueryResult, TypeJob, TypeJobs } from '../DataTypes';
 import { JobStore } from '../stores/JobStore';
 import HttpService from './HttpService';
 
@@ -11,7 +11,7 @@ class JobService {
 	}
 
 	applyJob = (jobId: string) => {
-		return this.httpService.post('/public/jobs/apply_job', { job_id: jobId });
+		return this.httpService.post('/api/jobs/apply_job', { job_id: jobId });
 	};
 
 	searchJobs = (keyword: string, location: string, region: string): Promise<{ jobs: TypeJobs }> => {
@@ -24,24 +24,28 @@ class JobService {
 		}
 
 		return this.httpService.get<{ jobs: TypeJobs }>(
-			`/public/jobs/search/${region}/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
+			`/api/jobs/search/${region}/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
 		);
 	};
 
 	searchProfessions = (keyword: string, region: string): Promise<QueryResult> => {
-		return this.httpService.get<QueryResult>(`/public/jobs/search_professions/${region}/${keyword}?`);
+		return this.httpService.get<QueryResult>(`/api/jobs/search_professions/${region}/${keyword}?`);
 	};
 
 	searchLocations = (keyword: string, region: string): Promise<QueryResult> => {
-		return this.httpService.get<QueryResult>(`/public/country/${region}/${keyword}`);
+		return this.httpService.get<QueryResult>(`/api/country/${region}/${keyword}`);
 	};
 
 	publishJob = (job: TypeJob) => {
-		return this.httpService.post('/public/jobs', job);
+		return this.httpService.post('/api/jobs', job);
 	};
 
 	getPopularJobs(location: string) {
-		return this.httpService.get<QueryResult>(`/public/jobs/get_populer_professions/${location}`);
+		return this.httpService.get<QueryResult>(`/api/jobs/get_populer_professions/${location}`);
+	}
+
+	getJobs() {
+		return this.httpService.get<JobListResponse>('/api/jobs/get_jobs');
 	}
 }
 

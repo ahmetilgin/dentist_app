@@ -9,6 +9,7 @@ import './index.css';
 import ErrorPage from './pages/ErrorPage';
 import HomePage from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
+import { ManageJobs } from './pages/ManageJobs';
 import { PublishJob } from './pages/PublishJob';
 import { RegisterPage } from './pages/RegisterPage';
 import { useRootStore } from './providers/context_provider/ContextProvider';
@@ -28,7 +29,9 @@ const App = observer(() => {
 
 	return (
 		<div className="h-screen flex flex-col w-full">
-			{(location.pathname === '/' || location.pathname === '/login') && <NavigationBar />}
+			{(location.pathname === '/' || location.pathname === '/login' || location.pathname === '/manage_jobs') && (
+				<NavigationBar />
+			)}
 			<div className="flex flex-col  flex-1 overflow-auto">
 				<Routes>
 					<Route path="/" element={<HomePage />} />
@@ -37,6 +40,7 @@ const App = observer(() => {
 					<Route path="/forgot_password/:role" element={<ForgotPassword />} />
 					<Route path="*" element={<ErrorPage />} />
 					<Route path="/publish_job" element={<PublishJob />} />
+					<Route path="/manage_jobs" element={<ManageJobs />} />
 
 					{/* <Route path="/home" element={<Home />} />
 					<Route path="/register/normal_user" element={<RegisterNormalUserPage />} />
