@@ -46,7 +46,7 @@ export default function ForgotPassword() {
 							/>
 						</div>
 						<Button
-							type="submit"
+							type="button"
 							className="w-full"
 							onClick={() => {
 								if (role == 'candidate') {

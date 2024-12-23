@@ -69,7 +69,10 @@
 		"dark": "Karanlık Mod",
 		"logout": "Çıkış Yap",
 		"apply": "Başvur",
-		"manage_jobs": "İlanları Yönet"
+		"manage_jobs": "İlanları Yönet",
+		"search_skills": "Yetenek Ara",
+		"thousands_of_candidates": "Binlerce aday, on binlerce arama",
+		"search_candidate": "Aday Ara"
 	},
 	"job_posting": {
 		"job": "İş",

@@ -69,7 +69,10 @@
 		"dark": "Modaliteti i Errët",
 		"logout": "Dil",
 		"apply": "Apliko",
-		"manage_jobs": "Manajto Njoftimet"
+		"manage_jobs": "Manajto Njoftimet",
+		"search_skills": "Kerko Perdorim",
+		"thousands_of_candidates": "Mijëra kandidat, dhjetëra mijëra arama",
+		"search_candidate": "Kerko Kandidat"
 	},
 	"job_posting": {
 		"job": "Punë",

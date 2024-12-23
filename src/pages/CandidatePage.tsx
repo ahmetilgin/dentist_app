@@ -8,7 +8,7 @@ import { BriefcaseBusiness, MapPin, Search } from 'lucide-react';
 import { SetStateAction, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function HomePage() {
+export default function CandidatePage() {
 	const [selectedRegion, setSelectedRegion] = useState<string>('-');
 	const [selectedPosition, setSelectedPosition] = useState<string>('-');
 	const [topJobs, setTopJobs] = useState<string[]>([]);
@@ -40,8 +40,8 @@ export default function HomePage() {
 
 	return (
 		<div
-			className={`flex flex-col w-full h-full items-center justify-center transition-all m-auto ease-linear p-5  ${
-				jobResults.length > 0 ? 'pt-[0em]' : 'pt-[5em]'
+			className={`flex flex-col w-full h-full items-center justify-center transition-all m-auto ease-linear pr-4 pl-4 pb-4 ${
+				jobResults.length > 0 ? 'pt-0' : 'pt-16'
 			}`}
 		>
 			<div className="w-full lg:w-2/3 mb-4" style={{ display: jobResults.length > 0 ? 'none' : 'block' }}>

@@ -49,6 +49,20 @@ export interface TypeJob {
 	ApplicationDeadline: string;
 }
 
+export interface TypeJobWithCandidates {
+    ID: string;
+    UserID: string;
+    JobTitle: string;
+    Description: string;
+    Requirements: string;
+    Location: string;
+    SalaryRange: string;
+    EmploymentType: string;
+    DatePosted: string;
+    ApplicationDeadline: string;
+    Candidates: string[];
+}
+
 export interface JobData {
 	jobDetail: TypeJob;
 	businessUserData: TypeBusinessUser;
@@ -60,7 +74,7 @@ export interface TypeJobSearch {
 }
 
 export interface JobListResponse {
-	jobs: TypeJob[];
+	jobs: TypeJobWithCandidates[];
 }
 
 export type TypeJobs = JobData[];

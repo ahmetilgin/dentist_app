@@ -47,6 +47,18 @@ class JobService {
 	getJobs() {
 		return this.httpService.get<JobListResponse>('/api/jobs/get_jobs');
 	}
+
+	deleteJob(jobId: string) {
+		return this.httpService.del<boolean>(`/api/jobs/delete/${jobId}`, {});
+	}
+
+	updateJob(jobData: TypeJob) {
+		return this.httpService.put<boolean>('/api/jobs/update', jobData);
+	}
+
+	getCandidateDetails(candidateId: string) {
+        return this.httpService.get<any>(`/api/jobs/candidate/${candidateId}`);
+    }
 }
 
 export default JobService;

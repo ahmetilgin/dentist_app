@@ -3,11 +3,13 @@ import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import ForgotPassword from './components/ForgotPassword';
 import { NavigationBar } from './components/NavigationBar';
+import ResetPassword from './components/ResetPassword';
 import { EnumUserType } from './DataTypes';
 import './i18n';
 import './index.css';
+import { BusinessUserPage } from './pages/BusinessUserPage';
+import CandidatePage from './pages/CandidatePage';
 import ErrorPage from './pages/ErrorPage';
-import HomePage from './pages/HomePage';
 import { LoginPage } from './pages/LoginPage';
 import { ManageJobs } from './pages/ManageJobs';
 import { PublishJob } from './pages/PublishJob';
@@ -34,13 +36,14 @@ const App = observer(() => {
 			)}
 			<div className="flex flex-col  flex-1 overflow-auto">
 				<Routes>
-					<Route path="/" element={<HomePage />} />
+					<Route path="/" element={userStore.isAuthenticated && userStore.userType === EnumUserType.EMPLOYER ? <BusinessUserPage /> : <CandidatePage />} />
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/register" element={<RegisterPage />} />
 					<Route path="/forgot_password/:role" element={<ForgotPassword />} />
 					<Route path="*" element={<ErrorPage />} />
 					<Route path="/publish_job" element={<PublishJob />} />
 					<Route path="/manage_jobs" element={<ManageJobs />} />
+					<Route path="/reset-password/:token" element={<ResetPassword />} />
 
 					{/* <Route path="/home" element={<Home />} />
 					<Route path="/register/normal_user" element={<RegisterNormalUserPage />} />

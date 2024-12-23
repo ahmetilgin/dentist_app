@@ -57,8 +57,8 @@
 		"tr": "Turkish",
 		"it": "Italian",
 		"login_signup": "Log In / Sign Up",
-		"discover_opportunities": "Discover Career Opportunities",
-		"job_postings_description": "Thousands of job postings from hundreds of companies.",
+		"discover_career_opportunities": "Discover Career Opportunities",
+		"job_postings_thousands_of_companies": "Thousands of job postings from hundreds of companies.",
 		"search_position_or_company": "Search Position or Company",
 		"search_city_or_district": "Search City or District",
 		"search_job": "FIND JOB",
@@ -69,7 +69,10 @@
 		"dark_mode": "Dark Mode",
 		"logout": "Logout",
 		"apply": "Apply",
-		"manage_jobs": "Manage Job Postings"
+		"manage_jobs": "Manage Job Postings",
+		"search_skills": "Search Skills",
+		"thousands_of_candidates": "Thousands of candidates, thousands of job postings",
+		"search_candidate": "Search Candidate"
 	},
 	"job_posting": {
 		"job": "Job",
