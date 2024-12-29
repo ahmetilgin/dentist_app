@@ -34,7 +34,9 @@
 		"location": "Tiranë, Durrës, Shkodër...",
 		"email": "shembull@email.com",
 		"position": "Microsoft, Zhvillues Softuerik, Menaxher Projekti...",
-		"employment_type": "Zgjidhni llojin e punësimit"
+		"employment_type": "Zgjidhni llojin e punësimit",
+		"candidate_skill": "Zhvillim Softuerik, Menaxhim Projekti, Dizajn...",
+		"candidate_location": "Tiranë, Durrës, Vlorë..."
 	},
 	"error": {
 		"register": "Ndodhi një gabim gjatë krijimit të llogarisë. Ju lutemi kontrolloni informacionet tuaja.",
@@ -72,7 +74,8 @@
 		"manage_jobs": "Manajto Njoftimet",
 		"search_skills": "Kerko Perdorim",
 		"thousands_of_candidates": "Mijëra kandidat, dhjetëra mijëra arama",
-		"search_candidate": "Kerko Kandidat"
+		"search_candidate": "Kerko Kandidat",
+		"discover_candidates": "Zbulo Kandidatët"
 	},
 	"job_posting": {
 		"job": "Punë",
@@ -101,7 +104,11 @@
 		"login_to_apply_desc": "Ju lutemi, hyni për të përfunduar aplikimin tuaj.",
 		"application_error": "Gabim në Aplikim",
 		"application_error_desc": "Ndodhi një gabim gjatë aplikimit tuaj. Ju lutemi provoni përsëri.",
-		"reset": "Rivendos"
+		"reset": "Rivendos",
+		"success": "Njoftimi u Publikua me Sukses",
+		"success_desc": "Njoftimi juaj i punës u publikua me sukses.",
+		"error": "Gabim në Publikim",
+		"error_desc": "Ndodhi një gabim gjatë publikimit të njoftimit. Ju lutemi provoni përsëri."
 	},
 	"workplace_type": {
 		"Remote": "Në Distancë",
@@ -109,10 +116,32 @@
 		"Hybrid": "Hibride"
 	},
 	"employment_type": {
-		"FullTime": "Kohë e Plotë",
-		"PartTime": "Kohë e Pjesshme",
-		"Contract": "Me Kontratë",
-		"Internship": "Praktikë",
-		"Temporary": "I Përkohshëm"
+		"fulltime": "Kohë e Plotë",
+		"parttime": "Kohë e Pjesshme",
+		"contract": "Me Kontratë",
+		"internship": "Praktikë",
+		"temporary": "I Përkohshëm"
+	},
+	"manage_jobs": {
+		"show_candidates": "Shfaq Kandidatët",
+		"edit_job": "Ndrysho Punën",
+		"candidates_for": "Kandidatët për {{jobTitle}}",
+		"more_options": "Më Shumë Opsione",
+		"delete": "Fshi",
+		"status_active": "Statusi: Aktiv",
+		"no_jobs_found": "Nuk u gjetën punë.",
+		"title": "Menaxho Punët",
+		"candidates_loading": "Duke ngarkuar kandidatët...",
+		"no_candidates": "Nuk u gjetën kandidatë",
+		"view_profile": "Shiko Profilin",
+		"send_message": "Dërgo Mesazh",
+		"job_deleted": "Puna u Fshi",
+		"job_deleted_desc": "Puna u fshi me sukses",
+		"job_delete_failed": "Fshirja e Punës Dështoi",
+		"job_delete_failed_desc": "Dështoi fshirja e punës",
+		"job_updated": "Puna u Përditësua",
+		"job_updated_desc": "Puna u përditësua me sukses",
+		"job_update_failed": "Përditësimi i Punës Dështoi",
+		"job_update_failed_desc": "Dështoi përditësimi i punës"
 	}
 }

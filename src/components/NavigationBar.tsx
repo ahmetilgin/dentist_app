@@ -1,21 +1,22 @@
 import { Globe, LogOut, Moon, Sun, User } from 'lucide-react';
+import { observer } from 'mobx-react';
 import { useTranslation } from 'react-i18next';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Button } from '@/components/ui/button';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
 import { EnumUserType } from '@/DataTypes';
 import { useRootStore } from '@/providers/context_provider/ContextProvider';
 import { useCustomTheme } from '@/providers/theme_provider/ThemeProvider';
 
-export function NavigationBar() {
+const NavigationBar = observer(() => {
 	const { mode, setTheme } = useCustomTheme();
 	const { t, i18n } = useTranslation();
 	const { userStore } = useRootStore();
@@ -102,4 +103,6 @@ export function NavigationBar() {
 			</div>
 		</header>
 	);
-}
+});
+
+export default NavigationBar;

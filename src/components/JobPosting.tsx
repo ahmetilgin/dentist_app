@@ -4,28 +4,34 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { EnumEmploymentType, QueryResult, TypeJob } from '@/DataTypes';
+import { useToast } from '@/hooks/use-toast';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { ArrowLeft, BriefcaseBusiness, MapPin } from 'lucide-react';
+import { observer } from 'mobx-react';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { useNavigate } from 'react-router-dom';
 import AutoComplete from './AutoComplete';
+import LoadingDots from './LoadingDots';
 
-export function JobPostingFormComponent() {
+export const JobPostingFormComponent = observer(() => {
 	const { t, i18n } = useTranslation();
 	const { httpService, jobService } = useRootService();
+	const { toast } = useToast();
+	const [isLoading, setIsLoading] = useState(false);
 
 	const [jobData, setJobData] = useState<TypeJob>({
 		JobTitle: '',
 		Description: '',
-		Requirements: '',
 		Location: '',
 		SalaryRange: '',
 		EmploymentType: '',
 		DatePosted: new Date().toISOString().split('T')[0],
 		ApplicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+		ID: '',
+		UserID: '',
 	} as TypeJob);
 
 	const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLInputElement>) => {
@@ -43,13 +49,6 @@ export function JobPostingFormComponent() {
 		}));
 	};
 
-	const handleRequirementChange = (content: string) => {
-		setJobData((prevData) => ({
-			...prevData,
-			Requirements: content,
-		}));
-	};
-
 	const handleDescriptionChange = (content: string) => {
 		setJobData((prevData) => ({
 			...prevData,
@@ -57,9 +56,27 @@ export function JobPostingFormComponent() {
 		}));
 	};
 
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		jobService.publishJob(jobData);
+		setIsLoading(true);
+		try {
+			await jobService.publishJob(jobData);
+			toast({
+				title: t('job_posting.success'),
+				description: t('job_posting.success_desc'),
+				variant: 'default',
+			});
+			navigate('/manage-jobs');
+		} catch (error) {
+			console.error(error);
+			toast({
+				title: t('job_posting.error'),
+				description: t('job_posting.error_desc'),
+				variant: 'destructive',
+			});
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	const modules = {
@@ -131,17 +148,6 @@ export function JobPostingFormComponent() {
 						</div>
 
 						<div className="space-y-2">
-							<Label htmlFor="Requirements">{t('job_posting.job_requirements')}</Label>
-
-							<ReactQuill
-								theme="snow"
-								value={jobData.Requirements}
-								onChange={handleRequirementChange}
-								modules={modules}
-							/>
-						</div>
-
-						<div className="space-y-2">
 							<AutoComplete
 								label="job_posting.location"
 								placeholder={t('placeholder.location')}
@@ -194,12 +200,18 @@ export function JobPostingFormComponent() {
 								</SelectContent>
 							</Select>
 						</div>
-						<Button type="submit" className="w-full">
-							{t('job_posting.create_new_job_posting')}
+						<Button type="submit" className="w-full" disabled={isLoading}>
+							{isLoading ? (
+								<div className="flex items-center justify-center">
+									<LoadingDots />
+								</div>
+							) : (
+								t('job_posting.create_new_job_posting')
+							)}
 						</Button>
 					</form>
 				</CardContent>
 			</Card>
 		</div>
 	);
-}
+});

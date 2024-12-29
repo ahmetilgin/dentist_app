@@ -34,7 +34,9 @@
 		"location": "Roma, Milano, Napoli...",
 		"email": "esempio@email.com",
 		"position": "Microsoft, Sviluppatore Software, Project Manager...",
-		"employment_type": "Seleziona il tipo di impiego"
+		"employment_type": "Seleziona il tipo di impiego",
+		"candidate_skill": "Sviluppo Software, Gestione Progetti, Design...",
+		"candidate_location": "Roma, Milano, Napoli..."
 	},
 	"error": {
 		"register": "Si è verificato un errore durante la creazione dell'account. Controlla le informazioni inserite.",
@@ -72,7 +74,8 @@
 		"manage_jobs": "Gestisci Annunci",
 		"search_skills": "Cerca Perdorim",
 		"thousands_of_candidates": "Migliaia di candidati, decine di migliaia di ricerca",
-		"search_candidate": "Cerca Candidato"
+		"search_candidate": "Cerca Candidato",
+		"discover_candidates": "Scopri i Candidati"
 	},
 	"job_posting": {
 		"job": "Lavoro",
@@ -101,7 +104,11 @@
 		"login_to_apply_desc": "Accedi per completare la tua candidatura.",
 		"application_error": "Errore nella Candidatura",
 		"application_error_desc": "Si è verificato un errore durante l'invio della tua candidatura. Riprova.",
-		"reset": "Reimposta"
+		"reset": "Reimposta",
+		"success": "Annuncio Pubblicato con Successo",
+		"success_desc": "Il tuo annuncio di lavoro è stato pubblicato con successo.",
+		"error": "Errore nella Pubblicazione",
+		"error_desc": "Si è verificato un errore durante la pubblicazione dell'annuncio. Riprova."
 	},
 	"workplace_type": {
 		"Remote": "Remoto",
@@ -109,10 +116,32 @@
 		"Hybrid": "Ibrido"
 	},
 	"employment_type": {
-		"FullTime": "Tempo Pieno",
-		"PartTime": "Part-Time",
-		"Contract": "Contratto",
-		"Internship": "Tirocinio",
-		"Temporary": "Temporaneo"
+		"fulltime": "Tempo Pieno",
+		"parttime": "Part-Time",
+		"contract": "Contratto",
+		"internship": "Tirocinio",
+		"temporary": "Temporaneo"
+	},
+	"manage_jobs": {
+		"show_candidates": "Mostra Candidati",
+		"edit_job": "Modifica Lavoro",
+		"candidates_for": "Candidati per {{jobTitle}}",
+		"more_options": "Altre Opzioni",
+		"delete": "Elimina",
+		"status_active": "Stato: Attivo",
+		"no_jobs_found": "Nessun lavoro trovato.",
+		"title": "Gestisci Lavori",
+		"candidates_loading": "Caricamento candidati...",
+		"no_candidates": "Nessun candidato trovato",
+		"view_profile": "Visualizza Profilo",
+		"send_message": "Invia Messaggio",
+		"job_deleted": "Lavoro Eliminato",
+		"job_deleted_desc": "Il lavoro è stato eliminato con successo",
+		"job_delete_failed": "Eliminazione Lavoro Fallita",
+		"job_delete_failed_desc": "Impossibile eliminare il lavoro",
+		"job_updated": "Lavoro Aggiornato",
+		"job_updated_desc": "Il lavoro è stato aggiornato con successo",
+		"job_update_failed": "Aggiornamento Lavoro Fallito",
+		"job_update_failed_desc": "Impossibile aggiornare il lavoro"
 	}
 }

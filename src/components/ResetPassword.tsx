@@ -2,6 +2,7 @@ import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
+import LoadingDots from './LoadingDots';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -13,21 +14,18 @@ export default function ResetPassword() {
 	const [password, setPassword] = useState('');
 	const [confirmPassword, setConfirmPassword] = useState('');
 	const [errorMessage, setErrorMessage] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
-	const handleResetPassword = () => {
-		if (password !== confirmPassword) {
-			setErrorMessage(t('error.password_mismatch'));
-			return;
+	const handleResetPassword = async () => {
+		setIsLoading(true);
+		try {
+			await authService.resetPassword(token!, password);
+			navigate('/login');
+		} catch {
+			setErrorMessage(t('error.reset_password'));
+		} finally {
+			setIsLoading(false);
 		}
-
-		authService
-			.resetPassword(token!, password)
-			.then(() => {
-				navigate('/login');
-			})
-			.catch(() => {
-				setErrorMessage(t('error.reset_password'));
-			});
 	};
 
 	return (
@@ -61,11 +59,8 @@ export default function ResetPassword() {
 						/>
 					</div>
 					{errorMessage && <p className="text-red-500">{errorMessage}</p>}
-					<Button
-						className=" px-4 py-2 "
-						onClick={handleResetPassword}
-					>
-						{t('reset_password.submit')}
+					<Button className=" px-4 py-2 " onClick={handleResetPassword} disabled={isLoading}>
+						{isLoading ? <LoadingDots /> : t('reset_password.submit')}
 					</Button>
 				</div>
 			</div>

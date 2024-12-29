@@ -6,10 +6,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { QueryResult, RegisterBusinessUser, TypeUser } from '@/DataTypes';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { ArrowLeft, Building2, MapPin, UserCircle } from 'lucide-react';
+import { observer } from 'mobx-react';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import AutoComplete from './AutoComplete';
+import LoadingDots from './LoadingDots';
 import { Alert, AlertDescription } from './ui/alert';
 
 const CandidateRegistration = () => {
@@ -30,23 +32,21 @@ const CandidateRegistration = () => {
 		setFormData((prev) => ({ ...prev, [name]: value }));
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const [isLoading, setIsLoading] = useState(false);
+
+	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
-		if (formData.password !== formData.password) {
-			setError(true);
-			setErrorContent(t('error.passwordNotMatch'));
-			setTimeout(() => setError(false), 3000);
-			return;
-		}
-		authService.registerUser(formData).then((res) => {
-			if (res) {
-				navigate('/login');
-			} else {
+		setIsLoading(true);
+		try {
+			const res = await authService.registerUser(formData);
+			if (res) navigate('/login');
+			else {
 				setError(true);
 				setErrorContent(t('error.register'));
-				setTimeout(() => setError(false), 3000);
 			}
-		});
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (
@@ -90,14 +90,14 @@ const CandidateRegistration = () => {
 					<AlertDescription>{errorContent}</AlertDescription>
 				</Alert>
 			)}
-			<Button type="submit" className="w-full">
-				{t('login.submit')}
+			<Button type="submit" className="w-full" disabled={isLoading}>
+				{isLoading ? <LoadingDots /> : t('login.submit')}
 			</Button>
 		</form>
 	);
 };
 
-const EmployerRegistration = () => {
+const EmployerRegistration = observer(() => {
 	const [error, setError] = useState(false);
 	const [errorContent, setErrorContent] = useState('');
 	const { httpService, authService } = useRootService();
@@ -183,6 +183,7 @@ const EmployerRegistration = () => {
 				<Input
 					id="confirmPassword"
 					name="confirmPassword"
+					placeholder={t('placeholder.password')}
 					type="password"
 					required
 					value={formData.confirmPassword}
@@ -194,6 +195,7 @@ const EmployerRegistration = () => {
 				<Input
 					id="businessName"
 					name="businessName"
+					placeholder={t('placeholder.businessName')}
 					required
 					value={formData.businessName}
 					onChange={handleInputChange}
@@ -204,6 +206,7 @@ const EmployerRegistration = () => {
 				<Input
 					id="businessAddress"
 					name="businessAddress"
+					placeholder={t('placeholder.businessAddress')}
 					required
 					value={formData.businessAddress}
 					onChange={handleInputChange}
@@ -214,6 +217,7 @@ const EmployerRegistration = () => {
 				<Textarea
 					id="businessDescription"
 					name="businessDescription"
+					placeholder={t('placeholder.businessDescription')}
 					value={formData.businessDescription}
 					onChange={handleInputChange}
 				/>
@@ -243,6 +247,7 @@ const EmployerRegistration = () => {
 					id="businessWebsite"
 					name="businessWebsite"
 					type="url"
+					placeholder={t('placeholder.businessWebsite')}
 					value={formData.businessWebsite}
 					onChange={handleInputChange}
 				/>
@@ -267,7 +272,7 @@ const EmployerRegistration = () => {
 			</Button>
 		</form>
 	);
-};
+});
 
 export default function RegistrationForm() {
 	const { t } = useTranslation();
@@ -275,7 +280,7 @@ export default function RegistrationForm() {
 
 	const navigate = useNavigate();
 	return (
-		<div className="flex min-h-full items-center w-full justify-normal sm:justify-center">
+		<div className="flex h-dvh items-center w-full justify-normal sm:justify-center">
 			<Card className="w-full max-w-2xl ">
 				<CardHeader>
 					<CardTitle className="text-2xl">

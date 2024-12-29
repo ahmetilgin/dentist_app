@@ -1,10 +1,23 @@
 import { QueryResult } from '@/DataTypes';
 import { Loader2 } from 'lucide-react';
 import { observer } from 'mobx-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Input } from './ui/input';
 import { Label } from './ui/label';
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const debounce = <T extends (...args: any[]) => Promise<void>>(
+	func: T,
+	wait: number
+): ((...args: Parameters<T>) => void) => {
+	let timeout: NodeJS.Timeout;
+
+	return (...args: Parameters<T>) => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => func(...args), wait);
+	};
+};
 
 export type AutoCompleteProps = {
 	onValueChanged: (value: string) => void;
@@ -22,12 +35,30 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 	const [data, setData] = useState<QueryResult | null>(null);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const debouncedFetch = useCallback(
+		async (value: string) => {
+			setIsLoading(true);
+			try {
+				const result = await fetchOptions(value.length === 0 ? '-' : value);
+				setData(result);
+			} finally {
+				setIsLoading(false);
+			}
+		},
+		[fetchOptions]
+	);
 	useEffect(() => {
-		fetchOptions(inputValue.length == 0 ? '-' : inputValue).then((result) => {
-			setData(result);
-			setIsLoading(false);
-		});
-	}, [inputValue, fetchOptions]);
+		const handler = debounce(async (value: string) => {
+			await debouncedFetch(value);
+		}, 300);
+		handler(inputValue);
+	}, [inputValue, debouncedFetch]);
+
+	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setInputValue(value);
+		setIsOpen(true);
+	};
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -44,24 +75,18 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 
 	return (
 		<div className="flex flex-col relative w-full" ref={containerRef}>
-			<Label  className="text-md font-medium mb-1">
-				{t(label)}
-			</Label>
+			<Label className="text-md font-medium mb-1">{t(label)}</Label>
 			<div className="relative">
-				{icon}
+				{icon && <div className="absolute left-2 top-1/2 transform -translate-y-1/2">{icon}</div>}
 				<Input
-					className="pl-8"
-					onChange={(e) => {
-						onValueChanged(e.target.value);
-						setInputValue(e.target.value);
-						setIsOpen(true);
-					}}
+					className={`${icon ? 'pl-8' : ''}`}
+					onChange={handleInputChange}
 					value={inputValue}
 					placeholder={t(placeholder ?? '')}
 				/>
 				{isLoading && (
 					<div className="absolute right-2 top-1/2 transform -translate-y-1/2">
-						<Loader2 className="h-4 w-4 animate-spin " />
+						<Loader2 className="h-4 w-4 animate-spin" />
 					</div>
 				)}
 			</div>
@@ -75,7 +100,7 @@ const AutoComplete = observer(({ label, fetchOptions, onValueChanged, placeholde
 								setInputValue(item);
 								setIsOpen(false);
 							}}
-							className="backdrop-blur-sm hover:bg-ring p-2 cursor-pointer w-full text-left"
+							className="bg-secondary hover:bg-ring p-2 cursor-pointer w-full text-left"
 						>
 							{item}
 						</button>

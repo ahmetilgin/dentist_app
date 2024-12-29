@@ -1,10 +1,11 @@
 import { Button } from '@/components/ui/button';
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'next-i18next';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
-export function WorkExperienceSection() {
+const WorkExperienceSection = observer(() => {
 	const { t } = useTranslation('common');
 	const { control } = useFormContext();
 	const { fields, append, remove } = useFieldArray({
@@ -88,4 +89,6 @@ export function WorkExperienceSection() {
 			</Button>
 		</div>
 	);
-}
+});
+
+export default WorkExperienceSection;

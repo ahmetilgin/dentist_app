@@ -1,4 +1,4 @@
-import { JobListResponse, QueryResult, TypeJob, TypeJobs } from '../DataTypes';
+import { JobListResponse, QueryResult, SearchJobsRequest, TypeJob, TypeJobs } from '../DataTypes';
 import { JobStore } from '../stores/JobStore';
 import HttpService from './HttpService';
 
@@ -14,19 +14,21 @@ class JobService {
 		return this.httpService.post('/api/jobs/apply_job', { job_id: jobId });
 	};
 
-	searchJobs = (keyword: string, location: string, region: string): Promise<{ jobs: TypeJobs }> => {
-		if (keyword === '') {
-			keyword = '-';
-		}
-
-		if (location === '') {
-			location = '-';
-		}
-
-		return this.httpService.get<{ jobs: TypeJobs }>(
-			`/api/jobs/search/${region}/${location.toLocaleLowerCase()}/${keyword.toLocaleLowerCase()}`
-		);
-	};
+	async searchJobs(
+		position: string,
+		region: string,
+		language: string,
+		page: number = 1
+	): Promise<{ jobs: TypeJobs }> {
+		const request: SearchJobsRequest = {
+			position,
+			region,
+			language,
+			page,
+			limit: 10,
+		};
+		return this.httpService.post('/api/jobs/search', request);
+	}
 
 	searchProfessions = (keyword: string, region: string): Promise<QueryResult> => {
 		return this.httpService.get<QueryResult>(`/api/jobs/search_professions/${region}/${keyword}?`);
@@ -57,8 +59,8 @@ class JobService {
 	}
 
 	getCandidateDetails(candidateId: string) {
-        return this.httpService.get<any>(`/api/jobs/candidate/${candidateId}`);
-    }
+		return this.httpService.get<any>(`/api/jobs/candidate/${candidateId}`);
+	}
 }
 
 export default JobService;

@@ -4,16 +4,37 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { ArrowLeft } from 'lucide-react';
+import { observer } from 'mobx-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
+import LoadingDots from './LoadingDots';
 
-export default function ForgotPassword() {
+const ForgotPassword = observer(() => {
 	const navigate = useNavigate();
 	const { t } = useTranslation();
 	const { authService } = useRootService();
 	const [email, setEmail] = useState('');
 	const { role } = useParams();
+	const [isLoading, setIsLoading] = useState(false);
+
+	const handleReset = async () => {
+		setIsLoading(true);
+		try {
+			if (role == 'candidate') {
+				await authService.sendEmailNormalUser(email);
+			} else {
+				await authService.sendEmailBusinessUser(email);
+			}
+			navigate('/login');
+		} catch (error) {
+			// Hata işleme
+			console.log(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	return (
 		<div className="flex h-screen w-full items-center justify-center px-4">
 			<Card className="mx-auto max-w-sm">
@@ -45,22 +66,14 @@ export default function ForgotPassword() {
 								onChange={(e) => setEmail(e.target.value)}
 							/>
 						</div>
-						<Button
-							type="button"
-							className="w-full"
-							onClick={() => {
-								if (role == 'candidate') {
-									authService.sendEmailNormalUser(email);
-								} else {
-									authService.sendEmailBusinessUser(email);
-								}
-							}}
-						>
-							{t('forgot_password.submit')}
+						<Button type="button" className="w-full" onClick={handleReset} disabled={isLoading}>
+							{isLoading ? <LoadingDots /> : t('forgot_password.submit')}
 						</Button>
 					</form>
 				</CardContent>
 			</Card>
 		</div>
 	);
-}
+});
+
+export default ForgotPassword;

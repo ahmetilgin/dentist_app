@@ -34,7 +34,9 @@
 		"location": "Ankara, İstanbul, İzmir...",
 		"email": "ornek@email.com",
 		"position": "Microsoft, Yazılım Geliştirici, Proje Yöneticisi...",
-		"employment_type": "İşe alım tipini seçin"
+		"employment_type": "İşe alım tipini seçin",
+		"candidate_skill": "Yazılım Geliştirme, Proje Yönetimi, Tasarım...",
+		"candidate_location": "İstanbul, Ankara, İzmir..."
 	},
 	"error": {
 		"register": "Hesap oluşturulurken hata oluştu. Lütfen bilgilerinizi kontrol edin.",
@@ -72,7 +74,8 @@
 		"manage_jobs": "İlanları Yönet",
 		"search_skills": "Yetenek Ara",
 		"thousands_of_candidates": "Binlerce aday, on binlerce arama",
-		"search_candidate": "Aday Ara"
+		"search_candidate": "Aday Ara",
+		"discover_candidates": "Adayları Keşfet"
 	},
 	"job_posting": {
 		"job": "İş",
@@ -101,7 +104,11 @@
 		"login_to_apply_desc": "Lütfen giriş yaparak başvurunuzu tamamlayın.",
 		"application_error": "Başvuru Hatası",
 		"application_error_desc": "Başvurunuz alınırken bir hata oluştu. Lütfen tekrar deneyin.",
-		"reset": "Sıfırla"
+		"reset": "Sıfırla",
+		"success": "İlan Başarıyla Yayınlandı",
+		"success_desc": "İş ilanınız başarıyla yayınlandı.",
+		"error": "İlan Yayınlama Hatası",
+		"error_desc": "İlanınız yayınlanırken bir hata oluştu. Lütfen tekrar deneyin."
 	},
 	"workplace_type": {
 		"Remote": "Uzaktan",
@@ -109,10 +116,32 @@
 		"Hybrid": "Hibrit"
 	},
 	"employment_type": {
-		"FullTime": "Tam Zamanlı",
-		"PartTime": "Yarı Zamanlı",
-		"Contract": "Sözleşmeli",
-		"Internship": "Stajyer",
-		"Temporary": "Geçici"
+		"fullTime": "Tam Zamanlı",
+		"partTime": "Yarı Zamanlı",
+		"contract": "Sözleşmeli",
+		"internship": "Stajyer",
+		"temporary": "Geçici"
+	},
+	"manage_jobs": {
+		"show_candidates": "Adayları Göster",
+		"edit_job": "İlanı Düzenle",
+		"candidates_for": "{{jobTitle}} için Adaylar",
+		"more_options": "Diğer Seçenekler",
+		"delete": "Sil",
+		"status_active": "Durum: Aktif",
+		"no_jobs_found": "İlan bulunamadı.",
+		"title": "İlanları Yönet",
+		"candidates_loading": "Adaylar yükleniyor...",
+		"no_candidates": "Aday bulunamadı",
+		"view_profile": "Profili Görüntüle",
+		"send_message": "Mesaj Gönder",
+		"job_deleted": "İlan Silindi",
+		"job_deleted_desc": "İlan başarıyla silindi",
+		"job_delete_failed": "İlan Silinemedi",
+		"job_delete_failed_desc": "İlan silinirken hata oluştu",
+		"job_updated": "İlan Güncellendi",
+		"job_updated_desc": "İlan başarıyla güncellendi",
+		"job_update_failed": "İlan Güncellenemedi",
+		"job_update_failed_desc": "İlan güncellenirken hata oluştu"
 	}
 }

@@ -9,11 +9,13 @@ import { useToast } from '@/hooks/use-toast';
 import { useRootService, useRootStore } from '@/providers/context_provider/ContextProvider';
 import { Separator } from '@radix-ui/react-select';
 import { ArrowLeft, Briefcase, Building2, CalendarDays, ChevronDown, CreditCard, MapPin, Share2 } from 'lucide-react';
+import { observer } from 'mobx-react';
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ReactQuill from 'react-quill-new';
 import { useNavigate } from 'react-router-dom';
+import LoadingDots from './LoadingDots';
 
 function FilterCombobox({ title, options }: { title: string; options: string[] }) {
 	const [open, setOpen] = React.useState(false);
@@ -217,13 +219,6 @@ export function JobDescription({ job }: { job: JobData }) {
 						</div>
 					</div>
 				)}
-				{job.jobDetail.Requirements && (
-					<div>
-						<div className="prose max-w-none">
-							<ReactQuill value={job.jobDetail.Requirements} readOnly={true} theme={'bubble'} />
-						</div>
-					</div>
-				)}
 				<Separator />
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					{job.jobDetail.UserID && (
@@ -292,9 +287,37 @@ function JobListItem({
 	);
 }
 
-export default function JobListing({ jobs, jobSelected }: { jobs: TypeJobs; jobSelected: (job: boolean) => void }) {
-	const [showDetail, setShowDetail] = React.useState(false);
-	const [selectedJob, setSelectedJob] = React.useState<JobData | null>(null);
+interface JobListingProps {
+	jobs: TypeJobs;
+	jobSelected: (job: boolean) => void;
+	loadMore: () => Promise<void>;
+	hasMore: boolean;
+}
+
+const JobListing = observer(({ jobs, jobSelected, loadMore, hasMore }: JobListingProps) => {
+	const [showDetail, setShowDetail] = useState(false);
+	const [selectedJob, setSelectedJob] = useState<JobData | null>(null);
+	const [isLoading, setIsLoading] = useState(false);
+	const observerTarget = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const observer = new IntersectionObserver(
+			async (entries) => {
+				if (entries[0].isIntersecting && hasMore && !isLoading) {
+					setIsLoading(true);
+					await loadMore();
+					setIsLoading(false);
+				}
+			},
+			{ threshold: 0.1 }
+		);
+
+		if (observerTarget.current) {
+			observer.observe(observerTarget.current);
+		}
+
+		return () => observer.disconnect();
+	}, [hasMore, loadMore, isLoading]);
 
 	useEffect(() => {
 		const handlePopState = () => setShowDetail(false);
@@ -332,6 +355,11 @@ export default function JobListing({ jobs, jobSelected }: { jobs: TypeJobs; jobS
 							onClicked={() => openJobDetail(job)}
 						/>
 					))}
+					{hasMore && (
+						<div ref={observerTarget} className="w-full py-4 flex justify-center">
+							{isLoading && <LoadingDots />}
+						</div>
+					)}
 				</ScrollArea>
 			)}
 			{showDetail && selectedJob && (
@@ -341,4 +369,6 @@ export default function JobListing({ jobs, jobSelected }: { jobs: TypeJobs; jobS
 			)}
 		</div>
 	);
-}
+});
+
+export default JobListing;

@@ -41,7 +41,6 @@ export interface TypeJob {
 	UserID: string;
 	JobTitle: string;
 	Description: string;
-	Requirements: string;
 	Location: string;
 	SalaryRange: string;
 	EmploymentType: string;
@@ -50,17 +49,16 @@ export interface TypeJob {
 }
 
 export interface TypeJobWithCandidates {
-    ID: string;
-    UserID: string;
-    JobTitle: string;
-    Description: string;
-    Requirements: string;
-    Location: string;
-    SalaryRange: string;
-    EmploymentType: string;
-    DatePosted: string;
-    ApplicationDeadline: string;
-    Candidates: string[];
+	ID: string;
+	UserID: string;
+	JobTitle: string;
+	Description: string;
+	Location: string;
+	SalaryRange: string;
+	EmploymentType: string;
+	DatePosted: string;
+	ApplicationDeadline: string;
+	Candidates: string[];
 }
 
 export interface JobData {
@@ -89,15 +87,23 @@ export enum EnumWorkplaceType {
 }
 
 export enum EnumEmploymentType {
-	FullTime = 'employment_type.FullTime',
-	PartTime = 'employment_type.PartTime',
-	Contract = 'employment_type.Contract',
-	Internship = 'employment_type.Internship',
-	Temporary = 'employment_type.Temporary',
+	FullTime = 'employment_type.fulltime',
+	PartTime = 'employment_type.parttime',
+	Contract = 'employment_type.contract',
+	Internship = 'employment_type.internship',
+	Temporary = 'employment_type.temporary',
 }
 
 export enum EnumUserType {
 	UNKNOWN,
 	EMPLOYER,
 	CANDIDATE,
+}
+
+export interface SearchJobsRequest {
+	position: string;
+	region: string;
+	language: string;
+	page: number;
+	limit: number;
 }

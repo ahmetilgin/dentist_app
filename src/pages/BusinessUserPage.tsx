@@ -3,10 +3,11 @@ import { Button } from '@/components/ui/button';
 import { QueryResult } from '@/DataTypes';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { BriefcaseBusiness, MapPin, Search } from 'lucide-react';
+import { observer } from 'mobx-react';
 import { SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export function BusinessUserPage() {
+const BusinessUserPage = observer(() => {
 	const [selectedRegion, setSelectedRegion] = useState<string>('-');
 	const [selectedPosition, setSelectedPosition] = useState<string>('-');
 	const [candidates, setCandidates] = useState<string[]>([]);
@@ -90,4 +91,6 @@ export function BusinessUserPage() {
 			</div>
 		</div>
 	);
-}
+});
+
+export default BusinessUserPage;

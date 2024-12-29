@@ -1,42 +1,122 @@
 import AutoComplete from '@/components/AutoComplete';
 import JobListing from '@/components/JobList';
+import LoadingDots from '@/components/LoadingDots';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { QueryResult, TypeJobs } from '@/DataTypes';
-import { useRootService } from '@/providers/context_provider/ContextProvider';
-import { BriefcaseBusiness, MapPin, Search } from 'lucide-react';
-import { SetStateAction, useEffect, useState } from 'react';
+import { TypeJobs } from '@/DataTypes';
+import { useToast } from '@/hooks/use-toast';
+import { useRootService, useRootStore } from '@/providers/context_provider/ContextProvider';
+import { BriefcaseBusiness, Loader2, MapPin, Search } from 'lucide-react';
+import { observer } from 'mobx-react';
+import { SetStateAction, useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function CandidatePage() {
-	const [selectedRegion, setSelectedRegion] = useState<string>('-');
-	const [selectedPosition, setSelectedPosition] = useState<string>('-');
+const CandidatePage = observer(() => {
 	const [topJobs, setTopJobs] = useState<string[]>([]);
 	const [jobResults, setJobResults] = useState<TypeJobs>([]);
 	const [jobSelected, setJobSelected] = useState(false);
+	const [isSearching, setIsSearching] = useState(false);
+	const [page, setPage] = useState(1);
+	const [hasMore, setHasMore] = useState(true);
 	const { t, i18n } = useTranslation();
 	const { jobService } = useRootService();
+	const { toast } = useToast();
+	const { searchStore } = useRootStore();
 
-	const searchJobs = () => {
-		jobService
-			.searchJobs(selectedPosition, selectedRegion, i18n.language)
-			.then((response: { jobs: TypeJobs }) => {
+	const searchJobs = useCallback(
+		async (newSearch = true) => {
+			if (isSearching) return;
+
+			setIsSearching(true);
+			try {
+				const currentPage = newSearch ? 1 : page;
+				const response = await jobService.searchJobs(
+					searchStore.position,
+					searchStore.region,
+					i18n.language,
+					currentPage
+				);
+
 				if (response.jobs) {
-					setJobResults(response.jobs);
+					if (newSearch) {
+						setJobResults(response.jobs);
+						setPage(1);
+					} else {
+						setJobResults((prev) => [...prev, ...response.jobs]);
+					}
+					setHasMore(response.jobs.length === 10);
+				} else {
+					setHasMore(false);
 				}
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	};
+			} catch (error) {
+				console.log(error);
+				toast({
+					title: t('job_posting.application_error'),
+					description: t('job_posting.application_error_desc'),
+					variant: 'destructive',
+				});
+			} finally {
+				setIsSearching(false);
+			}
+		},
+		[isSearching, page, searchStore.position, searchStore.region, i18n.language, jobService, toast, t]
+	);
 
 	useEffect(() => {
-		jobService.getPopularJobs(i18n.language).then((res: QueryResult) => {
-			if (res && res.query_result) {
-				setTopJobs(res.query_result);
+		if (page > 1) {
+			searchJobs(false);
+		}
+	}, [page, searchJobs]);
+
+	const loadMore = async () => {
+		if (!isSearching && hasMore) {
+			setPage((prev) => prev + 1);
+		}
+		return Promise.resolve();
+	};
+
+	const getTopJobs = useCallback(async () => {
+		try {
+			const response = await jobService.getPopularJobs(i18n.language);
+			if (response.query_result) {
+				setTopJobs(response.query_result);
 			}
-		});
+		} catch (error) {
+			console.error(error);
+		}
 	}, [jobService, i18n.language]);
+
+	useEffect(() => {
+		getTopJobs();
+	}, [getTopJobs]);
+
+	const handleTopJobClick = useCallback(
+		(job: string) => {
+			searchStore.setPosition(job);
+			searchStore.setRegion('-');
+			searchJobs(true);
+		},
+		[searchStore, searchJobs]
+	);
+
+	const TopJobsSection = useMemo(
+		() => (
+			<div className="mt-5">
+				<h5 className="text font-bold">{t('general.popular_searches')}</h5>
+				{topJobs.map((job: string, index: number) => (
+					<Badge
+						variant="outline"
+						className="mr-2 mb-2 cursor-pointer capitalize"
+						key={index}
+						onClick={() => handleTopJobClick(job)}
+					>
+						{job}
+					</Badge>
+				))}
+			</div>
+		),
+		[t, topJobs, handleTopJobClick]
+	);
 
 	return (
 		<div
@@ -44,6 +124,13 @@ export default function CandidatePage() {
 				jobResults.length > 0 ? 'pt-0' : 'pt-16'
 			}`}
 		>
+			{isSearching ? (
+				<div className="fixed inset-0 flex flex-col items-center justify-center backdrop-blur-sm z-50">
+					<Loader2 className="h-8 w-8 animate-spin text-primary mb-2" />
+					<LoadingDots />
+				</div>
+			) : null}
+
 			<div className="w-full lg:w-2/3 mb-4" style={{ display: jobResults.length > 0 ? 'none' : 'block' }}>
 				<h1 className="text-2xl font-bold">{t('general.discover_career_opportunities')}</h1>
 				<h4 className="text-xl font-normal">{t('general.job_postings_thousands_of_companies')}</h4>
@@ -60,8 +147,8 @@ export default function CandidatePage() {
 									<BriefcaseBusiness className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
 								}
 								onValueChanged={(selectedItem: SetStateAction<string> | null) => {
-									if (selectedItem != null) {
-										setSelectedPosition(selectedItem);
+									if (selectedItem != null && typeof selectedItem === 'string') {
+										searchStore.setPosition(selectedItem);
 									}
 								}}
 							/>
@@ -75,46 +162,39 @@ export default function CandidatePage() {
 									<MapPin className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-500" />
 								}
 								onValueChanged={(selectedItem: SetStateAction<string> | null) => {
-									if (selectedItem != null) {
-										setSelectedRegion(selectedItem);
+									if (selectedItem != null && typeof selectedItem === 'string') {
+										searchStore.setRegion(selectedItem);
 									}
 								}}
 							/>
 						</div>
 						<div className="grid mt-2 sm:mt-0 w-full sm:w-1/4">
-							<Button className="mt-auto text-md font-medium " onClick={searchJobs}>
-								{t('general.search_job').toUpperCase()}
-								<Search className="ml-2" />
+							<Button
+								className="mt-auto text-md font-medium"
+								onClick={() => searchJobs(true)}
+								disabled={isSearching}
+							>
+								{isSearching ? t('general.searching') : t('general.search_job').toUpperCase()}
+								<Search className={`ml-2 ${isSearching ? 'animate-spin' : ''}`} />
 							</Button>
 						</div>
 					</div>
 				)}
-				{jobResults != null && jobResults.length == 0 && (
-					<div className="mt-5">
-						<h5 className="text font-bold">{t('general.popular_searches')}</h5>
-						{topJobs.map((job: string, index: number) => (
-							<Badge
-								variant="outline"
-								className="mr-2 mb-2 cursor-pointer capitalize"
-								key={index}
-								onClick={searchJobs}
-							>
-								{job}
-							</Badge>
-						))}
-					</div>
-				)}
-				<div className="flex-1 overflow-auto">
-					{jobResults != null && jobResults.length > 0 && (
+				<div className="flex-1 overflow-auto w-full">
+					{jobResults != null && jobResults.length > 0 ? (
 						<JobListing
 							jobs={jobResults}
-							jobSelected={(selected) => {
-								setJobSelected(selected);
-							}}
+							jobSelected={setJobSelected}
+							loadMore={loadMore}
+							hasMore={hasMore}
 						/>
+					) : (
+						TopJobsSection
 					)}
 				</div>
 			</div>
 		</div>
 	);
-}
+});
+
+export default CandidatePage;

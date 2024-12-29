@@ -34,7 +34,9 @@
 		"location": "Shkodër, Tiranë, Krujë...",
 		"email": "example@email.com",
 		"position": "Microsoft, Software Developer, Project Manager...",
-		"employment_type": "Select employment type"
+		"employment_type": "Select employment type",
+		"candidate_skill": "Software Development, Project Management, Design...",
+		"candidate_location": "New York, London, Berlin..."
 	},
 	"errors": {
 		"register": "An error occurred while creating your account. Please check the provided information.",
@@ -72,7 +74,8 @@
 		"manage_jobs": "Manage Job Postings",
 		"search_skills": "Search Skills",
 		"thousands_of_candidates": "Thousands of candidates, thousands of job postings",
-		"search_candidate": "Search Candidate"
+		"search_candidate": "Search Candidate",
+		"discover_candidates": "Discover Candidates"
 	},
 	"job_posting": {
 		"job": "Job",
@@ -100,7 +103,11 @@
 		"login_to_apply_desc": "Please log in to complete your application.",
 		"application_error": "Application Error",
 		"application_error_desc": "An error occurred while submitting your application. Please try again.",
-		"reset": "Reset"
+		"reset": "Reset",
+		"success": "Job Posted Successfully",
+		"success_desc": "Your job posting has been published successfully.",
+		"error": "Error Publishing Job",
+		"error_desc": "There was an error publishing your job posting. Please try again."
 	},
 	"workplace_type": {
 		"remote": "Remote",
@@ -108,10 +115,32 @@
 		"hybrid": "Hybrid"
 	},
 	"employment_type": {
-		"full_time": "Full Time",
-		"part_time": "Part Time",
+		"fulltime": "Full Time",
+		"parttime": "Part Time",
 		"contract": "Contract",
 		"internship": "Internship",
 		"temporary": "Temporary"
+	},
+	"manage_jobs": {
+		"show_candidates": "Show Candidates",
+		"edit_job": "Edit Job",
+		"candidates_for": "Candidates for {{jobTitle}}",
+		"more_options": "More Options",
+		"delete": "Delete",
+		"status_active": "Status: Active",
+		"no_jobs_found": "No jobs found.",
+		"title": "Manage Jobs",
+		"candidates_loading": "Loading candidates...",
+		"no_candidates": "No candidates found",
+		"view_profile": "View Profile",
+		"send_message": "Send Message",
+		"job_deleted": "Job Deleted",
+		"job_deleted_desc": "Job has been successfully deleted",
+		"job_delete_failed": "Job Delete Failed",
+		"job_delete_failed_desc": "Failed to delete job",
+		"job_updated": "Job Updated",
+		"job_updated_desc": "Job has been successfully updated",
+		"job_update_failed": "Job Update Failed",
+		"job_update_failed_desc": "Failed to update job"
 	}
 }

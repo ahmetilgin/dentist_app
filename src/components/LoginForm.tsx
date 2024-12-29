@@ -5,11 +5,13 @@ import { Label } from '@/components/ui/label';
 import { TypeUser } from '@/DataTypes';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { ArrowLeft, Building2, UserCircle } from 'lucide-react';
+import { observer } from 'mobx-react';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import LoadingDots from './LoadingDots';
 
-function Login({ role }: { role: string }) {
+const Login = observer(({ role }: { role: string }) => {
 	const { t } = useTranslation();
 	const { authService } = useRootService();
 	const navigate = useNavigate();
@@ -17,6 +19,7 @@ function Login({ role }: { role: string }) {
 	const [email, setEmail] = React.useState('');
 	const [error, setError] = React.useState(false);
 	const [errorContent, setErrorContent] = React.useState('');
+	const [isLoading, setIsLoading] = useState(false);
 
 	const setErrorMessage = (message: string) => {
 		setError(true);
@@ -24,39 +27,28 @@ function Login({ role }: { role: string }) {
 		setTimeout(() => setError(false), 3000);
 	};
 
-	const handleLogin = () => {
-		if (role == 'employer') {
-			authService
-				.loginBusiness({
+	const handleLogin = async () => {
+		setIsLoading(true);
+		try {
+			if (role == 'employer') {
+				const res = await authService.loginBusiness({
 					email: email,
 					password: password,
-				} as TypeUser)
-				.then((res) => {
-					if (res) {
-						navigate('/');
-					} else {
-						setErrorMessage(t('error.login'));
-					}
-				})
-				.catch(() => {
-					setErrorMessage(t('error.login'));
-				});
-		} else {
-			authService
-				.loginUser({
+				} as TypeUser);
+				if (res) navigate('/');
+				else setErrorMessage(t('error.login'));
+			} else {
+				const res = await authService.loginUser({
 					email: email,
 					password: password,
-				} as TypeUser)
-				.then((res) => {
-					if (res) {
-						navigate('/');
-					} else {
-						setErrorMessage(t('error.login'));
-					}
-				})
-				.catch(() => {
-					setErrorMessage(t('error.login'));
-				});
+				} as TypeUser);
+				if (res) navigate('/');
+				else setErrorMessage(t('error.login'));
+			}
+		} catch {
+			setErrorMessage(t('error.login'));
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -99,8 +91,8 @@ function Login({ role }: { role: string }) {
 						{errorContent}
 					</Button>
 				)}
-				<Button type="button" className="w-full  text-white" onClick={() => handleLogin()}>
-					{role == 'employer' ? t('login.employer_login') : t('login.candidate_login')}
+				<Button disabled={isLoading} type="button" className="w-full  text-white" onClick={() => handleLogin()}>
+					{isLoading ? <LoadingDots /> : t('login.submit')}
 				</Button>
 			</div>
 			<div className="mt-4 text-center text-sm">
@@ -111,7 +103,7 @@ function Login({ role }: { role: string }) {
 			</div>
 		</div>
 	);
-}
+});
 
 export function LoginForm() {
 	const { t } = useTranslation();
@@ -167,3 +159,5 @@ export function LoginForm() {
 		</div>
 	);
 }
+
+export default Login;

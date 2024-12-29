@@ -13,11 +13,12 @@ import { JobListResponse, TypeJob, TypeJobWithCandidates } from '@/DataTypes';
 import { useToast } from '@/hooks/use-toast';
 import { useRootService } from '@/providers/context_provider/ContextProvider';
 import { Briefcase, Calendar, Edit2, MapPin, MoreVertical, Trash2, Users } from 'lucide-react';
+import { observer } from 'mobx-react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { EditJobComponent } from './EditJob';
+import EditJobComponent from './EditJob';
 
-export function CandidateListComponent({ job }: { job: TypeJobWithCandidates }) {
+const CandidateListComponent = observer(({ job }: { job: TypeJobWithCandidates }) => {
 	const { jobService } = useRootService();
 	const [candidates, setCandidates] = useState<any[]>([]);
 	const [isLoading, setIsLoading] = useState(true);
@@ -110,9 +111,9 @@ export function CandidateListComponent({ job }: { job: TypeJobWithCandidates }) 
 			))}
 		</ScrollArea>
 	);
-}
+});
 
-export function ManageJobsComponent() {
+const ManageJobsComponent = observer(() => {
 	const { jobService } = useRootService();
 	const [jobs, setJobs] = useState<JobListResponse>();
 	const { toast } = useToast();
@@ -220,12 +221,18 @@ export function ManageJobsComponent() {
 												<DialogTrigger asChild>
 													<Button variant="ghost" size="icon" className="h-8 w-8">
 														<Users className="h-4 w-4" />
-														<span className="sr-only">Show Candidates</span>
+														<span className="sr-only">
+															{t('manage_jobs.show_candidates')}
+														</span>
 													</Button>
 												</DialogTrigger>
 												<DialogContent className="max-w-3xl">
 													<DialogHeader>
-														<DialogTitle>Candidates for {job.JobTitle}</DialogTitle>
+														<DialogTitle>
+															{t('manage_jobs.candidates_for', {
+																jobTitle: job.JobTitle,
+															})}
+														</DialogTitle>
 													</DialogHeader>
 													<CandidateListComponent job={job} />
 												</DialogContent>
@@ -234,12 +241,12 @@ export function ManageJobsComponent() {
 												<DialogTrigger asChild>
 													<Button variant="ghost" size="icon" className="h-8 w-8">
 														<Edit2 className="h-4 w-4" />
-														<span className="sr-only">Edit Job</span>
+														<span className="sr-only">{t('manage_jobs.edit_job')}</span>
 													</Button>
 												</DialogTrigger>
 												<DialogContent className="max-w-3xl">
 													<DialogHeader>
-														<DialogTitle>Edit Job</DialogTitle>
+														<DialogTitle>{t('manage_jobs.edit_job')}</DialogTitle>
 													</DialogHeader>
 													<EditJobComponent
 														job={job}
@@ -253,29 +260,31 @@ export function ManageJobsComponent() {
 												<DropdownMenuTrigger asChild>
 													<Button variant="ghost" size="icon" className="h-8 w-8">
 														<MoreVertical className="h-4 w-4" />
-														<span className="sr-only">More Options</span>
+														<span className="sr-only">{t('manage_jobs.more_options')}</span>
 													</Button>
 												</DropdownMenuTrigger>
 												<DropdownMenuContent align="end">
 													<DropdownMenuItem onClick={() => handleDelete(job.ID)}>
 														<Trash2 className="mr-2 h-4 w-4" />
-														<span>Delete</span>
+														<span>{t('manage_jobs.delete')}</span>
 													</DropdownMenuItem>
 												</DropdownMenuContent>
 											</DropdownMenu>
 										</div>
 									</div>
 									<div className="mt-2">
-										<Badge variant="secondary">Status: Active</Badge>
+										<Badge variant="secondary">{t('manage_jobs.status_active')}</Badge>
 									</div>
 								</CardContent>
 							</Card>
 						))
 					) : (
-						<div>No jobs found.</div>
+						<div>{t('manage_jobs.no_jobs_found')}</div>
 					)}
 				</ScrollArea>
 			</CardContent>
 		</Card>
 	);
-}
+});
+
+export default ManageJobsComponent;

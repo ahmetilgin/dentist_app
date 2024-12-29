@@ -2,17 +2,17 @@ import { observer } from 'mobx-react';
 import { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import ForgotPassword from './components/ForgotPassword';
-import { NavigationBar } from './components/NavigationBar';
+import NavigationBar from './components/NavigationBar';
 import ResetPassword from './components/ResetPassword';
 import { EnumUserType } from './DataTypes';
 import './i18n';
 import './index.css';
-import { BusinessUserPage } from './pages/BusinessUserPage';
+import BusinessUserPage from './pages/BusinessUserPage';
 import CandidatePage from './pages/CandidatePage';
 import ErrorPage from './pages/ErrorPage';
 import { LoginPage } from './pages/LoginPage';
-import { ManageJobs } from './pages/ManageJobs';
-import { PublishJob } from './pages/PublishJob';
+import ManageJobs from './pages/ManageJobs';
+import PublishJob from './pages/PublishJob';
 import { RegisterPage } from './pages/RegisterPage';
 import { useRootStore } from './providers/context_provider/ContextProvider';
 
@@ -36,7 +36,16 @@ const App = observer(() => {
 			)}
 			<div className="flex flex-col  flex-1 overflow-auto">
 				<Routes>
-					<Route path="/" element={userStore.isAuthenticated && userStore.userType === EnumUserType.EMPLOYER ? <BusinessUserPage /> : <CandidatePage />} />
+					<Route
+						path="/"
+						element={
+							userStore.isAuthenticated && userStore.userType === EnumUserType.EMPLOYER ? (
+								<BusinessUserPage />
+							) : (
+								<CandidatePage />
+							)
+						}
+					/>
 					<Route path="/login" element={<LoginPage />} />
 					<Route path="/register" element={<RegisterPage />} />
 					<Route path="/forgot_password/:role" element={<ForgotPassword />} />
